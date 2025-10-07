@@ -1,0 +1,3 @@
+# These owners will be the default owners for everything in the repo.
+# All PRs will need to be approved by at least on of them.
+* @isisbusapps/ua-code-owner

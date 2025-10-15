@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: messages-service
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - "*.developers.facilities.rl.ac.uk"
+      secretName: developers-tls-certificate
+    - hosts:
+        - "*.facilities.rl.ac.uk"
+      secretName: facilities-tls-certificate
+  rules:
+    - host: "*.developers.facilities.rl.ac.uk"
+      http: &http_rules
+        paths:
+          - path: /messages
+            pathType: Prefix
+            backend:
+              service:
+                name: messages-service
+                port:
+                  number: 30000
+    - host: "*.facilities.rl.ac.uk"
+      http: *http_rules

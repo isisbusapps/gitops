@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ua-dev-tools
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers:
+        - name: ua-dev-tools
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8100
+          startupProbe:
+            successThreshold: 1
+            failureThreshold: 10
+            periodSeconds: 20
+            timeoutSeconds: 10
+            httpGet:
+              path: /ua-dev-tools/Ready
+              port: 8100
+          livenessProbe:
+            successThreshold: 1
+            failureThreshold: 5
+            periodSeconds: 20
+            timeoutSeconds: 10
+            httpGet:
+              path: /ua-dev-tools/Live
+              port: 8100
+          readinessProbe:
+            successThreshold: 3
+            failureThreshold: 3
+            periodSeconds: 20
+            timeoutSeconds: 10
+            httpGet:
+              path: /ua-dev-tools/Ready
+              port: 8100
+          volumeMounts:
+            - name: ua-dev-tools-config
+              mountPath: "/FBS/config"
+              readOnly: true
+      imagePullSecrets:
+        - name: registry-creds
+      volumes:
+        - name: ua-dev-tools-config
+          secret:
+            secretName: ua-dev-tools-config
+

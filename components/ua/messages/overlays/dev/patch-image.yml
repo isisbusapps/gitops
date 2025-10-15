@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: messages-service
+spec:
+  template:
+    spec:
+      containers:
+        - name: messages-service
+          image: harbor.stfc.ac.uk/isisbusapps/messages-service:dev
+          ports:
+            - containerPort: 4013

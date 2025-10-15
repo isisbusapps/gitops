@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+spec:
+  replicas: 3
+  template:
+    metadata:
+      annotations:
+        co.elastic.logs/processors.add_fields.target: ""
+        co.elastic.logs/processors.add_fields.fields.application.name: "auth-service"
+        co.elastic.logs/processors.add_fields.fields.application.domain: "users"
+        co.elastic.logs/processors.add_fields.fields.application.tier: "service"
+        co.elastic.logs/processors.add_fields.fields.application.language: "java"
+        # Remove ANSI colour codes. Their inclusion in Payara logs and the [ they contain messes up the dissect pattern.
+        co.elastic.logs/processors.1.script.lang: "javascript"
+        co.elastic.logs/processors.1.script.source: >
+          function process(event) {
+            event.Put("message", event.Get("message").replace(/\x1B\[[0-9;]{1,4}m/g, ""))
+          }
+        # Extract log_level, class, and log_message as separate fields for elastic from payara log entries
+        co.elastic.logs/processors.2.dissect.tokenizer: "[%{?timestamp}] [%{?oragnization}] [%{log_level}] [%{?message_id}] [%{class}] [%{?thread}] [%{?unixMilliseconds}] [%{?levelValue}] %{log_message}"
+        co.elastic.logs/processors.2.dissect.target_prefix: ""
+        co.elastic.logs/processors.2.dissect.ignore_failure: "true"
+        # Extract log_level, class, and log_message as separate fields for elastic from app log4j entries
+        co.elastic.logs/processors.3.dissect.tokenizer: "%{?date} %{?time} %{log_level->} [%{token} %{token_user}] [%{class}] %{log_message}"
+        co.elastic.logs/processors.3.dissect.target_prefix: ""
+        co.elastic.logs/processors.3.dissect.ignore_failure: "true"
+        co.elastic.logs/multiline.pattern: '^\[?[0-9]{4}-[0-9]{2}-[0-9]{2}'
+        co.elastic.logs/multiline.negate: "true"
+        co.elastic.logs/multiline.match: "after"
+    spec:
+      containers:
+        - name: auth-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          startupProbe:
+            successThreshold: 1
+            failureThreshold: 18
+            periodSeconds: 10
+            timeoutSeconds: 5
+            httpGet:
+              path: /q/health/started
+              port: 8080
+          livenessProbe:
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+            successThreshold: 1
+            httpGet:
+              path: /q/health/live
+              port: 8080
+          readinessProbe:
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 2
+            successThreshold: 3
+            httpGet:
+              path: /q/health/ready
+              port: 8080
+          volumeMounts:
+            - name: auth-service-private-key
+              mountPath: "/deployments/private.key"
+              subPath: "private.key"
+              readOnly: true
+          envFrom:
+            - secretRef:
+                name: auth-service-secret
+      imagePullSecrets:
+        - name: registry-creds
+      volumes:
+        - name: auth-service-private-key
+          secret:
+            secretName: auth-service-private-key

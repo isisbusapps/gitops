@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: user-office-web-service-v2
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - "*.developers.facilities.rl.ac.uk"
+    secretName: developers-tls-certificate
+  - hosts:
+      - "*.facilities.rl.ac.uk"
+    secretName: facilities-tls-certificate
+  rules:
+  - host: "*.developers.facilities.rl.ac.uk"
+    http: &http_rules
+      paths:
+        - path: /users-service/v2(/|$)(.*)
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: user-office-web-service-rest-v2
+              port:
+                number: 8080
+  - host: "*.facilities.rl.ac.uk"
+    http: *http_rules

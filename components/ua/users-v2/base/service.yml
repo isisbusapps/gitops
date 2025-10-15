@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-office-web-service-rest-v2
+spec:
+  selector:
+    app: user-office-web-service-v2
+    rest-api-version: v2
+  ports:
+    - name: https
+      protocol: TCP
+      port: 8080
+      targetPort: 8080

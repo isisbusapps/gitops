@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-office-web-service-v2
+spec:
+  selector:
+    matchLabels:
+      app: user-office-web-service-v2
+      rest-api-version: v2
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: user-office-web-service-v2
+        rest-api-version: v2
+        bypass-alloy-scraper: bypass
+    spec:
+      containers:
+        - name: user-office-web-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          startupProbe:
+            successThreshold: 1
+            failureThreshold: 18
+            periodSeconds: 10
+            timeoutSeconds: 5
+            httpGet:
+              path: /quarkus/health/started
+              port: 8080
+          livenessProbe:
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+            successThreshold: 1
+            httpGet:
+              path: /quarkus/health/live
+              port: 8080
+          readinessProbe:
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 2
+            successThreshold: 3
+            httpGet:
+              path: /quarkus/health/ready
+              port: 8080
+          volumeMounts:
+            - name: user-office-web-service-config
+              mountPath: "/deployments/config"
+              readOnly: true
+            - name: ua-environment-secrets
+              mountPath: "/deployments/.env"
+              subPath: ".env"
+              readOnly: true
+            - name: cacerts
+              mountPath: "/deployments/cacerts.jks"
+              subPath: "cacerts.jks"
+      imagePullSecrets:
+        - name: registry-creds
+      volumes:
+        - name: user-office-web-service-config
+          configMap:
+            name: user-office-web-service-config
+        - name: ua-environment-secrets
+          secret:
+            secretName: ua-environment-secrets
+        - name: cacerts
+          secret:
+            secretName: uows-cacerts

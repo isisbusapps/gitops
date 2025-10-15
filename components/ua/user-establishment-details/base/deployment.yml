@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-establishment-details
+spec:
+  replicas: 3
+  template:
+    metadata:
+      annotations:
+        co.elastic.logs/processors.add_fields.target: ""
+        co.elastic.logs/processors.add_fields.fields.application.name: "user-establishment-details"
+        co.elastic.logs/processors.add_fields.fields.application.domain: "user-establishment-details"
+        co.elastic.logs/processors.add_fields.fields.application.tier: web
+        co.elastic.logs/processors.add_fields.fields.application.language: "typescript"
+        # Extract log_level, class, and log_message as separate fields for elastic
+        co.elastic.logs/processors.dissect.tokenizer: "%{?date} %{?time} %{log_level->} %{log_message}"
+        co.elastic.logs/processors.dissect.target_prefix: ""
+        co.elastic.logs/multiline.pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}"
+        co.elastic.logs/multiline.negate: "true"
+        co.elastic.logs/multiline.match: "after"
+    spec:
+      containers:
+        - name: user-establishment-details
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          startupProbe:
+            successThreshold: 1
+            failureThreshold: 10
+            periodSeconds: 20
+            timeoutSeconds: 10
+            httpGet:
+              path: /UserEstablishmentDetails/Ready
+              port: 8080
+          livenessProbe:
+            successThreshold: 1
+            failureThreshold: 5
+            periodSeconds: 20
+            timeoutSeconds: 10
+            httpGet:
+              path: /UserEstablishmentDetails/Live
+              port: 8080
+          readinessProbe:
+            successThreshold: 3
+            failureThreshold: 3
+            periodSeconds: 20
+            timeoutSeconds: 10
+            httpGet:
+              path: /UserEstablishmentDetails/Ready
+              port: 8080
+          volumeMounts:
+            - name: user-establishment-details-config
+              mountPath: "/FBS/config"
+              readOnly: true
+      imagePullSecrets:
+        - name: registry-creds
+      volumes:
+        - name: user-establishment-details-config
+          secret:
+            secretName: user-establishment-details-config
+

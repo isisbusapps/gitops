@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authenticate-frontend
+spec:
+  replicas: 3
+  template:
+    metadata:
+    spec:
+      containers:
+        - name: authenticate-frontend
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: authenticate-frontend-config
+          startupProbe:
+            successThreshold: 1
+            failureThreshold: 10
+            periodSeconds: 20
+            timeoutSeconds: 10
+            initialDelaySeconds: 5
+            httpGet:
+              path: /authenticate-frontend/Ready
+              port: 3000
+          livenessProbe:
+            successThreshold: 1
+            failureThreshold: 5
+            periodSeconds: 20
+            timeoutSeconds: 10
+            httpGet:
+              path: /authenticate-frontend/Live
+              port: 3000
+          readinessProbe:
+            successThreshold: 3
+            failureThreshold: 3
+            periodSeconds: 20
+            timeoutSeconds: 10
+            httpGet:
+              path: /authenticate-frontend/Ready
+              port: 3000
+      imagePullSecrets:
+        - name: registry-creds

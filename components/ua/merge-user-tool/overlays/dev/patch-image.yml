@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: merge-user-tool
+spec:
+  template:
+    spec:
+      containers:
+        - name: merge-user-tool
+          image: harbor.stfc.ac.uk/isisbusapps/merge-user-tool:dev
+          ports:
+            - containerPort: 7005
+          env:
+            - name: APP_ENV
+              value: dev
+            - name: JAVA_TOOL_OPTIONS
+              value: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=7005 -Dspring.profiles.active=dev
+      volumes:
+        - name: merge-user-tool-config
+          secret:
+            secretName: merge-user-tool-profiles
+            items:
+              - key: merge-user-tool-dev.properties
+                path: application-dev.properties
+              - key: mergeUserConfigDev.json
+                path: mergeUserConfigDev.json

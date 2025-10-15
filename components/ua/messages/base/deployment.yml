@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: messages-service
+spec:
+  replicas: 3
+  template:
+    metadata:
+      annotations:
+        co.elastic.logs/processors.add_fields.target: ""
+        co.elastic.logs/processors.add_fields.fields.application.name: "messages-service"
+        co.elastic.logs/processors.add_fields.fields.application.domain: "messages-service"
+        co.elastic.logs/processors.add_fields.fields.application.tier: "service"
+        co.elastic.logs/processors.add_fields.fields.application.language: "java"
+        # Extract log_level, class, and log_message as separate fields for elastic
+        co.elastic.logs/processors.dissect.tokenizer: "%{?date} %{?time} %{log_level->} [%{class}] %{log_message}"
+        co.elastic.logs/processors.dissect.target_prefix: ""
+        co.elastic.logs/multiline.pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}"
+        co.elastic.logs/multiline.negate: "true"
+        co.elastic.logs/multiline.match: "after"
+    spec:
+      containers:
+        - name: messages-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 30000
+          startupProbe:
+            successThreshold: 1
+            failureThreshold: 18
+            periodSeconds: 10
+            timeoutSeconds: 5
+            httpGet:
+              path: /q/health/started
+              port: 30000
+          livenessProbe:
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+            successThreshold: 1
+            httpGet:
+              path: /q/health/live
+              port: 30000
+          readinessProbe:
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 2
+            successThreshold: 3
+            httpGet:
+              path: /q/health/ready
+              port: 30000
+          envFrom:
+            - secretRef:
+                name: messages-service-secret
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: registry-creds

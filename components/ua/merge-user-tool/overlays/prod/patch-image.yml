@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: merge-user-tool
+spec:
+  template:
+    spec:
+      containers:
+        - name: merge-user-tool
+          image: harbor.stfc.ac.uk/isisbusapps/merge-user-tool:1.2.0
+          env:
+            - name: APP_ENV
+              value: prod
+      volumes:
+        - name: merge-user-tool-config
+          secret:
+            secretName: merge-user-tool-profiles
+            items:
+              - key: merge-user-tool-prod.properties
+                path: application-prod.properties
+              - key: mergeUserConfigProd.json
+                path: mergeUserConfigProd.json

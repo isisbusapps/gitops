@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: messages
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - clusters:
+      selector:
+        matchLabels:
+          appEnvironment: dev
+  ignoreApplicationDifferences:
+    - jsonPointers:
+        - /spec/syncPolicy
+  template:
+    metadata:
+      name: '{{.name}}-messages'
+      annotations:
+        argocd-image-updater.argoproj.io/image-list: devimage=harbor.stfc.ac.uk/isisbusapps/messages-service:dev
+        argocd-image-updater.argoproj.io/devimage.update-strategy: digest
+        argocd-image-updater.argoproj.io/write-back-method: git
+        argocd.argoproj.io/sync-wave: "-1"
+    spec:
+      project: u-a-project
+      source:
+        path: components/ua/shared-config/overlays/dev
+        repoURL: 'https://github.com/isisbusapps/gitops'
+        targetRevision: main
+      destination:
+        namespace: apps
+        name: '{{.name}}'
+      syncPolicy:
+        automated: 
+          selfHeal: true

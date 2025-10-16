@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authenticate-frontend
+spec:
+  template:
+    spec:
+      containers:
+        - name: authenticate-frontend
+          image: harbor.stfc.ac.uk/isisbusapps/authenticate-frontend:dev

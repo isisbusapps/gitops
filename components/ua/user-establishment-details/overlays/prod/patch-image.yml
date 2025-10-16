@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-establishment-details
+spec:
+  template:
+    spec:
+      containers:
+        - name: user-establishment-details
+          image: harbor.stfc.ac.uk/isisbusapps/user-establishment-details:1.4.4

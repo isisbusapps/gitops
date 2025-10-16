@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mailchimp-webhooks
+spec:
+  template:
+    spec:
+      containers:
+        - name: mailchimp-webhooks
+          image: harbor.stfc.ac.uk/isisbusapps/mailchimp-webhooks:dev
+          ports:
+            - containerPort: 7005
+          env:
+            - name: APP_ENV
+              value: dev
+            - name: JAVA_TOOL_OPTIONS
+              value: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=7005

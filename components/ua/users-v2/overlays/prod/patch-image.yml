@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-office-web-service-v2
+  rest-api-version: v2
+spec:
+  template:
+    spec:
+      containers:
+        - name: user-office-web-service
+          image: harbor.stfc.ac.uk/isisbusapps/user-office-web-service:v2.2.0-alpha
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: -Djavax.net.ssl.trustStore=/deployments/cacerts.jks

@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: messages
+  name: ua-shared-config
   namespace: argocd
 spec:
   goTemplate: true
@@ -16,11 +16,8 @@ spec:
         - /spec/syncPolicy
   template:
     metadata:
-      name: '{{.name}}-messages'
+      name: '{{.name}}-ua-shared-config'
       annotations:
-        argocd-image-updater.argoproj.io/image-list: devimage=harbor.stfc.ac.uk/isisbusapps/messages-service:dev
-        argocd-image-updater.argoproj.io/devimage.update-strategy: digest
-        argocd-image-updater.argoproj.io/write-back-method: git
         argocd.argoproj.io/sync-wave: "-1"
     spec:
       project: u-a-project

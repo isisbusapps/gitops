@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mailchimp-webhooks
+spec:
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        co.elastic.logs/processors.add_fields.target: ""
+        co.elastic.logs/processors.add_fields.fields.application.name: "mailchimp-webhooks"
+        co.elastic.logs/processors.add_fields.fields.application.domain: "mailchimp-webhooks"
+        co.elastic.logs/processors.add_fields.fields.application.tier: "service"
+        co.elastic.logs/processors.add_fields.fields.application.language: "java"
+        # Extract log_level, class, and log_message as separate fields for elastic
+        co.elastic.logs/processors.dissect.tokenizer: "%{?date} %{?time} %{log_level->} [%{?Session_and_user_data}] [%{class}] %{log_message}"
+        co.elastic.logs/processors.dissect.target_prefix: ""
+        co.elastic.logs/multiline.pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}"
+        co.elastic.logs/multiline.negate: "true"
+        co.elastic.logs/multiline.match: "after"
+    spec:
+      containers:
+        - name: mailchimp-webhooks
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: spring-config
+              mountPath: "/FBS/Apps/spring/mailchimp-webhooks"
+              readOnly: true
+      volumes:
+        - name: spring-config
+          secret:
+            secretName: mailchimp-webhooks-profiles
+            items:
+              - key: mailchimp-webhooks.properties
+                path: application.properties
+      imagePullSecrets:
+        - name: registry-creds

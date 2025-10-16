@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: user-office-web-service-v1
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - "*.developers.facilities.rl.ac.uk"
+    secretName: developers-tls-certificate
+  - hosts:
+      - "*.facilities.rl.ac.uk"
+    secretName: facilities-tls-certificate
+  rules:
+  - host: "*.developers.facilities.rl.ac.uk"
+    http: &http_rules
+      paths:
+      - path: /users-service/v1
+        pathType: Prefix
+        backend:
+          service:
+            name: user-office-web-service-rest-v1
+            port:
+              number: 8080
+      - path: /users-service/v1/quarkus
+        pathType: Prefix
+        backend:
+          service:
+            name: user-office-web-service-rest-v1
+            port:
+              number: 8080
+  - host: "*.facilities.rl.ac.uk"
+    http: *http_rules

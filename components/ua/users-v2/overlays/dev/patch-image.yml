@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-office-web-service-v2
+  rest-api-version: v2
+spec:
+  template:
+    spec:
+      containers:
+        - name: user-office-web-service
+          image: harbor.stfc.ac.uk/isisbusapps/user-office-web-service:dev
+          ports:
+            - containerPort: 7005
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=7005 -Djavax.net.ssl.trustStore=/deployments/cacerts.jks

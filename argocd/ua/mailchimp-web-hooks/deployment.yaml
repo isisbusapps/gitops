@@ -17,11 +17,11 @@ spec:
   template:
     metadata:
       name: '{{.name}}-mailchimp-web-hooks'
-    annotations:
-      argocd-image-updater.argoproj.io/image-list: devimage=harbor.stfc.ac.uk/isisbusapps/mailchimp-webhooks:dev
-      argocd-image-updater.argoproj.io/devimage.update-strategy: digest
-      argocd-image-updater.argoproj.io/write-back-method: git
-      argocd.argoproj.io/sync-wave: "0"
+      annotations:
+        argocd-image-updater.argoproj.io/image-list: devimage=harbor.stfc.ac.uk/isisbusapps/mailchimp-webhooks:dev
+        argocd-image-updater.argoproj.io/devimage.update-strategy: digest
+        argocd-image-updater.argoproj.io/write-back-method: git
+        argocd.argoproj.io/sync-wave: "0"
     spec:
       project: u-a-project
       source:

@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - harbor.stfc.ac.uk/isisbusapps/user-office-web-service:dev@sha256:ebc01f2e2b08773147b316630a5dd469275089f94d35672552d186d6fea213cf

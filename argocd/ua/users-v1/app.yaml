@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: users-v1
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - clusters:
+      selector:
+        matchLabels:
+          appEnvironment: dev
+  ignoreApplicationDifferences:
+    - jsonPointers:
+        - /spec/syncPolicy
+  template:
+    metadata:
+      name: '{{.name}}-users-v1'
+      annotations:
+        argocd.argoproj.io/sync-wave: "0"
+    spec:
+      project: u-a-project
+      source:
+        path: components/ua/users-v1/overlays/dev
+        repoURL: 'https://github.com/isisbusapps/gitops'
+        targetRevision: main
+      destination:
+        namespace: apps
+        name: '{{.name}}'
+      syncPolicy:
+        automated:
+          selfHeal: true

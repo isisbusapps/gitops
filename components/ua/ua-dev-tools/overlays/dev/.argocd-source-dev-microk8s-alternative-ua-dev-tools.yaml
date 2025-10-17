@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - harbor.stfc.ac.uk/isisbusapps/ua-dev-tools:dev@sha256:02432aed4a36a045ab1eb82afadb8dd049eb5932483b3945f5809c6d237425a6

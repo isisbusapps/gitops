@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - harbor.stfc.ac.uk/isisbusapps/messages-service:dev@sha256:5f58dbd6d87b15433416119749d1feb9c777287fa75cd31282557e57baf335c4

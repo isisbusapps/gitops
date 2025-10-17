@@ -6,7 +6,7 @@ metadata:
 spec:
   project: infrastructure-project
   source:
-    path: argocd
+    path: argocd/dev
     repoURL: https://github.com/isisbusapps/gitops
     targetRevision: main
     directory:

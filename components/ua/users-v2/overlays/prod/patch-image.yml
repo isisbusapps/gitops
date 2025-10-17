@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: user-office-web-service-v2
-  rest-api-version: v2
 spec:
   template:
     spec:

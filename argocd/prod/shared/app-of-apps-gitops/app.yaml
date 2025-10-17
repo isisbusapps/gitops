@@ -6,7 +6,7 @@ metadata:
 spec:
   project: infrastructure-project
   source:
-    path: argocd
+    path: argocd/prod
     repoURL: https://github.com/isisbusapps/gitops
     targetRevision: main
     directory:
@@ -15,4 +15,6 @@ spec:
     namespace: argocd
     server: https://kubernetes.default.svc
   syncPolicy:
-    automated: {}
+    syncPolicy:
+      automated: 
+        selfHeal: true

@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: merge-user-tool
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - clusters:
+      selector:
+        matchLabels:
+          appEnvironment: prod
+  template:
+    metadata:
+      name: '{{.name}}-merge-user-tool-app'
+      annotations:
+        argocd.argoproj.io/sync-wave: "0"
+    spec:
+      project: u-a-project
+      source:
+        path: components/ua/merge-user-tool/overlays/prod
+        repoURL: 'https://github.com/isisbusapps/gitops'
+        targetRevision: main
+      destination:
+        namespace: apps
+        name: '{{.name}}'
+      syncPolicy:
+        automated: 
+          selfHeal: true

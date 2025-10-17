@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - harbor.stfc.ac.uk/isisbusapps/auth-service:dev@sha256:6eab48fd4804260d8e5cf6a68e218f3a48a94660c8efcc98527374b059d67c26

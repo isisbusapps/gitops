@@ -25,7 +25,7 @@ spec:
     spec:
       project: u-a-project
       source:
-        path:  components/ua/user-establishment-details/dev
+        path:  components/ua/user-establishment-details/overlays/dev
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:

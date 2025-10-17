@@ -11,7 +11,7 @@ spec:
   template:
     metadata:
       labels:
-        app: user-office-web-service-v1
+        app: user-office-web-service
         rest-api-version: v1
         bypass-alloy-scraper: bypass
     spec:

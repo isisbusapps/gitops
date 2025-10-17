@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - harbor.stfc.ac.uk/isisbusapps/authenticate-frontend:dev@sha256:86826ce780b7f4eb28acb0e456235b96af8e7c62ca4779c4156b004043b14a7e

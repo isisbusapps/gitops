@@ -16,10 +16,10 @@ spec:
       name: '{{.name}}-merge-user-tool-app'
       annotations:
         argocd.argoproj.io/sync-wave: "0"
-        notifications.argoproj.io/subscribe.on-deployed.smtp-ua: <replace-email>
-        notifications.argoproj.io/subscribe.app-sync-failed.smtp-ua: <replace-email>
-        notifications.argoproj.io/subscribe.on-health-degraded.smtp-ua: <replace-email>
-        notifications.argoproj.io/subscribe.on-sync-status-unknown.smtp-ua: <replace-email>
+        notifications.argoproj.io/subscribe.on-deployed.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com,fase-support@stfc.ac.uk
+        notifications.argoproj.io/subscribe.app-sync-failed.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com,fase-support@stfc.ac.uk
+        notifications.argoproj.io/subscribe.on-health-degraded.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com,fase-support@stfc.ac.uk
+        notifications.argoproj.io/subscribe.on-sync-status-unknown.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com,fase-support@stfc.ac.uk
     spec:
       project: u-a-project
       source:

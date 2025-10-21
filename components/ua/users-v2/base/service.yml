@@ -4,7 +4,7 @@ metadata:
   name: user-office-web-service-rest-v2
 spec:
   selector:
-    app: user-office-web-service-v2
+    app: user-office-web-service
     rest-api-version: v2
   ports:
     - name: https

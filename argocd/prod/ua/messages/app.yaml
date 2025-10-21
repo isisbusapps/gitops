@@ -16,6 +16,10 @@ spec:
       name: '{{.name}}-messages'
       annotations:
         argocd.argoproj.io/sync-wave: "0"
+        notifications.argoproj.io/subscribe.on-deployed.smtp-ua: <replace-email>
+        notifications.argoproj.io/subscribe.app-sync-failed.smtp-ua: <replace-email>
+        notifications.argoproj.io/subscribe.on-health-degraded.smtp-ua: <replace-email>
+        notifications.argoproj.io/subscribe.on-sync-status-unknown.smtp-ua: <replace-email>
     spec:
       project: u-a-project
       source:

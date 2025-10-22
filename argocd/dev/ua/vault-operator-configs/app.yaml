@@ -16,13 +16,13 @@ spec:
         - /spec/syncPolicy
   template:
     metadata:
-      name: '{{.name}}-vault-operator'
+      name: '{{.name}}-vault-operator-config'
       annotations:
         argocd.argoproj.io/sync-wave: "-1"
     spec:
       project: u-a-project
       source:
-        path: components/vault-operator
+        path: components/vault-operator-config
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:

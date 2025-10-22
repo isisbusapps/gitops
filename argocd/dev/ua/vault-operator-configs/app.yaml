@@ -22,11 +22,11 @@ spec:
     spec:
       project: u-a-project
       source:
-        path: components/ua/vault-operator-config
+        path: components/ua/vault-operator-config/dev
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:
-        namespace: apps
+        namespace: vault-operator
         name: '{{.name}}'
       syncPolicy:
         automated: 

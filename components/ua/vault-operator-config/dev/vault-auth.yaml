@@ -3,7 +3,7 @@ apiVersion: secrets.hashicorp.com/v1beta1
 kind: VaultAuth
 metadata:
   name: static-auth
-  namespace: apps
+  namespace: vault-operator
 spec:
   vaultConnectionRef: secrets-isis-connection
   method: kubernetes

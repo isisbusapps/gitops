@@ -28,7 +28,7 @@ spec:
         helm:
           releaseName: vault-operator
       destination:
-        namespace: apps
+        namespace: vault-operator
         name: '{{.name}}'
       syncPolicy:
         automated: 

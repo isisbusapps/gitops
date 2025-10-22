@@ -22,7 +22,7 @@ spec:
     spec:
       project: u-a-project
       source:
-        path: components/vault-operator-config
+        path: components/ua/vault-operator-config
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:

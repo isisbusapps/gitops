@@ -19,6 +19,9 @@ spec:
       name: '{{.name}}-ua-shared-config'
       annotations:
         argocd.argoproj.io/sync-wave: "-1"
+        notifications.argoproj.io/subscribe.app-sync-failed.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com
+        notifications.argoproj.io/subscribe.on-health-degraded.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com
+        notifications.argoproj.io/subscribe.on-sync-status-unknown.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com
     spec:
       project: u-a-project
       source:

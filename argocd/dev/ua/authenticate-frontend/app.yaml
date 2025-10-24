@@ -29,7 +29,7 @@ spec:
     spec:
       project: u-a-project
       source:
-        path: components/ua/authenticate-frontend/overlays/dev
+        path: components-non-existent/ua/authenticate-frontend/overlays/dev
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:

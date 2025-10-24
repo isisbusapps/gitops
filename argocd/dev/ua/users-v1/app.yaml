@@ -19,7 +19,7 @@ spec:
       name: '{{.name}}-users-v1'
       annotations:
         argocd.argoproj.io/sync-wave: "0"
-        notifications.argoproj.io/subscribe.app-sync-failed.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com
+        notifications.argoproj.io/subscribe.on-sync-failed.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com
         notifications.argoproj.io/subscribe.on-health-degraded.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com
         notifications.argoproj.io/subscribe.on-sync-status-unknown.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com
 

@@ -2,7 +2,7 @@
 apiVersion: secrets.hashicorp.com/v1beta1
 kind: VaultConnection
 metadata:
-  namespace: vault-operator
+  namespace: apps
   name: secrets-isis-connection
 spec:
   address: "https://secrets.isis.rl.ac.uk"

@@ -26,7 +26,7 @@ spec:
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:
-        namespace: vault-operator
+        namespace: apps
         name: '{{.name}}'
       syncPolicy:
         automated: 

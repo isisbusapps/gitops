@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: merge-user-tool
-          image: harbor.stfc.ac.uk/isisbusapps/merge-user-tool:1.2.0
+          image: ghcr.io/isisbusapps/merge-user-tool:1.2.0
           env:
             - name: APP_ENV
               value: prod

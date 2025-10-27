@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: mailchimp-webhooks
-          image: harbor.stfc.ac.uk/isisbusapps/mailchimp-webhooks:dev
+          image: ghcr.io/isisbusapps/mailchimp-webhooks:dev
           ports:
             - containerPort: 7005
           env:

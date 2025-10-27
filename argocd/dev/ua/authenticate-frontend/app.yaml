@@ -18,7 +18,7 @@ spec:
     metadata:
       name: '{{.name}}-authenticate-frontend'
       annotations:
-        argocd-image-updater.argoproj.io/image-list: devimage=harbor.stfc.ac.uk/isisbusapps/authenticate-frontend:dev
+        argocd-image-updater.argoproj.io/image-list: devimage=ghcr.io/isisbusapps/authenticate-frontend:dev
         argocd-image-updater.argoproj.io/devimage.update-strategy: digest
         argocd-image-updater.argoproj.io/write-back-method: git
         argocd.argoproj.io/sync-wave: "0"

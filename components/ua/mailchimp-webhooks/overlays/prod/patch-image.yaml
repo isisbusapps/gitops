@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: mailchimp-webhooks
-          image: harbor.stfc.ac.uk/isisbusapps/mailchimp-webhooks:4.0.0
+          image: ghcr.io/isisbusapps/mailchimp-webhooks:4.0.0
           env:
             - name: APP_ENV
               value: prod

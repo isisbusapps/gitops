@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - ghcr.io/isisbusapps/mailchimp-webhooks:dev@sha256:ed78aea166e88ea603bdd605b67f57f8d653471b9ff42a1dafcd1fb99d053929
+  - ghcr.io/isisbusapps/mailchimp-webhooks:dev@sha256:2fb843c6f07368d9252244a8011b1106be7a2ee699f522e6bae4a723d89705b6

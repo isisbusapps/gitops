@@ -7,4 +7,4 @@ spec:
     spec:
       containers:
         - name: auth-service
-          image: harbor.stfc.ac.uk/isisbusapps/auth-service:1.2.0
+          image: ghcr.io/isisbusapps/auth-service:1.2.0

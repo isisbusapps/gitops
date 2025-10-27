@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: user-office-web-service
-          image: harbor.stfc.ac.uk/isisbusapps/user-office-web-service:v1.2.0
+          image: ghcr.io/isisbusapps/user-office-web-service:v1.2.0
           env:
             - name: JAVA_TOOL_OPTIONS
               value: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=7005 -Djavax.net.ssl.trustStore=/deployments/cacerts.jks

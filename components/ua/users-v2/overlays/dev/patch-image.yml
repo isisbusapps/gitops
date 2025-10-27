@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: user-office-web-service
-          image: harbor.stfc.ac.uk/isisbusapps/user-office-web-service:dev
+          image: ghcr.io/isisbusapps/user-office-web-service:dev
           ports:
             - containerPort: 7005
           env:

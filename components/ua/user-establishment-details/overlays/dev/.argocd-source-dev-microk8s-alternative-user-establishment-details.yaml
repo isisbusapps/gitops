@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - harbor.stfc.ac.uk/isisbusapps/user-establishment-details:dev@sha256:459420df152b20c37c1c79cdc49f280796862a4105f779a72ead0a74278e925f
+  - ghcr.io/isisbusapps/user-establishment-details:dev@sha256:459420df152b20c37c1c79cdc49f280796862a4105f779a72ead0a74278e925f

@@ -7,4 +7,4 @@ spec:
     spec:
       containers:
         - name: user-establishment-details
-          image: harbor.stfc.ac.uk/isisbusapps/user-establishment-details:1.4.4
+          image: ghcr.io/isisbusapps/user-establishment-details:1.4.4

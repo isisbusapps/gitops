@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: merge-user-tool
-          image: harbor.stfc.ac.uk/isisbusapps/merge-user-tool:dev
+          image: ghcr.io/isisbusapps/merge-user-tool:dev
           ports:
             - containerPort: 7005
           env:

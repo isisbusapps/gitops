@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - harbor.stfc.ac.uk/isisbusapps/merge-user-tool:dev@sha256:9c94fd520d074cb30a807487395136f6963a57062b7a531e5085bce6d82b182c
+  - harbor.stfc.ac.uk/isisbusapps/merge-user-tool:dev@sha256:0783c622daa7053d0541b79d11d42b4cf56292d18e7d8d601490be5c61505c31

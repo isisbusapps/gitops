@@ -7,6 +7,6 @@ spec:
     spec:
       containers:
         - name: auth-service
-          image: harbor.stfc.ac.uk/isisbusapps/auth-service:dev
+          image: ghcr.io/isisbusapps/auth-service:dev
           ports:
             - containerPort: 5005

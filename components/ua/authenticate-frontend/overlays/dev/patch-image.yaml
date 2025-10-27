@@ -7,4 +7,4 @@ spec:
     spec:
       containers:
         - name: authenticate-frontend
-          image: harbor.stfc.ac.uk/isisbusapps/authenticate-frontend:dev
+          image: ghcr.io/isisbusapps/authenticate-frontend:dev

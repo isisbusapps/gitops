@@ -7,4 +7,4 @@ spec:
     spec:
       containers:
         - name: ua-dev-tools
-          image: harbor.stfc.ac.uk/isisbusapps/ua-dev-tools:dev
+          image: ghcr.io/isisbusapps/ua-dev-tools:dev

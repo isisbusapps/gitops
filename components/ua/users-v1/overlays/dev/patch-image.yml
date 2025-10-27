@@ -13,3 +13,14 @@ spec:
           env:
             - name: JAVA_TOOL_OPTIONS
               value: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=7005 -Djavax.net.ssl.trustStore=/deployments/cacerts.jks
+          envFrom:
+            - secretRef:
+                name: user-office-web-service-secrets
+          volumeMounts:
+            - name: user-office-web-service-config
+              mountPath: "/deployments/config"
+              readOnly: true
+      volume:
+        - name: user-office-web-service-config
+          configMap:
+            name: user-office-web-service-config

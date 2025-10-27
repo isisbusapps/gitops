@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: uows-new-config
+data:
+  application.properties: |
+    ADDomainAuthPath=LDAPS://logon11.fed.cclrc.ac.uk
+    ADDomainAuthPaths=LDAPS://logon03.fed.cclrc.ac.uk,LDAPS://logon04.fed.cclrc.ac.uk,LDAPS://logon05.fed.cclrc.ac.uk,LDAPS://logon10.fed.cclrc.ac.uk,LDAPS://logon11.fed.cclrc.ac.uk,LDAPS://logon01.fed.cclrc.ac.uk,LDAPS://logon02.fed.cclrc.ac.uk
+    ADDomain=CLRC
+    ADDomainUserPath=fed.cclrc.ac.uk
+    AUTHENTICATE.OfficeLoginURL=https://devoffice.facilities.rl.ac.uk/auth/Login.aspx
+    AUTHENTICATE.OverrideEmailAddress=BISAPPSSINK@stfc.ac.uk
+    EXPERIMENTALREPORTS.IsisUserOfficeEmail=BISAPPSSINK@stfc.ac.uk
+    EXPERIMENTALREPORTS.ClfUserOfficeEmail=BISAPPSSINK@stfc.ac.uk
+    IsisUoSoftwareAccount=clrc\\ISISUOSOFTWARE
+    IsisUoSoftwareAccountNoDomain=ISISUOSOFTWARE
+    JAVAMSUTILS.WsdlUrl=https://devapis.facilities.rl.ac.uk/details/JavaMSUtils/JavaMSUtils.asmx?WSDL
+    mailchimp.baseurl=https://devexternal-api.facilities.rl.ac.uk/mailchimp
+    mergeuser.endpointURL=https://devapis.facilities.rl.ac.uk/users/merges
+    SMTPHost=ob-mgw.stfc.ac.uk
+    SMTPPort=26
+    UserAccountActivationURL=https://devusers.facilities.rl.ac.uk/auth/VerifyAccount.aspx?id=
+    UserAccountPasswordResetURL=https://devusers.facilities.rl.ac.uk/auth/ResetPassword.aspx?id=
+    USERCHECK.UserCheckURL=https://devoffice.facilities.rl.ac.uk/usercheck/default.aspx
+    USEROFFICEDETAILS.LoginRedirectURL=https://devoffice.facilities.rl.ac.uk/details/Login.do
+    USEROFFICEDETAILS.LoginServiceURL=https://devoffice.facilities.rl.ac.uk/details
+    quarkus.rest-client.mailchimp-api.url=https://devexternal-api.facilities.rl.ac.uk/mailchimp
+    quarkus.rest-client.ideiio-api.url=https://DCRL-LX-IAM001.rl.ac.uk:4748/0759a640-7ec1-42cd-913c-f538b0f1c618/scim/v1
+    quarkus.rest-client.merge-user-tool-api.url=https://devapis.facilities.rl.ac.uk/users/merges
+    ideiio.username=isis
+    CONTACT_US_URL=https://www.facilities.rl.ac.uk/isis/busapps/knowledgebase/Lists/Posts/Post.aspx?ID=2
+    CDR_TOKEN=Proxy-Authorization
+    CDR_TOKEN_TYPE=token
+    JAVA_MS_UTILS_TOKEN_HEADER=Proxy-Authorization
+    FEDIDPOSTURL=https://devproxy-api.facilities.rl.ac.uk/cdrwebservices/service/DAOAddNonStaffExecute
+    FEDIDUPDATEURL=https://devproxy-api.facilities.rl.ac.uk/cdrwebservices/service/SetPersonEnddate
+    LDAP_REQUESTDIR=\\\\fitbawebdev\\d$\\glassfishdata\\testfedidLDAPdumps\\
+    LDAP_RESPONSEDIR=\\\\fitbawebdev\\d$\\glassfishdata\\testfedidLDAPdumps\\results\\
+    TERMS_AND_CONDITIONS_URL=https://www.isis.stfc.ac.uk/Pages/terms.aspx
+    DATABASE_SERVER_LATENCY_EXPIRY_MINS=60
+    quarkus.otel.exporter.otlp.endpoint=http://alloy.alloy.svc.cluster.local:4317
+    mailchimp.client.list.id=6d290c5c86
+    JWT.publicKey=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA+pvKvB1qwZZmYW3Jlo9q48CKHa0Q5PCsDq6Jn2nLxKBJqc/twF+RCIrt3PvXO9aSm1SguMzra5DypGzCjUQV0X0dNzwro0SFn6cYVGYqD2lhTFQxOiwNE+ZN/oX5ZIIcjJqFMXR/FUBMIlA8jsYI5NmcwAXJaccMASD/bhu8DcV3Nbsxz5+/V2Fyswv4e6SwFtFRboKeN6BXnwOZY4f574lfxdf8LV+oLTFj5Tiyy1zTnwT20/llF6OVVFZD3pkkUegQyKf2njXGp29AO1HhAjVMN003l04lNRC94ejjsw4p0xYU0FakKYTJMIojTlJvTxHPeIhEcXFP2FYLHpx09QIDAQAB
+
+    IsisUoSoftwarePassword=${AD_PASSWORD}
+    mailchimp.client.api.key=${MAILCHIMP_CLIENT_API_KEY}
+    mergeuser.authentication.key=${MERGE_USER_AUTHENTICATION_KEY}
+    UsersPrivateEncryptionKey=${USERS_PRIVATE_ENCRYPTION_KEY}
+    ideiio.password=${IDEIIO_PASSWORD}

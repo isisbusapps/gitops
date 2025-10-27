@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: authenticate-frontend-config
+  namespace: apps
+data:
+  JWT_PUBLIC_KEY: "-----BEGIN PUBLIC KEY----- MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA+pvKvB1qwZZmYW3Jlo9q48CKHa0Q5PCsDq6Jn2nLxKBJqc/twF+RCIrt3PvXO9aSm1SguMzra5DypGzCjUQV0X0dNzwro0SFn6cYVGYqD2lhTFQxOiwNE+ZN/oX5ZIIcjJqFMXR/FUBMIlA8jsYI5NmcwAXJaccMASD/bhu8DcV3Nbsxz5+/V2Fyswv4e6SwFtFRboKeN6BXnwOZY4f574lfxdf8LV+oLTFj5Tiyy1zTnwT20/llF6OVVFZD3pkkUegQyKf2njXGp29AO1HhAjVMN003l04lNRC94ejjsw4p0xYU0FakKYTJMIojTlJvTxHPeIhEcXFP2FYLHpx09QIDAQAB -----END PUBLIC KEY-----"
+  USERS_API_URL: "http://user-office-web-service-rest-v2.apps.svc.cluster.local:8080"
+  AUTH_API_URL: "http://auth-service.apps.svc.cluster.local:8080"
+  LOG_LEVEL: info
+  NAFE_BASE_URL: "https://devusers.facilities.rl.ac.uk"

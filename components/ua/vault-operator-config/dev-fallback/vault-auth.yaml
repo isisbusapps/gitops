@@ -1,0 +1,18 @@
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  name: static-auth
+  namespace: apps
+spec:
+  vaultConnectionRef: secrets-isis-connection
+  method: kubernetes
+  mount: u-and-a-dev-fallback
+  allowedNamespaces:
+    - "*"
+  kubernetes:
+    role: cluster
+    serviceAccount: vault-op
+    audiences:
+      - vault
+      - https://kubernetes.default.svc.cluster.local

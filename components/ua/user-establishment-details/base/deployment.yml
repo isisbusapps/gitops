@@ -49,13 +49,15 @@ spec:
               path: /UserEstablishmentDetails/Ready
               port: 8080
           volumeMounts:
-            - name: user-establishment-details-config
+            - name: config
               mountPath: "/FBS/config"
               readOnly: true
       imagePullSecrets:
         - name: registry-creds
       volumes:
-        - name: user-establishment-details-config
+        - name: config
           secret:
-            secretName: user-establishment-details-config
-
+            secretName: user-establishment-details
+            items:
+              - key: BISAppSettings.json
+                path: BISAppSettings.json

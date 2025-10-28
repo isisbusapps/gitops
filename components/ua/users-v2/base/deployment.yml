@@ -45,25 +45,21 @@ spec:
               path: /quarkus/health/ready
               port: 8080
           volumeMounts:
-            - name: user-office-web-service-config
+            - name: config
               mountPath: "/deployments/config"
-              readOnly: true
-            - name: ua-environment-secrets
-              mountPath: "/deployments/.env"
-              subPath: ".env"
               readOnly: true
             - name: cacerts
               mountPath: "/deployments/cacerts.jks"
               subPath: "cacerts.jks"
+          envFrom:
+            - secretRef:
+                name: user-office-web-service-v2
       imagePullSecrets:
         - name: registry-creds
       volumes:
-        - name: user-office-web-service-config
+        - name: config
           configMap:
-            name: user-office-web-service-config
-        - name: ua-environment-secrets
-          secret:
-            secretName: ua-environment-secrets
+            name: user-office-web-service-v2-config
         - name: cacerts
           secret:
             secretName: uows-cacerts

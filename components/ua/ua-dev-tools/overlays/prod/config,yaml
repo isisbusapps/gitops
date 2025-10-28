@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ua-dev-tools
+data:
+  BISAppSettings.json: |
+    {
+      "UOWSRestAPIURL" : "https://api.facilities.rl.ac.uk/users-service/v2",
+      "JWTPublicKey" : "-----BEGIN PUBLIC KEY----- MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx653Gv4kx1I5fsJju/Ame7674HJAjsheIthRuT9RS96vrvyUyc3B+FTTXAyNvtY5jsJoUY9o/4YhbB4Ep8GrL9h3rmZjxIGLv8jPfyYYqV874t5xvSf0Bcew4c+Rc41vVWaQPaEqYkyBJ9sLnI/TWatS1Zbw0lFc5S5gxzealYaDLj3xLtoAEDoYwyoDS1AMxWK1IEFOYtdAwGyPBkR51xodyY0Hi+uu9sPx++lJ/Vokw66K79puakNqOa0pCMuon4h44/8b382aLb5yNXijWjqgfJN0oEYlXRjdCOIRSXyGACwozRrD7xHyT7nFC0NEmpK8UWC9kiBLlgtJS6HElwIDAQAB -----END PUBLIC KEY-----",
+      "AuthURL" : "https://office.facilities.rl.ac.uk",
+      "AuthServiceURL": "https://api.facilities.rl.ac.uk/auth-service/v0/authenticate?sessionID="
+    }

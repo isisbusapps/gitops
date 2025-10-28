@@ -64,12 +64,18 @@ spec:
               mountPath: "/deployments/private.key"
               subPath: "private.key"
               readOnly: true
+            - name: config
+              mountPath: "/deployments/config/"
+              readOnly: true
           envFrom:
             - secretRef:
-                name: auth-service-secret
+                name: auth-service
       imagePullSecrets:
         - name: registry-creds
       volumes:
         - name: auth-service-private-key
           secret:
             secretName: auth-service-private-key
+        - name: config
+          configMap:
+            name: auth-service-config

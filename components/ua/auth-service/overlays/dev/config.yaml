@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth-service-config
+data:
+  application.properties: |
+    #Configrations for connection
+    quarkus.http.port=8080
+    quarkus.datasource.db-kind = oracle
+
+    #Hibernate config
+    quarkus.hibernate-orm.database.generation = none
+
+    #JWT config
+    jwt.issuer=auth-service-quarkus
+    smallrye.jwt.sign.key.location=private.key
+    #8hrs in seconds
+    jwt.expiration-seconds=28800
+
+    #Session config
+    #1hr in seconds
+    session.user-expiration-seconds=3600
+    #4hrs in seconds
+    session.user-office-expiration-seconds=14400
+    #8hrs in seconds
+    session.admin-expiration-seconds=28800
+    #8hrs in seconds
+    session.super-admin-expiration-seconds=28800
+
+    #Observabilityquarkus dev
+    quarkus.otel.sdk.disabled=true
+    quarkus.application.name=auth-service-quarkus
+    quarkus.micrometer.export.prometheus.path=/metrics
+
+    # enable tracing of database queries
+    quarkus.datasource.jdbc.telemetry=true

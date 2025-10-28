@@ -6,5 +6,8 @@ bases:
 
 namespace: apps
 
+resources:
+  - config.yaml
+
 patches:
 - path: patch-image.yml

@@ -6,6 +6,10 @@ bases:
 
 namespace: apps
 
+resources:
+  - static-secret.yaml
+  - config.yaml
+
 patches:
   - path: patch-image.yml
   - path: enable-debug-service.yml

@@ -31,9 +31,9 @@ spec:
       volumes:
         - name: spring-config
           secret:
-            secretName: mailchimp-webhooks-profiles
+            secretName: mailchimp-webhooks
             items:
-              - key: mailchimp-webhooks.properties
+              - key: application.properties
                 path: application.properties
       imagePullSecrets:
         - name: registry-creds

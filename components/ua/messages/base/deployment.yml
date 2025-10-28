@@ -50,7 +50,7 @@ spec:
               port: 30000
           envFrom:
             - secretRef:
-                name: messages-service
+                name: messages
       restartPolicy: Always
       imagePullSecrets:
         - name: registry-creds

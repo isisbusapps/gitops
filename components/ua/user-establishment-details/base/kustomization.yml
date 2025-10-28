@@ -5,7 +5,7 @@ labels:
 - includeSelectors: true
   includeTemplates: true
   pairs:
-    app: authenticate-frontend
+    app: user-establishment-details
 
 namespace: apps
 

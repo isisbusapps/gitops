@@ -15,4 +15,3 @@ spec:
     serviceAccount: vault-op
     audiences:
       - vault
-      - https://kubernetes.default.svc.cluster.local

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ua-dev-tools
+data:
+  BISAppSettings.json: |
+    {
+      "UOWSRestAPIURL" : "https://devapi.facilities.rl.ac.uk/users-service/v2",
+      "JWTPublicKey" : "-----BEGIN PUBLIC KEY----- MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA+pvKvB1qwZZmYW3Jlo9q48CKHa0Q5PCsDq6Jn2nLxKBJqc/twF+RCIrt3PvXO9aSm1SguMzra5DypGzCjUQV0X0dNzwro0SFn6cYVGYqD2lhTFQxOiwNE+ZN/oX5ZIIcjJqFMXR/FUBMIlA8jsYI5NmcwAXJaccMASD/bhu8DcV3Nbsxz5+/V2Fyswv4e6SwFtFRboKeN6BXnwOZY4f574lfxdf8LV+oLTFj5Tiyy1zTnwT20/llF6OVVFZD3pkkUegQyKf2njXGp29AO1HhAjVMN003l04lNRC94ejjsw4p0xYU0FakKYTJMIojTlJvTxHPeIhEcXFP2FYLHpx09QIDAQAB -----END PUBLIC KEY-----",
+      "AuthURL" : "https://devoffice.facilities.rl.ac.uk",
+      "AuthServiceURL": "https://devapi.facilities.rl.ac.uk/auth-service/v0/authenticate?sessionID="
+    }

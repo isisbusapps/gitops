@@ -6,5 +6,8 @@ bases:
 
 namespace: apps
 
+resources:
+  - static-secret.yaml
+
 patches:
   - path: patch-image.yml

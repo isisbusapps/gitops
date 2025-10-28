@@ -60,7 +60,7 @@ spec:
               path: /q/health/ready
               port: 8080
           volumeMounts:
-            - name: auth-service-private-key
+            - name: private-key
               mountPath: "/deployments/private.key"
               subPath: "private.key"
               readOnly: true
@@ -73,9 +73,9 @@ spec:
       imagePullSecrets:
         - name: registry-creds
       volumes:
-        - name: auth-service-private-key
+        - name: private-key
           secret:
-            secretName: auth-service-private-key
+            secretName: auth-service-jwt-private-key
         - name: config
           configMap:
             name: auth-service-config

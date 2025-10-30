@@ -26,7 +26,7 @@ spec:
             periodSeconds: 10
             timeoutSeconds: 5
             httpGet:
-              path: /quarkus/health/started-asd
+              path: /quarkus/health/started
               port: 8080
           livenessProbe:
             periodSeconds: 30

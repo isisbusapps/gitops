@@ -59,7 +59,7 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: user-office-web-service-v2-config
+            name: user-office-web-service-v2-config-a
         - name: cacerts
           secret:
             secretName: uows-cacerts

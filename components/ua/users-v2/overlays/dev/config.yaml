@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: user-office-web-service-v1-config
+  name: user-office-web-service-v2-config
   namespace: apps
 
 data:

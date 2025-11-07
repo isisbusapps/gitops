@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - ghcr.io/isisbusapps/user-office-web-service:dev@sha256:457ac3d4127e62fe086c8f31a0514053901d408f08375129b6d265744e4bb681
+  - ghcr.io/isisbusapps/user-office-web-service:dev@sha256:b87752c583cb8a3e89a9a9ddf2a72991f43d648f344e4654d0829c6000e9befc

@@ -11,8 +11,10 @@ spec:
       elements:
         # Names of clusters to deploy the app to
         - name: dev-v3
+          path: dev
         # Uncomment if you want to deploy to dev-microk8s-alternative
         - name: dev-microk8s-alternative
+          path: dev-fallback
   ignoreApplicationDifferences:
     - jsonPointers:
         - /spec/syncPolicy
@@ -24,7 +26,7 @@ spec:
     spec:
       project: u-a-project
       source:
-        path: components/ua/vault-operator-config/{{.metadata.labels.type}}
+        path: components/ua/vault-operator-config/{{.path}}
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:

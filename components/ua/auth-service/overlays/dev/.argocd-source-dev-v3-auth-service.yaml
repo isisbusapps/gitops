@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - ghcr.io/isisbusapps/auth-service:dev@sha256:309a9f901ee63c42afd8fa2efeea0b73d235122d6bee67bab762b9afe0f6c464
+  - ghcr.io/isisbusapps/auth-service:dev@sha256:68d9ff43ca0b4cf429bb829da05b9ecf127b82f04a54a9e05351ea04164e830f

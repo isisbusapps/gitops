@@ -50,7 +50,7 @@ spec:
               port: 8080
           envFrom:
             - secretRef:
-                name: user-office-web-service-v2 
+                name: establishment-service 
       restartPolicy: Always
       imagePullSecrets:
         - name: registry-creds

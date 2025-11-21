@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: establishment-service-config
+  namespace: apps
+
+data:
+  application.properties: |-
+    #Configrations for db connection
+    quarkus.http.port=8080
+    quarkus.http.cors.enabled=true
+    %dev.quarkus.http.cors.origins=/.*/
+    
+    # JWT configuration
+    mp.jwt.verify.publickey=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqZFkrF6lDYXnc0Jfg8A8OkaDvpn/SbcJ/LR6srp3RC2tyKJRGWjE8UaqOdAosyRYDLUj0IoNvfICDl2B0l15peFVN2RHrnif7rM7nYXN1v3BKM1iRlGPYYZMQB2XP+Grv/c2rQXNxSsBy5+cglm38lsVRquuQHVu081J9UBeie+/ghT58IdEr472mfk62unXiKrvc34DaK7DVXXd09M/fPDupCdkWEdvv0n2u7WKUnCQWgV5+hFqAxwmgsaGUcPZYJuAeHFgKhIvirhrIWv/2S/MQP9i9/3mfltskuS1TI2WprNsxOBTA7u3uK0yyly4yb10B5jUx65MNNYEzJaT+QIDAQAB
+    mp.jwt.verify.issuer=auth-service-quarkus
+    smallrye.jwt.path.groups=Role
+

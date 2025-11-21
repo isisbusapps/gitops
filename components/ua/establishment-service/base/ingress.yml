@@ -2,6 +2,9 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: establishment-service
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   tls:
@@ -15,12 +18,12 @@ spec:
     - host: "*.developers.facilities.rl.ac.uk"
       http: &http_rules
         paths:
-          - path: /establishment
-            pathType: Prefix
+          - path: /establishment-service(/|$)(.*)
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: establishment-service
                 port:
-                  number: 30000
+                  number: 8080 
     - host: "*.facilities.rl.ac.uk"
       http: *http_rules

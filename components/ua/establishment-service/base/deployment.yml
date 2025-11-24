@@ -35,9 +35,17 @@ spec:
             httpGet:
               path: /q/health/ready
               port: 8080
+          volumeMounts:
+            - name: config
+              mountPath: "/deployments/config"
+              readOnly: true
           envFrom:
             - secretRef:
                 name: establishment-service 
       restartPolicy: Always
       imagePullSecrets:
         - name: registry-creds
+      volumes:
+        - name: config
+          configMap:
+            name: establishment-service-config

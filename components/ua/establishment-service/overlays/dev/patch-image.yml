@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: establishment-service
+spec:
+  template:
+    spec:
+      containers:
+        - name: establishment-service
+          image: ghcr.io/isisbusapps/establishment-service:dev
+          ports:
+            - containerPort: 4019

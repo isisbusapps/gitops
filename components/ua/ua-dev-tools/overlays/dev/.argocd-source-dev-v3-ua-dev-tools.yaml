@@ -1,3 +1,0 @@
-kustomize:
-  images:
-  - ghcr.io/isisbusapps/ua-dev-tools:dev@sha256:8aa50f6ff86bc5030275f7369d0f0a1a203486bd0adfbd68d985082ce600e063

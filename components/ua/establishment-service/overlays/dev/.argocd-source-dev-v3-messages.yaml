@@ -1,3 +1,0 @@
-kustomize:
-  images:
-  - ghcr.io/isisbusapps/establishment-service:dev@sha256:16ca6db71bc72b388b8af2fe267bdbd35fa8116a78b63c0b84f0fb2f6f874c69

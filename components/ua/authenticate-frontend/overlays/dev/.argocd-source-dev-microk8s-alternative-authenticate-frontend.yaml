@@ -1,3 +1,0 @@
-kustomize:
-  images:
-  - ghcr.io/isisbusapps/authenticate-frontend:dev@sha256:1ad0d54d7b62bf4fedaa471af2dfbd788486245819ae2e9d9b4c7ffa38c36874

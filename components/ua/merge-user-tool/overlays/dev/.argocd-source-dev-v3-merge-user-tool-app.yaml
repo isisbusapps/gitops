@@ -1,3 +1,0 @@
-kustomize:
-  images:
-  - ghcr.io/isisbusapps/merge-user-tool:dev@sha256:97c01fea9c97cb04cf8c62ac35594f33c6b5975e6f94c924671dc448f6503fb1

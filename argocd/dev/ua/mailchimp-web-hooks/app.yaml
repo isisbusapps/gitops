@@ -13,16 +13,10 @@ spec:
         - name: dev-v3
         # Uncomment if you want to deploy to dev-microk8s-alternative
         #- name: dev-microk8s-alternative
-  ignoreApplicationDifferences:
-    - jsonPointers:
-        - /spec/syncPolicy
   template:
     metadata:
       name: '{{.name}}-mailchimp-web-hooks'
       annotations:
-        argocd-image-updater.argoproj.io/image-list: devimage=ghcr.io/isisbusapps/mailchimp-webhooks:dev
-        argocd-image-updater.argoproj.io/devimage.update-strategy: digest
-        argocd-image-updater.argoproj.io/write-back-method: git
         argocd.argoproj.io/sync-wave: "0"
         notifications.argoproj.io/subscribe.on-sync-failed.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com
         notifications.argoproj.io/subscribe.on-health-degraded.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com

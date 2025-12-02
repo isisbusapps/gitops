@@ -15,9 +15,6 @@ spec:
         # Uncomment if you want to deploy to dev-microk8s-alternative
         - name: dev-microk8s-alternative
           path: dev-fallback
-  ignoreApplicationDifferences:
-    - jsonPointers:
-        - /spec/syncPolicy
   template:
     metadata:
       name: '{{.name}}-vault-operator-config'

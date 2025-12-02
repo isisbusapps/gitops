@@ -4,6 +4,7 @@ namespace: apps
 
 resources:
 - ../../base
+- config.yaml
 
 patches:
 - path: patch-image.yaml

@@ -35,7 +35,7 @@ spec:
           readinessProbe:
             successThreshold: 3
             failureThreshold: 3
-            periodSeconds: 20
+            periodSeconds: 5
             timeoutSeconds: 10
             httpGet:
               path: /authenticate-frontend/Ready

@@ -7,4 +7,4 @@ spec:
     spec:
       containers:
         - name: authenticate-frontend
-          image: ghcr.io/isisbusapps/authenticate-frontend@sha256:aa49e7dcdf922d815560b9a5be0f439128e973e9e266dc211e7395a0d4e2bd9d
+          image: ghcr.io/isisbusapps/authenticate-frontend@sha256:d38be517c37945843ca6eec3a9ea1608f2c6e0055a75d01ee6d5172d3837b694

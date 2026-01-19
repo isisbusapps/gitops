@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: user-exchange
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+        # Names of clusters to deploy the app to
+        - name: dev-v3
+        # Uncomment if you want to deploy to dev-microk8s-alternative
+        #- name: dev-microk8s-alternative
+  template:
+    metadata:
+      name: '{{.name}}-user-exchange'
+      annotations:
+        argocd.argoproj.io/sync-wave: "0"
+        notifications.argoproj.io/subscribe.on-sync-failed.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com
+        notifications.argoproj.io/subscribe.on-health-degraded.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com
+        notifications.argoproj.io/subscribe.on-sync-status-unknown.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com
+    spec:
+      project: u-a-project
+      source:
+        path: mu2/users-exchange-chart
+        repoURL: 'https://github.com/isisbusapps/merge-user-tool'
+        targetRevision: develop
+        helm:
+          valueFiles:
+            - values.yaml
+      destination:
+        namespace: apps
+        name: '{{.name}}'
+      syncPolicy:
+        automated: 
+          selfHeal: true
+          enabled: true

@@ -25,7 +25,7 @@ spec:
       project: u-a-project
       source:
         path: secret-config/dev/user-exchange
-        repoURL: ' https://git.developers.facilities.rl.ac.uk/isisbusapps/BisAppSettings'
+        repoURL: https://git.developers.facilities.rl.ac.uk/isisbusapps/BisAppSettings
         targetRevision: develop
       destination:
         namespace: apps

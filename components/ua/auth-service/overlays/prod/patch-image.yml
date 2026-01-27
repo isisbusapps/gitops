@@ -7,4 +7,5 @@ spec:
     spec:
       containers:
         - name: auth-service
+          # version: 1.2.0
           image: ghcr.io/isisbusapps/auth-service:1.2.0

@@ -5,6 +5,30 @@ metadata:
 spec:
   template:
     spec:
+      initContainers:
+        - name: db-updater
+          image: ghcr.io/isisbusapps/users-db-updater:dev
+          args: ["update"]
+          env:
+            - name: LIQUIBASE_COMMAND_URL
+              valueFrom:
+                secretKeyRef:
+                  name: user-office-web-service-v2
+                  key: DB_URL
+            - name: LIQUIBASE_COMMAND_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: user-office-web-service-v2
+                  key: DB_USERNAME
+            - name: LIQUIBASE_COMMAND_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: user-office-web-service-v2
+                  key: DB_PASSWORD
+            - name: DEPLOYMENT_NAME
+              value: "users-v2-dev"
+            - name: AUTHOR
+              value: "kubernetes"
       containers:
         - name: user-office-web-service
           image: ghcr.io/isisbusapps/user-office-web-service@sha256:acf3f27f09fc576d268e6cade540750c1a308e2a20f2cc02ca2981840b9cfe51

@@ -31,7 +31,7 @@ spec:
               value: "kubernetes"
       containers:
         - name: user-office-web-service
-          image: ghcr.io/isisbusapps/user-office-web-service@sha256:2e77b47ac06a6a57ae8fde1586ebe590a8f8c8d0256ad14623b46f7223a0de0a
+          image: ghcr.io/isisbusapps/user-office-web-service@sha256:baeb11fc47677abe9e825a85e430c3b2fb5eb895f506cd172a47af63f0530c44
           ports:
             - containerPort: 7005
           env:

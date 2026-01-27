@@ -9,6 +9,7 @@ namespace: apps
 resources:
   - config.yaml
   - static-secret.yaml
+  - liquibase-config.yaml
 
 patches:
   - path: patch-image.yml

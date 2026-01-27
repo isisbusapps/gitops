@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: users-db-updater-config
+  namespace: apps
+
+data:
+  liquibase.docker.properties: |-
+    contexts=Prod
+
+    liquibase.analytics.enabled=false
+    liquibase.convertDataTypes=true
+    liquibase.diffColumnOrder=false
+    liquibase.headless=true
+
+    changeLogFile=changelog/changelog.xml
+    classpath=/liquibase/changelog
+    liquibase.hub.mode=off

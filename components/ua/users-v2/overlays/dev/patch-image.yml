@@ -29,6 +29,15 @@ spec:
               value: "users-v2-dev"
             - name: AUTHOR
               value: "kubernetes"
+          volumeMounts:
+            - name: liquibase-config
+              mountPath: /liquibase/liquibase.docker.properties
+              subPath: liquibase.docker.properties
+              readOnly: true
+      volumes:
+        - name: liquibase-config
+          configMap:
+            name: users-db-updater-config
       containers:
         - name: user-office-web-service
           image: ghcr.io/isisbusapps/user-office-web-service@sha256:4f3bb0f56c2b24593f256c65a79bace25778522ac4430c80956e80d46206dc71

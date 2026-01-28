@@ -7,4 +7,4 @@ spec:
     spec:
       containers:
         - name: user-establishment-details
-          image: ghcr.io/isisbusapps/user-establishment-details@sha256:8427f2512dbe7945ffe2ed25127fbc782aa76fce45bc9f409e4249619027d27b
+          image: ghcr.io/isisbusapps/user-establishment-details@sha256:e81009b2401916c7e7fec1d714a4a00889c9a4ed4913fb84166d1c70e4e44dda

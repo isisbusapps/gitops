@@ -12,3 +12,4 @@ data:
   LOG_LEVEL: info
   ICRD_EMAIL: "ICRD@stfc.ac.uk"
   NAFE_BASE_URL: "https://devusers.facilities.rl.ac.uk"
+  APP_ENV: dev

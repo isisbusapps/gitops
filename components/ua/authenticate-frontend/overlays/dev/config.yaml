@@ -11,5 +11,5 @@ data:
   EST_API_URL: "http://establishment-service.apps.svc.cluster.local:8080"
   LOG_LEVEL: info
   ICRD_EMAIL: "ICRD@stfc.ac.uk"
-  NAFE_BASE_URL: "https://devusers.facilities.rl.ac.uk"
+  NAFE_BASE_URL: "https://devoffice.facilities.rl.ac.uk"
   APP_ENV: dev

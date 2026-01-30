@@ -6,10 +6,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - "devkubernetes.developers.facilities.rl.ac.uk"
+        - "*.facilities.rl.ac.uk"
       secretName: facilities-tls-certificate
   rules:
-    - host: "devkubernetes.developers.facilities.rl.ac.uk"
+    - host: "*.facilities.rl.ac.uk"
       http:
         paths:
           - path: /authenticate-frontend

@@ -2,8 +2,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: authenticate-frontend
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   tls:
@@ -14,8 +12,7 @@ spec:
     - host: "*.facilities.rl.ac.uk"
       http:
         paths:
-          - path: /auth(/|$)(.*)
-            pathType: ImplementationSpecific
+          - path: /auth
             backend:
               service:
                 name: authenticate-frontend

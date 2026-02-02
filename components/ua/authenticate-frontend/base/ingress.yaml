@@ -12,7 +12,7 @@ spec:
     - host: "*.facilities.rl.ac.uk"
       http:
         paths:
-          - path: /authenticate-frontend
+          - path: /auth
             pathType: Prefix
             backend:
               service:

@@ -1,0 +1,64 @@
+logging {
+	level = "info"
+}
+
+remote.kubernetes.secret "alloy_secrets" {
+	name      = "mimir-password"
+	namespace = "alloy"
+}
+
+discovery.kubernetes "argocd_services" {
+	role = "service"
+
+	namespaces {
+		names = ["argocd"]
+	}
+
+	selectors {
+		role  = "service"
+		label = "app.kubernetes.io/part-of=argocd"
+	}
+}
+
+discovery.relabel "argocd_metrics" {
+	targets = discovery.kubernetes.argocd_services.targets
+
+	rule {
+		source_labels = ["__meta_kubernetes_service_port_name"]
+		action        = "keep"
+		regex         = "metrics"
+	}
+
+	rule {
+		source_labels = ["__meta_kubernetes_service_label_app_kubernetes_io_name"]
+		action        = "replace"
+		target_label  = "service_name"
+	}
+
+	rule {
+		source_labels = ["__meta_kubernetes_namespace"]
+		action        = "replace"
+		target_label  = "namespace"
+	}
+}
+
+prometheus.scrape "argocd_metrics" {
+	targets = discovery.relabel.argocd_metrics.output
+	job_name = "argocd"
+
+	forward_to = [prometheus.remote_write.to_mimir.receiver]
+}
+
+prometheus.remote_write "to_mimir" {
+	endpoint {
+		url = "https://mimir.developers.facilities.rl.ac.uk/api/v1/push"
+
+		basic_auth {
+			username = "fase"
+			password = remote.kubernetes.secret.mimir_password.data["mimir-password"]
+		}
+		headers = {
+			"X-Scope-OrgID" = "FASE",
+		}
+	}
+}

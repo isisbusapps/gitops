@@ -1,0 +1,49 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: management-alloy
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-10"
+spec:
+  project: infrastructure-project
+  sources:
+    - repoURL: https://grafana.github.io/helm-charts
+      targetRevision: 0.10.0
+      chart: alloy
+      helm:
+        valueFiles:
+          - $values/argocd/management-dev/alloy/values.yaml
+    - repoURL: 'https://github.com/isisbusapps/gitops'
+      targetRevision: main
+      ref: values
+  destination:
+    namespace: alloy
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: management-alloy-config
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-100"
+spec:
+  project: infrastructure-project
+  source:
+    path: components/infra/alloy-config
+    repoURL: 'https://github.com/isisbusapps/gitops'
+    targetRevision: main
+  destination:
+    namespace: alloy
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      selfHeal: true

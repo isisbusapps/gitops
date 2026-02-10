@@ -55,7 +55,7 @@ prometheus.remote_write "to_mimir" {
 
 		basic_auth {
 			username = "fase"
-			password = remote.kubernetes.secret.mimir_password.data["mimir-password"]
+			password = remote.kubernetes.secret.alloy_secrets.data["mimir-password"]
 		}
 		headers = {
 			"X-Scope-OrgID" = "FASE",

@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: management-vault-operator-config
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+    spec:
+      project: infrastructure-project
+      source:
+        path: components/infra/alloy/vault-config-management-dev
+        repoURL: 'https://github.com/isisbusapps/gitops'
+        targetRevision: main
+      destination:
+        namespace: alloy
+        name: https://kubernetes.default.svc
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+        automated:
+          selfHeal: true

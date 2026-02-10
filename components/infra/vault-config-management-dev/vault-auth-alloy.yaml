@@ -1,0 +1,74 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultConnection
+metadata:
+  namespace: alloy
+  name: secrets-isis-connection
+spec:
+  address: "https://secrets.isis.rl.ac.uk"
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  name: static-auth
+  namespace: alloy
+spec:
+  vaultConnectionRef: secrets-isis-connection
+  method: kubernetes
+  mount: fase-dev-management
+  allowedNamespaces:
+    - "*"
+  kubernetes:
+    role: cluster
+    serviceAccount: vault-op
+    audiences:
+      - vault
+      - https://kubernetes.default.svc.cluster.local
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  namespace: alloy
+  name: vault-op
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: service-account-read
+  namespace: alloy
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: service-account-read
+subjects:
+  - kind: ServiceAccount
+    name: vault-op
+    namespace: alloy
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: service-account-read-alloy
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:auth-delegator
+subjects:
+  - kind: ServiceAccount
+    name: vault-op
+    namespace: alloy
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: service-account-read
+  namespace: alloy
+rules:
+  - apiGroups: [ "" ]
+    resources: [ "serviceaccounts" ]
+    verbs: [ "get", "watch", "list" ]
+  - apiGroups: [ "authentication.k8s.io" ]
+    resources: [ "tokenreviews" ]
+    verbs: [ "create" ]
+  - apiGroups: [ "authentication.k8s.io" ]
+    resources: [ "subjectaccessreviews" ]
+    verbs: [ "create" ]

@@ -1,0 +1,17 @@
+# Dependabot config references:
+# https://github.com/isisbusapps/User-Check-App/pull/188/changes
+# https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference#cooldown-
+
+version: 2
+updates:
+  # Enable version updates for npm
+  - package-ecosystem: "npm"
+    directory: "/gitops/"
+    schedule:
+      interval: "daily"
+    cooldown:
+      default-days: 1 #default days to wait for updates
+      semver-major-days: 7 #days to wait for major updates, overrides default-days
+      semver-minor-days: 2 #days to wait for minor updates, overrides default-days
+      include:
+        - "*" #Includes all dependencies

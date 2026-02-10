@@ -3,7 +3,7 @@ logging {
 }
 
 remote.kubernetes.secret "alloy_secrets" {
-	name      = "mimir-password"
+	name      = "alloy-secrets"
 	namespace = "alloy"
 }
 

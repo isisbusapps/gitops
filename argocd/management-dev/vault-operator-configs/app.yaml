@@ -6,17 +6,16 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
 spec:
-    spec:
-      project: infrastructure-project
-      source:
-        path: components/infra/alloy/vault-config-management-dev
-        repoURL: 'https://github.com/isisbusapps/gitops'
-        targetRevision: main
-      destination:
-        namespace: alloy
-        name: https://kubernetes.default.svc
-      syncPolicy:
-        syncOptions:
-          - CreateNamespace=true
-        automated:
-          selfHeal: true
+    project: infrastructure-project
+    source:
+      path: components/infra/alloy/vault-config-management-dev
+      repoURL: 'https://github.com/isisbusapps/gitops'
+      targetRevision: main
+    destination:
+      namespace: alloy
+      name: https://kubernetes.default.svc
+    syncPolicy:
+      syncOptions:
+        - CreateNamespace=true
+      automated:
+        selfHeal: true

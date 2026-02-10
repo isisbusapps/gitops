@@ -13,7 +13,7 @@ spec:
       targetRevision: main
     destination:
       namespace: alloy
-      name: https://kubernetes.default.svc
+      server: https://kubernetes.default.svc
     syncPolicy:
       syncOptions:
         - CreateNamespace=true

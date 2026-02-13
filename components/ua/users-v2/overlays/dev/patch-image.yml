@@ -50,4 +50,4 @@ spec:
   template:
     spec:
       containers:
-        - image: ghcr.io/isisbusapps/user-office-web-service@sha256:90f33abe97b4adc043731fb6f3e5b0e0052becaf42749ca62656d661d722c0c6
+        - image: ghcr.io/isisbusapps/user-office-web-service@sha256:53245b3631dd634d557cace36bcff41caabcec19eaf7af2885c8d7cc93a7a936

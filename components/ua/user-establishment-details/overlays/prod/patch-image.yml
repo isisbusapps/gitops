@@ -7,5 +7,5 @@ spec:
     spec:
       containers:
         - name: user-establishment-details
-          # version: 1.4.4
-          image: ghcr.io/isisbusapps/user-establishment-details:1.4.4
+          # version: 1.5.0
+          image: ghcr.io/isisbusapps/user-establishment-details:1.5.0

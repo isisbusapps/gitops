@@ -12,7 +12,7 @@ spec:
         # Names of clusters to deploy the app to
         - name: prod-v4
         # Uncomment if you want to deploy to prod-microk8s-alternative
-        - name: prod-microk8s-alternative
+        - name: prod-fallback
   template:
     metadata:
       name: '{{.name}}-vault-operator'

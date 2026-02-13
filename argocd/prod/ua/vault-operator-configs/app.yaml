@@ -13,7 +13,7 @@ spec:
         - name: prod-v4
           path: prod
         # Uncomment if you want to deploy to prod-microk8s-alternative
-        - name: prod-microk8s-alternative
+        - name: prod-fallback
           path: prod-fallback
   template:
     metadata:

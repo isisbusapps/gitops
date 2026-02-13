@@ -46,3 +46,8 @@ wrong:
           env:
             - name: JAVA_TOOL_OPTIONS
               value: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=7005 -Djavax.net.ssl.trustStore=/deployments/cacerts.jks
+spec:
+  template:
+    spec:
+      containers:
+        - image: ghcr.io/isisbusapps/user-office-web-service@sha256:90f33abe97b4adc043731fb6f3e5b0e0052becaf42749ca62656d661d722c0c6

@@ -1,0 +1,14 @@
+[
+  {
+    "domain": "proposal.facilities.rl.ac.uk",
+    "paramName":"sessionid"
+  },
+  {
+    "domain": "users.facilities.rl.ac.uk",
+    "paramName":"sessionid"
+  },
+    {
+    "domain": "office.facilities.rl.ac.uk",
+    "paramName":"sessionid"
+  }
+]

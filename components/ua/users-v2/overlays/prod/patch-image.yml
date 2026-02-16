@@ -5,43 +5,45 @@ metadata:
 spec:
   template:
     spec:
-#      initContainers:
-#        - name: db-updater
-#          image: ghcr.io/isisbusapps/users-db-updater:prod
-#          args: ["update"]
-#          env:
-#            - name: LIQUIBASE_COMMAND_URL
-#              valueFrom:
-#                secretKeyRef:
-#                  name: user-office-web-service-v2
-#                  key: DB_URL
-#            - name: LIQUIBASE_COMMAND_USERNAME
-#              valueFrom:
-#                secretKeyRef:
-#                  name: user-office-web-service-v2
-#                  key: DB_USERNAME
-#            - name: LIQUIBASE_COMMAND_PASSWORD
-#              valueFrom:
-#                secretKeyRef:
-#                  name: user-office-web-service-v2
-#                  key: DB_PASSWORD
-#            - name: DEPLOYMENT_NAME
-#              value: "users-v2-prod"
-#            - name: AUTHOR
-#              value: "kubernetes"
-#          volumeMounts:
-#            - name: liquibase-config
-#              mountPath: /liquibase/liquibase.docker.properties
-#              subPath: liquibase.docker.properties
-#              readOnly: true
-#      volumes:
-#        - name: liquibase-config
-#          configMap:
-#            name: users-db-updater-config
+      #      initContainers:
+      #        - name: db-updater
+      #          image: ghcr.io/isisbusapps/users-db-updater:prod
+      #          args: ["update"]
+      #          env:
+      #            - name: LIQUIBASE_COMMAND_URL
+      #              valueFrom:
+      #                secretKeyRef:
+      #                  name: user-office-web-service-v2
+      #                  key: DB_URL
+      #            - name: LIQUIBASE_COMMAND_USERNAME
+      #              valueFrom:
+      #                secretKeyRef:
+      #                  name: user-office-web-service-v2
+      #                  key: DB_USERNAME
+      #            - name: LIQUIBASE_COMMAND_PASSWORD
+      #              valueFrom:
+      #                secretKeyRef:
+      #                  name: user-office-web-service-v2
+      #                  key: DB_PASSWORD
+      #            - name: DEPLOYMENT_NAME
+      #              value: "users-v2-prod"
+      #            - name: AUTHOR
+      #              value: "kubernetes"
+      #          volumeMounts:
+      #            - name: liquibase-config
+      #              mountPath: /liquibase/liquibase.docker.properties
+      #              subPath: liquibase.docker.properties
+      #              readOnly: true
+      #      volumes:
+      #        - name: liquibase-config
+      #          configMap:
+      #            name: users-db-updater-config
       containers:
         - name: user-office-web-service
-          # version: v2.2.0-alpha
-          image: ghcr.io/isisbusapps/user-office-web-service:v2.2.0-alpha
+          # version: 2.3.0-alpha
+          image: ghcr.io/isisbusapps/user-office-web-service@sha256:f62ba2e00220277df24fdf1cf6859c26ff8736aeb626b814e0a78f647b4b1e7e
           env:
             - name: JAVA_TOOL_OPTIONS
               value: -Djavax.net.ssl.trustStore=/deployments/cacerts.jks
+      initContainers:
+        - image: ghcr.io/isisbusapps/users-db-updater@sha256:08e63e12a6c58060980ca82ad63117769c2058c05b767f2e72cf1d84e7e967ef

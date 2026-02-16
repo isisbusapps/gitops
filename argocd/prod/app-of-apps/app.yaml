@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app-of-apps-ua
+  name: app-of-apps-prod-ua
   namespace: argocd
 spec:
   project: infrastructure-project
@@ -15,5 +15,4 @@ spec:
     namespace: argocd
     server: https://kubernetes.default.svc
   syncPolicy:
-    automated:
-      selfHeal: true
+    automated: {}

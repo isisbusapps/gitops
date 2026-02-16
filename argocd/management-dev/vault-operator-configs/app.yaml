@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: management-vault-operator-config
+  name: management-dev-vault-operator-config
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "-1"

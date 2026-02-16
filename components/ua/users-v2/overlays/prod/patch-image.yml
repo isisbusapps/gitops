@@ -7,7 +7,7 @@ spec:
     spec:
       initContainers:
         - name: db-updater
-        - image: ghcr.io/isisbusapps/users-db-updater@sha256:08e63e12a6c58060980ca82ad63117769c2058c05b767f2e72cf1d84e7e967ef
+          image: ghcr.io/isisbusapps/users-db-updater@sha256:08e63e12a6c58060980ca82ad63117769c2058c05b767f2e72cf1d84e7e967ef
           args: ["update"]
           env:
             - name: LIQUIBASE_COMMAND_URL

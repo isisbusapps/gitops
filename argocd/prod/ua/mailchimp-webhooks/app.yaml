@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: mailchimp-web-hooks
+  name: mailchimp-webhooks
   namespace: argocd
 spec:
   goTemplate: true
@@ -15,7 +15,7 @@ spec:
         #- name: prod-fallback
   template:
     metadata:
-      name: '{{.name}}-mailchimp-web-hooks'
+      name: '{{.name}}-mailchimp-webhooks'
       annotations:
         argocd.argoproj.io/sync-wave: "0"
     spec:

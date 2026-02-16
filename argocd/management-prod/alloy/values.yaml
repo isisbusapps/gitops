@@ -1,0 +1,14 @@
+alloy:
+  configMap:
+    create: false
+    name: alloy-config
+    key: config.alloy
+  extraPorts:
+    - name: "http-traces"
+      port: 4318
+      targetPort: 4318
+      protocol: "TCP"
+    - name: "grpc-traces"
+      port: 4317
+      targetPort: 4317
+      protocol: "TCP"

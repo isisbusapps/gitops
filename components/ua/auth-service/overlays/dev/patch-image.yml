@@ -10,6 +10,8 @@ spec:
           image: ghcr.io/isisbusapps/auth-service@sha256:94d4f6b9b7d660c6b730493b7422c0b40bc09f7e1831aac06ddd5186d0176d64
           ports:
             - containerPort: 5005
-          env:
-            - name: USERS_SERVICE_URL
-              value: http://user-office-web-service-rest-v2.apps.svc.cluster.local:8080
+          envFrom:
+            - secretRef:
+                name: auth-service
+
+

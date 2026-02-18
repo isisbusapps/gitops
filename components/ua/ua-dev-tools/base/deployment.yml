@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ua-dev-tools
-spec:
+wrong:
   replicas: 3
   template:
     spec:

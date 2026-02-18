@@ -8,4 +8,4 @@ spec:
       containers:
         - name: ua-dev-tools
           # version: 2.1.0
-          image: ghcr.io/isisbusapps/ua-dev-tools:2.1.0
+          image: ghcr.io/isisbusapps/ua-dev-tools:2.1.0DoesNotExist

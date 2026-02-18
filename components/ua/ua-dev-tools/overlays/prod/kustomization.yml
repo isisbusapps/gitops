@@ -8,7 +8,6 @@ namespace: apps
 
 resources:
   - config.yaml
-  - does.not.exist
 
 patches:
 - path: patch-image.yml

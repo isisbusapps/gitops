@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: user-establishment-details
 data:
-  PORT: "8100"
+  PORT: "8080"

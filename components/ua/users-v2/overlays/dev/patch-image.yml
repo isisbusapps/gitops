@@ -50,4 +50,6 @@ spec:
   template:
     spec:
       containers:
-        - image: ghcr.io/isisbusapps/user-office-web-service@sha256:d71a9fcea986acd23a2a20b261d2d818f804f3eae4822a806463100c11f033d2
+        - image: ghcr.io/isisbusapps/user-office-web-service@sha256:7d2d909b476e086ca971243ced0e42edb8526fd6592c1c167e2ba80635330c45
+      initContainers:
+        - image: ghcr.io/isisbusapps/users-db-updater@sha256:3c0e8192172bbfd864317404fecac5986d49145910d2455ba0d0404474b7ba4a

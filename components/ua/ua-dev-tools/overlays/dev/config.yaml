@@ -8,3 +8,5 @@ data:
   AuthURL: "https://devoffice.facilities.rl.ac.uk"
   AuthServiceURL: "https://devapi.facilities.rl.ac.uk/auth-service/v0/authenticate?sessionID="
   PORT: "8100"
+  AUTH_URL: "https://devoffice.facilities.rl.ac.uk"
+  API_URL: "https://devapi.facilities.rl.ac.uk/users-service/v2"

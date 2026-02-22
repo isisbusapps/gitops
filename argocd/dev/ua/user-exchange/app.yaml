@@ -24,7 +24,7 @@ spec:
     spec:
       project: u-a-project
       source:
-        path: mu2/users-exchange-chart
+        path: mu2/user-exchange-chart
         repoURL: 'https://github.com/isisbusapps/merge-user-tool'
         targetRevision: develop
         helm:

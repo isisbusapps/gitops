@@ -4,3 +4,4 @@ metadata:
   name: user-establishment-details
 data:
   PORT: "8080"
+  CONFIG_PATH: "/FBS/config"

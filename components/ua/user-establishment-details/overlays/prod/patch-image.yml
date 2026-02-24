@@ -9,3 +9,6 @@ spec:
         - name: user-establishment-details
           # version: 1.5.0
           image: ghcr.io/isisbusapps/user-establishment-details:1.5.0
+          envFrom:
+            - configMapRef:
+                name: user-establishment-details

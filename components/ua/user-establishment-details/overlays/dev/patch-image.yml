@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: user-establishment-details
 spec:
+  revisionHistoryLimit: 3
   template:
     spec:
       containers:

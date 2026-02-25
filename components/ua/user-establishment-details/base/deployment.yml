@@ -18,6 +18,7 @@ spec:
         co.elastic.logs/multiline.pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}"
         co.elastic.logs/multiline.negate: "true"
         co.elastic.logs/multiline.match: "after"
+    spec:
       containers:
         - name: user-establishment-details
           imagePullPolicy: Always

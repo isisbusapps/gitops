@@ -52,4 +52,4 @@ spec:
       containers:
         - image: ghcr.io/isisbusapps/user-office-web-service@sha256:7d2d909b476e086ca971243ced0e42edb8526fd6592c1c167e2ba80635330c45
       initContainers:
-        - image: ghcr.io/isisbusapps/users-db-updater@sha256:3c0e8192172bbfd864317404fecac5986d49145910d2455ba0d0404474b7ba4a
+        - image: ghcr.io/isisbusapps/users-db-updater@sha256:270d5ad4a02a42675b8e56417c168ce5da1ffcc06f6f85eacbfc2a855745ee66

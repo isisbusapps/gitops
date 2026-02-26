@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-exchange-publisher
+spec:
+  revisionHistoryLimit: 3 
+  selector:
+    matchLabels:
+      app: user-exchange-publisher      
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: user-exchange-publisher       
+    spec:
+      containers:
+        - name: user-exchange-publisher
+          image: ghcr.io/isisbusapps/user-exchange-publisher:0.1.2          
+          ports:
+            - containerPort: 8080            
+          volumeMounts:
+            - name: data
+              mountPath: "/data"                       
+          envFrom:
+            - secretRef:
+                name:  user-exchange-publisher
+      imagePullSecrets:
+        - name: registry-creds
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: user-exchange-publisher-data-pvc

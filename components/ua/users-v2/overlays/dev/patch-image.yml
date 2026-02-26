@@ -7,7 +7,7 @@ spec:
     spec:
       initContainers:
         - name: db-updater
-          image: ghcr.io/isisbusapps/users-db-updater@sha256:42c10df40ce7d9e435be71afb08003aa4fd9c4becaec55a711ecec89b1456856
+          image: ghcr.io/isisbusapps/users-db-updater@sha256:270d5ad4a02a42675b8e56417c168ce5da1ffcc06f6f85eacbfc2a855745ee66
           args: ["update"]
           env:
             - name: LIQUIBASE_COMMAND_URL
@@ -40,16 +40,9 @@ spec:
             name: users-db-updater-config
       containers:
         - name: user-office-web-service
-          image: ghcr.io/isisbusapps/user-office-web-service@sha256:510a1aa0d6805da4f5bde24fd99ea41a22da78f412e285098d9b460720022592
+          image: ghcr.io/isisbusapps/user-office-web-service@sha256:7d2d909b476e086ca971243ced0e42edb8526fd6592c1c167e2ba80635330c45
           ports:
             - containerPort: 7005
           env:
             - name: JAVA_TOOL_OPTIONS
               value: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=7005 -Djavax.net.ssl.trustStore=/deployments/cacerts.jks
-spec:
-  template:
-    spec:
-      containers:
-        - image: ghcr.io/isisbusapps/user-office-web-service@sha256:7d2d909b476e086ca971243ced0e42edb8526fd6592c1c167e2ba80635330c45
-      initContainers:
-        - image: ghcr.io/isisbusapps/users-db-updater@sha256:270d5ad4a02a42675b8e56417c168ce5da1ffcc06f6f85eacbfc2a855745ee66

@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: auth-service
-          image: ghcr.io/isisbusapps/auth-service@sha256:9b7c50ad8a4e63b468aa18274307cf8518f9eea9c533e4a390f997e47095bc9e
+          image: ghcr.io/isisbusapps/auth-service@sha256:86a852373f3997c51a675f1159538eee6ecfec148a44c65b911cdebe7962c104
           ports:
             - containerPort: 5005
           envFrom:

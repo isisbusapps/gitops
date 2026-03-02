@@ -4,14 +4,7 @@ data:
     #!/bin/sh
     echo "Setting ownership and permissions for /data..."
 
-    # Dynamically get the UID and GID of the process running the container
-    UID=$(id -u)
-    GID=$(id -g)
-
-    # Change ownership of /data to the container user
-    chown -R $UID:$GID /data
-
-    # Give owner and group full access
+    chown -R 773:773 /data
     chmod -R 770 /data
 
     echo "Init container finished."

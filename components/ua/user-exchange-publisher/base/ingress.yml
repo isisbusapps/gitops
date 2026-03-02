@@ -17,7 +17,7 @@ spec:
   - host: "*.developers.facilities.rl.ac.uk"
     http: &http_rules
       paths:
-        - path: /publish/merge(/|$)(.*)
+        - path: /publisher(/publish(/.*)?)
           pathType: ImplementationSpecific
           backend:
             service:

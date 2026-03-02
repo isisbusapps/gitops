@@ -8,6 +8,3 @@ namespace: apps
 
 resources:
   - static-secret.yaml
-  
-patches:  
-  - path: enable-debug-service.yml  

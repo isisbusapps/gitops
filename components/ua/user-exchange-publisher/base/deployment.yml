@@ -42,5 +42,5 @@ spec:
             claimName: user-exchange-publisher-data-pvc
         - name: script
           configMap:
-            name: setup_h2_permissions
+            name: setup-h2-permissions
             defaultMode: 0755    # makes script executable    

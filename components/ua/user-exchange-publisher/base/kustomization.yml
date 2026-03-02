@@ -14,4 +14,4 @@ resources:
   - ingress.yml
   - service.yml
   - storage.yml
-  - setup_h2_permissions.yml
+  - setup-h2-permissions.yml

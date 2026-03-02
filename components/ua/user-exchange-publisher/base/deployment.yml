@@ -15,7 +15,7 @@ spec:
     spec:
       initContainers:
         - name: setup-h2-permissions
-          image: ghcr.io/isisbusapps/user-exchange-publisher@sha256:2f8f729328f4eb48163fe5c69e8d94253ff45e5e318c89e17ccd85523c6551b8
+          image: ghcr.io/isisbusapps/user-exchange-publisher@sha256:28e21d2471512cf30131ff362505f611afab80b6f6a67641bc5c982125320df6
           command: ["/bin/sh", "/scripts/setup_h2_permissions.sh"]
           securityContext:
             runAsUser: 0
@@ -28,7 +28,7 @@ spec:
               readOnly: true
       containers:
         - name: user-exchange-publisher
-          image: ghcr.io/isisbusapps/user-exchange-publisher@sha256:2f8f729328f4eb48163fe5c69e8d94253ff45e5e318c89e17ccd85523c6551b8
+          image: ghcr.io/isisbusapps/user-exchange-publisher@sha256:28e21d2471512cf30131ff362505f611afab80b6f6a67641bc5c982125320df6
           ports:
             - containerPort: 8080            
           volumeMounts:

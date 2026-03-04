@@ -1,0 +1,14 @@
+apiVersion: v1
+data:
+  setup_h2_permissions.sh: |-
+    #!/bin/sh
+    echo "Setting ownership and permissions for /data..."
+
+    chown -R 773:773 /data
+    chmod -R 770 /data
+
+    echo "Init container finished."
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: setup-h2-permissions

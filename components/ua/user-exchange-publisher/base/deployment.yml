@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-exchange-publisher
+spec:
+  revisionHistoryLimit: 3 
+  selector:
+    matchLabels:
+      app: user-exchange-publisher      
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: user-exchange-publisher       
+    spec:
+      initContainers:
+        - name: setup-h2-permissions
+          image: ghcr.io/isisbusapps/user-exchange-publisher:0.1.2
+          command: ["/bin/sh", "/scripts/setup_h2_permissions.sh"]
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: script
+              mountPath: /scripts
+              readOnly: true
+      containers:
+        - name: user-exchange-publisher
+          image: ghcr.io/isisbusapps/user-exchange-publisher:0.1.2
+          ports:
+            - containerPort: 8080            
+          volumeMounts:
+            - name: data
+              mountPath: "/data"                       
+          envFrom:
+            - secretRef:
+                name:  user-exchange-publisher
+          securityContext:
+            runAsUser: 773
+            runAsGroup: 773
+                      
+      imagePullSecrets:
+        - name: registry-creds
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: user-exchange-publisher-data-pvc
+        - name: script
+          configMap:
+            name: setup-h2-permissions
+            defaultMode: 0755    # makes script executable    

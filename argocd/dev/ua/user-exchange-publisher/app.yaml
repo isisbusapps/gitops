@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: user-exchange-publisher
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+        # Names of clusters to deploy the app to
+        - name: dev-v3
+        # Uncomment if you want to deploy to dev-microk8s-alternative
+        #- name: dev-microk8s-alternative
+  template:
+    metadata:
+      name: '{{.name}}-user-exchange-publisher'
+      annotations:
+        argocd.argoproj.io/sync-wave: "0"
+        notifications.argoproj.io/subscribe.on-sync-failed.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com
+        notifications.argoproj.io/subscribe.on-health-degraded.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com
+        notifications.argoproj.io/subscribe.on-sync-status-unknown.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com
+    spec:
+      project: u-a-project
+      source:
+        path: components/ua/user-exchange-publisher/overlays/dev
+        repoURL: 'https://github.com/isisbusapps/gitops'
+        targetRevision: main
+      destination:
+        namespace: apps
+        name: '{{.name}}'
+      syncPolicy:
+        automated: 
+          selfHeal: true

@@ -5,3 +5,7 @@ metadata:
 data:
   PORT: "8080"
   CONFIG_PATH: "/FBS/config"
+  API_BASE: "http://user-office-web-service-rest-v2.apps.svc.cluster.local:8080"
+  CLIENT_API_BASE: "https://devapi.facilities.rl.ac.uk/users-service/v2/"
+  ESTABLISHMENTS_BASE: "http://establishment-service.apps.svc.cluster.local:8080"
+  CLIENT_ESTABLISHMENTS_BASE: "https://devapi.facilities.rl.ac.uk/establishment-service/"

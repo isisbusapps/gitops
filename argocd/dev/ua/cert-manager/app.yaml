@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: cred-manager
+  name: cert-manager
   namespace: argocd
 spec:
   goTemplate: true
@@ -15,7 +15,7 @@ spec:
         #- name: dev-microk8s-alternative
   template:
     metadata:
-      name: cred-manager      
+      name: cert-manager      
     spec:
       project: u-a-project
       source:
@@ -23,8 +23,8 @@ spec:
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:
-        namespace: cred-manager
-        name: cred-manager
+        namespace: cert-manager
+        name: cert-manager
       syncPolicy:
         automated: 
           selfHeal: true

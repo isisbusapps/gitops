@@ -10,3 +10,6 @@ spec:
           image: ghcr.io/isisbusapps/establishment-service@sha256:96fe491640f51c536efbf3dfebb3aec61e0fb38a5d1faea746c1e0a2822caf73
           ports:
             - containerPort: 4019
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=4019 -Djavax.net.ssl.trustStore=/deployments/cacerts.jks

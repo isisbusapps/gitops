@@ -11,7 +11,7 @@ data:
     quarkus.http.cors.enabled=true
     
     # JWT configuration
-    mp.jwt.verify.publickey=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx653Gv4kx1I5fsJju/Ame7674HJAjsheIthRuT9RS96vrvyUyc3B+FTTXAyNvtY5jsJoUY9o/4YhbB4Ep8GrL9h3rmZjxIGLv8jPfyYYqV874t5xvSf0Bcew4c+Rc41vVWaQPaEqYkyBJ9sLnI/TWatS1Zbw0lFc5S5gxzealYaDLj3xLtoAEDoYwyoDS1AMxWK1IEFOYtdAwGyPBkR51xodyY0Hi+uu9sPx++lJ/Vokw66K79puakNqOa0pCMuon4h44/8b382aLb5yNXijWjqgfJN0oEYlXRjdCOIRSXyGACwozRrD7xHyT7nFC0NEmpK8UWC9kiBLlgtJS6HElwIDAQAB
+    mp.jwt.verify.publickey=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA+pvKvB1qwZZmYW3Jlo9q48CKHa0Q5PCsDq6Jn2nLxKBJqc/twF+RCIrt3PvXO9aSm1SguMzra5DypGzCjUQV0X0dNzwro0SFn6cYVGYqD2lhTFQxOiwNE+ZN/oX5ZIIcjJqFMXR/FUBMIlA8jsYI5NmcwAXJaccMASD/bhu8DcV3Nbsxz5+/V2Fyswv4e6SwFtFRboKeN6BXnwOZY4f574lfxdf8LV+oLTFj5Tiyy1zTnwT20/llF6OVVFZD3pkkUegQyKf2njXGp29AO1HhAjVMN003l04lNRC94ejjsw4p0xYU0FakKYTJMIojTlJvTxHPeIhEcXFP2FYLHpx09QIDAQAB
     mp.jwt.verify.issuer=auth-service-quarkus
     smallrye.jwt.path.groups=Role
 

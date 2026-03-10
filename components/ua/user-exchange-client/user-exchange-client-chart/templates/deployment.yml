@@ -21,7 +21,7 @@ spec:
             - containerPort: 8080            
           volumeMounts:           
             - name: {{ .name }}-config
-              mountPath: /etc/configs
+              mountPath: /etc/configs/{{ .cm_name}}.yaml
               subPath: {{.cm_name}}.yaml                   
           envFrom:
             - secretRef:

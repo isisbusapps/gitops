@@ -1,0 +1,5 @@
+clients:
+  - name: users
+    cm_name: user-exchange-client-config-users 
+#  - name: facilities-eras
+#    cm_name:    

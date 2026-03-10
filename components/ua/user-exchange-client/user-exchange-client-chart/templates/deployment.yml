@@ -1,0 +1,39 @@
+{{- range .Values.clients}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-exchange-client-{{ .name }}
+spec:
+  revisionHistoryLimit: 3 
+  selector:
+    matchLabels:
+      app: user-exchange-client-{{ .name }}     
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: user-exchange-client-{{ .name }}      
+    spec:      
+      containers:
+        - name: user-exchange-client-{{ .name }}
+          image: ghcr.io/isisbusapps/user-exchange-client:0.1.2
+          ports:
+            - containerPort: 8080            
+          volumeMounts:           
+            - name: {{ .name }}-config
+              mountPath: /etc/configs/{{ .cm_name}}.yaml
+              subPath: {{.cm_name}}.yaml                   
+          envFrom:
+            - secretRef:
+                name:  user-exchange-client-{{ .name }}
+      imagePullSecrets:
+        - name: registry-creds
+      volumes:        
+        - name: {{.name}}-config
+          configMap:
+            name: {{ .cm_name }}
+            items:
+              - key: {{.cm_name}}.yaml
+                path: {{.cm_name}}.yaml     
+---
+{{- end }}

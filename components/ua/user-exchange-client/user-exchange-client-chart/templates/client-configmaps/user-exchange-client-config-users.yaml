@@ -1,0 +1,21 @@
+apiVersion: v1
+data:
+  user-exchange-client-config-users.yaml: |
+    exchangeConfig:
+      clientName: "Users-Client"
+      pendingQueue: "users_pending"
+      holdingQueue: "users_holding"
+      failedQueue: "users_failed"
+      successQueue: "users_successful"
+      failReasonsHeader: "fail-reasons"
+      retryCountHeader: "retry-count"
+      maxRetries: 5
+    databaseActions:
+      merge:
+        - sqlStatement: "select count(1) from person where user_number = to_char(:newUser) and thru_date is null"
+          expectedResult: "=1"
+        - sqlStatement: "select count(1) from person where user_number = to_char(:oldUser) and new_user_number = to_char(:newUser)"
+          expectedResult: ">0"
+kind: ConfigMap
+metadata:
+  name: user-exchange-client-config-users

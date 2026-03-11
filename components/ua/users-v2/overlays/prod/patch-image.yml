@@ -7,7 +7,7 @@ spec:
     spec:
       initContainers:
         - name: db-updater
-          image: ghcr.io/isisbusapps/users-db-updater@sha256:befc284658a877ba89b774b71732de07fad2545488736c54783e277e2097299d
+          image: ghcr.io/isisbusapps/users-db-updater@sha256:5f817344df876351793795ec470a2c301c37adf754c035222e4c7bae4c1207db
           args: ["update"]
           env:
             - name: LIQUIBASE_COMMAND_URL
@@ -40,8 +40,8 @@ spec:
             name: users-db-updater-config
       containers:
         - name: user-office-web-service
-          # version: 2.4.0-alpha
-          image: ghcr.io/isisbusapps/user-office-web-service@sha256:bdf64c06990f6188430764e8782f8815aae8dee96a70af94af67372846162f55
+          # version: 2.5.0-alpha
+          image: ghcr.io/isisbusapps/user-office-web-service@sha256:8ccb4985331782bd73dfe62459376edf1bca3bd028208b8bd727496e4b38e067
           env:
             - name: JAVA_TOOL_OPTIONS
               value: -Djavax.net.ssl.trustStore=/deployments/cacerts.jks

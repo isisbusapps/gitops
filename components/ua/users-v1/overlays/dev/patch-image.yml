@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: user-office-web-service
-          image: ghcr.io/isisbusapps/user-office-web-service@sha256:5c5b4e97776b0b73073740db851f554a1cba09c959b3e660543067d7505909c3
+          image: ghcr.io/isisbusapps/user-office-web-service@sha256:986485c6096667a74bdd090f4dcb1e5fc5ba3d7bfd8e3c1b775e1946c32ac239
           ports:
             - containerPort: 7005
           env:

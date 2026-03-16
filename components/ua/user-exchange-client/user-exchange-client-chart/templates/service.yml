@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: user-exchange-client-{{ .name }}-service
 spec:
-  type: cluster-IP
+  type: ClusterIP
   selector:
     app:  user-exchange-client-{{ .name }}
   ports:

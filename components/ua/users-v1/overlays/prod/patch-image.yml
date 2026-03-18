@@ -7,8 +7,8 @@ spec:
     spec:
       containers:
         - name: user-office-web-service
-          # version: 1.6.1
-          image: ghcr.io/isisbusapps/user-office-web-service@sha256:7dd49507b21c57cb5bae11e78b84b69a09c8ce742dd6080c3f8ad921023ba8af
+          # version: 1.6.3
+          image: ghcr.io/isisbusapps/user-office-web-service@sha256:e61ea9e2978dd4ba22274182cbbe420d1c727667b8afbc96f6a41eb94476900e
           env:
             - name: JAVA_TOOL_OPTIONS
               value: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=7005 -Djavax.net.ssl.trustStore=/deployments/cacerts.jks

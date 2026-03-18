@@ -16,7 +16,7 @@ spec:
     spec:      
       containers:
         - name: user-exchange-client-{{ .name }}
-          image: ghcr.io/isisbusapps/user-exchange-client:0.1.2
+          image: {{ $.Values.image_ref }}
           ports:
             - containerPort: 8080            
           volumeMounts:           

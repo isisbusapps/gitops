@@ -1,3 +1,4 @@
+image_ref: ghcr.io/isisbusapps/user-exchange-client:0.1.2
 clients:
   - name: users
     cm_name: user-exchange-client-config-users 

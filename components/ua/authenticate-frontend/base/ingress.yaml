@@ -8,9 +8,6 @@ spec:
     - hosts:
         - "*.facilities.rl.ac.uk"
       secretName: facilities-tls-certificate
-    - hosts:
-      - "*.developers.facilities.rl.ac.uk"
-      secretName: developers-tls-certificate
   rules:
     - host: "*.facilities.rl.ac.uk" 
       http: &http_rules

@@ -9,8 +9,8 @@ spec:
         - "*.facilities.rl.ac.uk"
       secretName: facilities-tls-certificate
   rules:
-    - host: "*.facilities.rl.ac.uk" 
-      http: &http_rules
+    - host: "*.facilities.rl.ac.uk"
+      http:
         paths:
           - path: /auth
             pathType: Prefix
@@ -19,5 +19,3 @@ spec:
                 name: authenticate-frontend
                 port:
                   number: 3000
-    - host: "*.developers.facilities.rl.ac.uk"
-        http: *http_rules

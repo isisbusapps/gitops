@@ -27,6 +27,4 @@ spec:
         name: '{{.name}}'
       syncPolicy:
         automated: 
-          selfHeal: true
-        syncOptions:
-          - CreateNamespace=true
+          selfHeal: true  

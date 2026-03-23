@@ -11,6 +11,7 @@ data:
 
     quarkus.rest-client.mailchimp-api.url=https://devexternal-api.facilities.rl.ac.uk/mailchimp
     quarkus.rest-client.merge-user-tool-api.url=https://devapis.facilities.rl.ac.uk/users/merges
+    quarkus.rest-client.establishment-service.url=http://establishment-service.apps.svc.cluster.local:8080
 
     DATABASE_SERVER_LATENCY_EXPIRY_MINS=60
 

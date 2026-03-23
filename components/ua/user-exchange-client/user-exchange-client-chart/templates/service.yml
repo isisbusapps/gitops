@@ -1,0 +1,16 @@
+{{- range .Values.clients}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-exchange-client-{{ .name }}-service
+spec:
+  type: ClusterIP
+  selector:
+    app:  user-exchange-client-{{ .name }}
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+{{ end }}          

@@ -1,0 +1,4 @@
+clients:
+  name:
+    - users
+    - facilities-eras

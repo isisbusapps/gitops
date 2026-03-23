@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: cert-manager
+  name: rabbitmq-operator
   namespace: argocd
 spec:
   goTemplate: true
@@ -15,19 +15,15 @@ spec:
         #- name: dev-microk8s-alternative
   template:
     metadata:
-      name: cert-manager      
+      name: rabbitmq-operator      
     spec:
       project: u-a-project
       source:
-        repoURL: oci://quay.io/jetstack/charts/cert-manager
-        targetRevision: v1.20.0
-        helm:
-        releaseName: cert-manager
-        parameters:
-          - name: crds.enabled
-            value: "true"        
+        path: components/infra/rabbitmq-operators/operators/topology-operator
+        repoURL: 'https://github.com/isisbusapps/gitops'
+        targetRevision: main
       destination:
-        namespace: cert-manager
+        namespace: rabbitmq-operators
         name: '{{.name}}'
       syncPolicy:
         automated: 

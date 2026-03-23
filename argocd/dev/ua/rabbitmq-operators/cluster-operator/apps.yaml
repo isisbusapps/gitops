@@ -19,7 +19,7 @@ spec:
     spec:
       project: u-a-project
       source:
-        path: components/infra/rabbitmq-operators/operators
+        path: components/infra/rabbitmq-operators/operators/cluster-operator
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:

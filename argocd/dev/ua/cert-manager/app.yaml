@@ -19,12 +19,16 @@ spec:
     spec:
       project: u-a-project
       source:
-        path: components/infra/RabbitMQ-Operators/cert-manager
-        repoURL: 'https://github.com/isisbusapps/gitops'
-        targetRevision: main
+        repoURL: oci://quay.io/jetstack/charts/cert-manager
+        targetRevision: v1.20.0
+        helm:
+        releaseName: cert-manager
+        parameters:
+          - name: crds.enabled
+            value: "true"        
       destination:
         namespace: cert-manager
-        name: cert-manager
+        name: '{{.name}}'
       syncPolicy:
         automated: 
           selfHeal: true

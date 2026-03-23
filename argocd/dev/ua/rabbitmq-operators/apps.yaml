@@ -24,7 +24,7 @@ spec:
         targetRevision: main
       destination:
         namespace: rabbitmq-operators
-        name: rabbitmq-operator
+        name: '{{.name}}'
       syncPolicy:
         automated: 
           selfHeal: true

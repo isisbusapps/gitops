@@ -3,4 +3,4 @@ clients:
   - name: users
     cm_name: user-exchange-client-config-users
   - name: era
-    cm_name: user-exchange-client-config-era
+    cm_name: user-exchange-client-configmap-era

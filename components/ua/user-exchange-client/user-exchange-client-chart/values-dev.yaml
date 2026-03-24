@@ -1,6 +1,6 @@
 image_ref: ghcr.io/isisbusapps/merge-user-tool/user-exchange-client@sha256:d5cdd5606c3e0d6f407c19cad68274ecf73b96c356b3fd3b88e6af9e253a7c03
 clients:
   - name: users
-    cm_name: user-exchange-client-config-users
+    cm_name: user-exchange-client-configmap-users
   - name: era
-    cm_name: user-exchange-client-config-era
+    cm_name: user-exchange-client-configmap-era

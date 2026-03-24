@@ -18,4 +18,4 @@ data:
           expectedResult: ">0"
 kind: ConfigMap
 metadata:
-  name: user-exchange-client-config-users
+  name: user-exchange-client-configmap-users

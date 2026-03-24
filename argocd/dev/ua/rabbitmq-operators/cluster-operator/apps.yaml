@@ -23,11 +23,10 @@ spec:
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:
-        namespace: rabbitmq-operators
+        namespace: rabbitmq-system
         name: '{{.name}}'
       syncPolicy:
         automated: 
           selfHeal: true
         syncOptions:
-          - CreateNamespace=true
           - ServerSideApply=true  

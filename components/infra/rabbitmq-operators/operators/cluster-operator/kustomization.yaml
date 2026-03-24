@@ -4,3 +4,13 @@ kind: Kustomization
 resources:
   - https://github.com/rabbitmq/cluster-operator/releases/download/v2.19.2/cluster-operator.yml
   
+patches:
+  - target:
+      kind: Namespace
+      name: rabbitmq-system
+    patch: |
+      $patch: delete
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: rabbitmq-system  

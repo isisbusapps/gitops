@@ -18,4 +18,4 @@ data:
 kind: ConfigMap
 metadata:
   creationTimestamp: null
-  name: user-exchange-client-configmap-era
+  name: user-exchange-client-config-era

@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: rabbitmq-operator
+  name: rabbitmq-cluster-operator
   namespace: argocd
 spec:
   goTemplate: true
@@ -15,7 +15,7 @@ spec:
         #- name: dev-microk8s-alternative
   template:
     metadata:
-      name: rabbitmq-operator      
+      name: rabbitmq-cluster-operator      
     spec:
       project: u-a-project
       source:

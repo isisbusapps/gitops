@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: approved-experiments
+spec:
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        co.elastic.logs/processors.add_fields.target: ""
+        co.elastic.logs/processors.add_fields.fields.application.name: "approved-experiments"
+        co.elastic.logs/processors.add_fields.fields.application.domain: "approved-experiments"
+        co.elastic.logs/processors.add_fields.fields.application.tier: "service"
+        co.elastic.logs/processors.add_fields.fields.application.language: "javascript"
+
+    spec:
+      containers:
+        - name: approved-experiments
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: CONFIG_PATH
+              value: /FBS/.env
+            - name: FILTERS_PATH
+              value: /FBS/filters.json
+          volumeMounts:
+            - name: env-config
+              mountPath: "/FBS"
+              readOnly: true
+            - name: common-views
+              mountPath: "/app/build/common-views"
+              readOnly: true
+            - name: common-js
+              mountPath: "/app/build/common-public/js"
+              readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /approved-experiments/health/ready
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+      imagePullSecrets:
+        - name: registry-creds
+      volumes:
+        - name: env-config
+          secret:
+            secretName: approved-experiments-environment
+        - name: common-views
+          configMap:
+            name: common-pug-views
+        - name: common-js
+          configMap:
+            name: common-pug-content-js

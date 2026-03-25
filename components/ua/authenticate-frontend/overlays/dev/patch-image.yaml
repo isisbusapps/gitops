@@ -13,6 +13,8 @@ spec:
               name: allowed-redirects
               subPath: allowed-redirects.json
           envFrom:
+            - configMapRef:
+                name: authenticate-frontend-config
             - secretRef:
                 name: authenticate-frontend
       volumes:

@@ -12,6 +12,9 @@ spec:
             - mountPath: /front_end/config/allowed-redirects.json
               name: allowed-redirects
               subPath: allowed-redirects.json
+          envFrom:
+            - secretRef:
+                name: authenticate-frontend
       volumes:
         - name: allowed-redirects
           configMap:

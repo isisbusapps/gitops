@@ -13,6 +13,11 @@ configMapGenerator:
       - allowed-redirects.json
     options:
       disableNameSuffixHash: true
+  - name: internal-redirects
+    files:
+      - internal-redirects.json
+    options:
+      disableNameSuffixHash: true
 
 patches:
 - path: patch-image.yaml

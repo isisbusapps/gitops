@@ -1,6 +1,15 @@
 [
   {
     "service": "schedule",
-    "urlTemplate": "https://devoffice.facilities.rl.ac.uk/schedule?login=${login}&userSession=${userSession}"
+    "extraParams": [
+      {
+        "name": "login",
+        "value": "__login__"
+      },
+      {
+        "name": "userSession",
+        "value": "__userSession__"
+      }
+    ]
   }
 ]

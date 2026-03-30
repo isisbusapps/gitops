@@ -7,6 +7,6 @@ spec:
     spec:
       containers:
         - name: messages-service
-          image: ghcr.io/isisbusapps/messages-service@sha256:093322231469724633fc49535d4357d35c114ce2af73d238b859c4c43d12eb52
+          image: ghcr.io/isisbusapps/messages-service@sha256:5cef4c549d599a6a4ffd9f99c682d91e91332381ef78a24134479323e5ce84db
           ports:
             - containerPort: 4013

@@ -13,6 +13,19 @@
     ]
   },
   {
+    "service": "eras",
+    "extraParams": [
+      {
+        "name": "login",
+        "value": "__login__"
+      },
+      {
+        "name": "userSession",
+        "value": "__userSession__"
+      }
+    ]
+  },
+  {
     "service": "auth",
     "extraParams": [
       {

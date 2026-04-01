@@ -6,8 +6,8 @@ metadata:
 
 data:
   application.properties: |-
-    UserAccountActivationURL=https://users.facilities.rl.ac.uk/auth/VerifyAccount.aspx?id=
-    UserAccountPasswordResetURL=https://users.facilities.rl.ac.uk/auth/ResetPassword.aspx?id=
+    UserAccountActivationURL=https://users.facilities.rl.ac.uk/auth/VerifyAccount?id=
+    UserAccountPasswordResetURL=https://users.facilities.rl.ac.uk/auth/ResetPassword?id=
 
     quarkus.rest-client.mailchimp-api.url=https://external-api.facilities.rl.ac.uk/mailchimp
     quarkus.rest-client.merge-user-tool-api.url=https://apis.facilities.rl.ac.uk/users/merges

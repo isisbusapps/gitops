@@ -7,6 +7,9 @@ metadata:
     rabbitmq.com/topology-allowed-namespaces: "apps"
 spec:
   replicas: 1
+  persistence:
+    storageClassName: csi-cinder
+    storage: 20Gi
   override:
     service:
       spec:

@@ -9,12 +9,11 @@ spec:
   replicas: 1
   terminationGracePeriodSeconds: 180
   persistence:
-    storageClassName: standard
-    storage: 10Gi
+    storageClassName: csi-cinder
+    storage: 20Gi  
   image: {{ $.Values.image }}  
   override:
-    service:
-      type: ClusterIP
+    service:      
       spec:
         ports:
           - name: epmd 
@@ -23,7 +22,7 @@ spec:
     statefulSet:
       spec:
         template:
-          spec:
+          spec: 
             containers:
               - name: rabbitmq
                 ports:
@@ -35,8 +34,7 @@ spec:
                     protocol: TCP
   secretBackend:
     externalSecret:
-      name: {{ $.Values.admin_secret}}  
-              
+      name: {{ $.Values.admin_secret}} 
   rabbitmq:
       additionalPlugins:               
         - rabbitmq_shovel

@@ -1,5 +1,5 @@
 # metadata.name
-rmq_cluster_name: "user-exchange"
+rmq_cluster_name: "rmq-message-broker"
 
 # namespace - needs to be same across all entities
 namespace: "apps"

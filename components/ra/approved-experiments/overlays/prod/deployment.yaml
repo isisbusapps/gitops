@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: approved-experiments
+spec:
+  template:
+    spec:
+      containers:
+        - name: approved-experiments
+          image: ghcr.io/isisbusapps/approved-experiments:1.7.5

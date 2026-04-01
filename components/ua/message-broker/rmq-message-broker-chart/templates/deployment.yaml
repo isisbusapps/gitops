@@ -13,8 +13,7 @@ spec:
     storage: 10Gi
   image: {{ $.Values.image }}  
   override:
-    service:
-      type: ClusterIP
+    service:      
       spec:
         ports:
           - name: epmd 

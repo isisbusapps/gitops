@@ -1,0 +1,46 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  name: {{ $.Values.rmq_cluster_name }}
+  namespace: {{ $.Values.namespace }}
+  labels:
+    app: rabbitmq
+spec:  
+  replicas: 1
+  terminationGracePeriodSeconds: 180
+  persistence:
+    storageClassName: standard
+    storage: 10Gi
+  image: {{ $.Values.image }}  
+  override:
+    service:
+      type: ClusterIP
+      spec:
+        ports:
+          - name: epmd 
+            protocol: TCP
+            port: 4369
+    statefulSet:
+      spec:
+        template:
+          spec:
+            containers:
+              - name: rabbitmq
+                ports:
+                  - containerPort: 4369
+                    name: epmd
+                    protocol: TCP 
+                  - containerPort: 25672
+                    name: dist
+                    protocol: TCP
+  secretBackend:
+    externalSecret:
+      name: {{ $.Values.admin_secret}}  
+              
+  rabbitmq:
+      additionalPlugins:               
+        - rabbitmq_shovel
+        - rabbitmq_shovel_management
+        - rabbitmq_tracing        
+        
+       

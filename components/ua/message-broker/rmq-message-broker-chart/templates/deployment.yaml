@@ -17,9 +17,7 @@ spec:
     statefulSet:
       spec:
         template:
-          spec:
-            securityContext:
-              fsGroup: 999
+          spec:           
             containers:
               - name: rabbitmq
                 ports:

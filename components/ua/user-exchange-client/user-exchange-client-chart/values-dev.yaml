@@ -4,3 +4,5 @@ clients:
     cm_name: user-exchange-client-config-users
   - name: era
     cm_name: user-exchange-client-config-era
+  - name: schedule
+    cm_name: user-exchange-client-config-schedule

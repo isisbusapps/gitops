@@ -17,16 +17,13 @@ spec:
     metadata:
       name: '{{.name}}-rmq-message-broker'
       annotations:
-        argocd.argoproj.io/sync-wave: "0"
-        notifications.argoproj.io/subscribe.on-sync-failed.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com
-        notifications.argoproj.io/subscribe.on-health-degraded.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com
-        notifications.argoproj.io/subscribe.on-sync-status-unknown.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com
+        argocd.argoproj.io/sync-wave: "0"        
     spec:
       project: u-a-project
       source:
-        path: Message-Broker/rmq-message-broker-chart
-        repoURL: 'https://github.com/isisbusapps/users-exchange'
-        targetRevision: develop
+        path: components/ua/message-broker/rmq-message-broker-chart
+        repoURL: 'https://github.com/isisbusapps/gitops'
+        targetRevision: main
         helm:
           valueFiles:
             - values.yaml

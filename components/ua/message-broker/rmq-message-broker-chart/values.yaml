@@ -1,0 +1,10 @@
+# metadata.name
+rmq_cluster_name: "user-exchange"
+
+# namespace - needs to be same across all entities
+namespace: "apps"
+
+admin_secret: "uex-admin-secret"
+
+# ensures cluster operator doesnt use latest images
+image: "rabbitmq:4-management"

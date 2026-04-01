@@ -1,0 +1,7 @@
+#folder name in vault
+users: 
+  - username: uex-admin
+  - username: users-client   
+  - username: sharepoint-client    
+  - username: visits-client
+  - username: era-client

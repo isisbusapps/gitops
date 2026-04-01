@@ -1,7 +1,7 @@
 apiVersion: rabbitmq.com/v1beta1
 kind: RabbitmqCluster
 metadata:
-  name: {{ $.Values.rmq-cluster-name }}
+  name: {{ $.Values.rmq_cluster_name }}
   namespace: {{ $.Values.namespace }}
   annotations:
     rabbitmq.com/topology-allowed-namespaces: "apps"

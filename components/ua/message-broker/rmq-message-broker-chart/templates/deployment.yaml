@@ -3,39 +3,42 @@ kind: RabbitmqCluster
 metadata:
   name: {{ $.Values.rmq_cluster_name }}
   namespace: {{ $.Values.namespace }}
-  annotations:
-    rabbitmq.com/topology-allowed-namespaces: "apps"
-spec:
+  labels:
+    app: rabbitmq
+spec:  
   replicas: 1
+  terminationGracePeriodSeconds: 180
   persistence:
     storageClassName: csi-cinder
-    storage: 20Gi
+    storage: 20Gi  
+  image: {{ $.Values.image }}  
   override:
-    service:
+    service:      
       spec:
         ports:
-          - name: epmd # adds an additional port on the service
+          - name: epmd 
             protocol: TCP
             port: 4369
     statefulSet:
       spec:
         template:
-          spec:           
+          spec: 
             containers:
               - name: rabbitmq
                 ports:
-                  - containerPort: 4369 # opens an additional port on the rabbitmq server container
+                  - containerPort: 4369
                     name: epmd
                     protocol: TCP 
-                  - containerPort: 25672 # opens an additional port on the rabbitmq server container
+                  - containerPort: 25672
                     name: dist
                     protocol: TCP
   secretBackend:
     externalSecret:
-      name: uex-admin-secret     
-              
+      name: {{ $.Values.admin_secret}} 
   rabbitmq:
-      additionalPlugins:
-        - rabbitmq_top
+      additionalPlugins:               
         - rabbitmq_shovel
-        - rabbitmq_tracing
+        - rabbitmq_shovel_management
+        - rabbitmq_tracing        
+        
+       

@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: user-exchange-topology
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+        # Names of clusters to deploy the app to
+        - name: dev-v3
+        # Uncomment if you want to deploy to dev-microk8s-alternative
+        #- name: dev-microk8s-alternative
+  template:
+    metadata:
+      name: '{{.name}}-user-exchange-topology'
+      annotations:
+        argocd.argoproj.io/sync-wave: "0"        
+    spec:
+      project: u-a-project
+      source:
+        path: components/ua/user-exchange-topology/user-exchange-topology-chart
+        repoURL: 'https://github.com/isisbusapps/gitops'
+        targetRevision: main
+        helm:
+          valueFiles:          
+            - ../../message-broker/rmq-message-broker-chart/values.yaml
+            #---add values.yaml from here---
+            - values.yaml
+      destination:
+        namespace: apps
+        name: '{{.name}}'
+      syncPolicy:
+        automated: 
+          selfHeal: true
+          enabled: true

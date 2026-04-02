@@ -1,0 +1,11 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: Vhost
+metadata:
+  name: {{ $.Values.user_exchange_vhost }}-vhost
+  namespace: {{ $.Values.namespace }}
+spec:
+  name: {{ $.Values.user_exchange_vhost }}
+  rabbitmqClusterReference:
+    name: {{ $.Values.rmq_cluster_name }}
+  deletionPolicy: retain   
+  

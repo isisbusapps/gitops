@@ -12,7 +12,6 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
-
           startupProbe:
             successThreshold: 1
             failureThreshold: 10

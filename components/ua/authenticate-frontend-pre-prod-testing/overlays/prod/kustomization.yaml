@@ -5,6 +5,7 @@ namespace: apps
 resources:
 - ../../base
 - config.yaml
+- static-secrets.yaml
 
 configMapGenerator:
   - name: allowed-redirects

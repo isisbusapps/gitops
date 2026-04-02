@@ -20,7 +20,7 @@ spec:
             timeoutSeconds: 10
             initialDelaySeconds: 5
             httpGet:
-              path: /authenticate-frontend/auth/Ready
+              path: /auth/Ready
               port: 3000
           livenessProbe:
             successThreshold: 1
@@ -28,7 +28,7 @@ spec:
             periodSeconds: 20
             timeoutSeconds: 10
             httpGet:
-              path: /authenticate-frontend/auth/Live
+              path: /auth/Live
               port: 3000
           readinessProbe:
             successThreshold: 3
@@ -36,7 +36,7 @@ spec:
             periodSeconds: 5
             timeoutSeconds: 10
             httpGet:
-              path: /authenticate-frontend/auth/Ready
+              path: /auth/Ready
               port: 3000
       imagePullSecrets:
         - name: registry-creds

@@ -10,7 +10,7 @@ data:
   AUTH_API_URL: "http://auth-service.apps.svc.cluster.local:8080"
   MESSAGES_URL: "http://messages-service.apps.svc.cluster.local:30000/messages"
   EST_API_URL: "http://establishment-service.apps.svc.cluster.local:8080"
-  LOG_LEVEL: info
+  LOG_LEVEL: "info"
   ICRD_EMAIL: "ICRD@stfc.ac.uk"
   NAFE_BASE_URL: "https://users.facilities.rl.ac.uk"
-  APP_ENV: prod
+  APP_ENV: "prod"

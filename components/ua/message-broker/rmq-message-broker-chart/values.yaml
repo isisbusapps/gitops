@@ -8,3 +8,18 @@ admin_secret: "uex-admin-secret"
 
 # ensures cluster operator doesnt use latest images
 image: "rabbitmq:4-management"
+
+erlang_cookie_secret: "rmq-message-broker-erlang-cookie"
+
+#UEX specfic kv
+configMap:
+# Configure cookies
+  configure_rmq_cookie_permissions_config:
+    name: configure-rmq-cookie-permissions-config
+    scriptKey: configure-rmq-cookie-permissions.sh
+    scriptMountPath: configure-rmq-cookie-permissions.sh
+# enable firehose   
+  uex_init_job_config:
+    name: uex-init-job-config
+    scriptKey: uex-init-job.sh
+    scriptMountPath: /uex-init-job.sh

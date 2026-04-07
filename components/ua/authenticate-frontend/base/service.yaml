@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: authenticate-frontend-office
+  name: authenticate-frontend
 spec:
   ports:
     - name: https

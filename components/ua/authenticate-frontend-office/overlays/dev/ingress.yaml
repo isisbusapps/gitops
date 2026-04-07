@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: authenticate-frontend-office
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - "devoffice.facilities.rl.ac.uk"
+      secretName: facilities-tls-certificate
+  rules:
+    - host: "devoffice.facilities.rl.ac.uk"
+      http:
+        paths:
+          - path: /auth
+            pathType: Prefix
+            backend:
+              service:
+                name: authenticate-frontend
+                port:
+                  number: 3000

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: authenticate-frontend
+  name: authenticate-frontend-office
 spec:
   template:
     spec:
@@ -15,10 +15,8 @@ spec:
               subPath: allowed-redirects.json
           envFrom:
             - configMapRef:
-                name: authenticate-frontend-config
-            - secretRef:
-                name: authenticate-frontend
+                name: authenticate-frontend-office-config
       volumes:
         - name: allowed-redirects
           configMap:
-            name: allowed-redirects
+            name: allowed-redirects-office

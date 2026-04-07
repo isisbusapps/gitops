@@ -1,16 +1,38 @@
 apiVersion: v1
 data:
-  uex-init-job.sh: "#!/bin/bash\nset -e\nMAX_RETRIES=\"${MAX_RETRIES:-10}\"\nSLEEP_SECONDS=\"${SLEEP_SECONDS:-10}\"\nRABBITMQ_STATUS=false\nNODE=\"rabbit@rmq-message-broker-server-0.rmq-message-broker-nodes.apps\"\n\necho
-    \"Checking RabbitMQ node status for node : $NODE\"\n\nfor ((i=1; i<=MAX_RETRIES;
-    i++)); do\n  if rabbitmqctl -n \"$NODE\" -l status > /dev/null 2>&1; then\n    echo
-    \"RabbitMQ is ready.\"\n    RABBITMQ_STATUS=true\n    break\n  fi\n\n  # Sleep
-    on the last attempt\n  if (( i < MAX_RETRIES )); then\n    echo \"[$i/$MAX_RETRIES]
-    RabbitMQ not ready. Retrying in ${SLEEP_SECONDS}s...\" \n    sleep \"$SLEEP_SECONDS\"\n
-    \ else\n    echo \"[$i/$MAX_RETRIES] RabbitMQ not ready. No more attempts, giving
-    up.\"\n  fi\ndone\n\nif ! $RABBITMQ_STATUS; then\n  echo \"RabbitMQ never became
-    ready after $((MAX_RETRIES * SLEEP_SECONDS)) seconds.\"  \n  exit 1\nfi\n\necho
-    \"Enabling message tracing...\"\nrabbitmqctl -n \"$NODE\" -l trace_on -p uex"
+  uex-init-job.sh: |
+    #!/bin/bash
+    set -e
+    MAX_RETRIES="${MAX_RETRIES:-10}"
+    SLEEP_SECONDS="${SLEEP_SECONDS:-10}"
+    RABBITMQ_STATUS=false
+    NODE="rabbit@rmq-message-broker-server-0.rmq-message-broker-nodes.apps"
+
+    echo "Checking RabbitMQ node status for node : $NODE"
+
+    for ((i=1; i<=MAX_RETRIES; i++)); do
+      if rabbitmqctl -n "$NODE" -l status > /dev/null 2>&1; then
+        echo "RabbitMQ is ready."
+        RABBITMQ_STATUS=true
+        break
+      fi
+
+      # Sleep on the last attempt
+      if (( i < MAX_RETRIES )); then
+        echo "[$i/$MAX_RETRIES] RabbitMQ not ready. Retrying in ${SLEEP_SECONDS}s..."
+        sleep "$SLEEP_SECONDS"
+      else
+        echo "[$i/$MAX_RETRIES] RabbitMQ not ready. No more attempts, giving up."
+      fi
+    done
+
+    if ! $RABBITMQ_STATUS; then
+      echo "RabbitMQ never became ready after $((MAX_RETRIES * SLEEP_SECONDS)) seconds."
+      exit 1
+    fi
+
+    echo "Enabling message tracing..."
+    rabbitmqctl -n "$NODE" -l trace_on -p uex
 kind: ConfigMap
 metadata:
-  creationTimestamp: null
   name: uex-init-job-config

@@ -16,7 +16,7 @@ for ((i=1; i<=MAX_RETRIES; i++)); do
 
   # Sleep on the last attempt
   if (( i < MAX_RETRIES )); then
-    echo "[$i/$MAX_RETRIES] RabbitMQ not ready. Retrying in ${SLEEP_SECONDS}s..." 
+    echo "[$i/$MAX_RETRIES] RabbitMQ not ready. Retrying in ${SLEEP_SECONDS}s..."
     sleep "$SLEEP_SECONDS"
   else
     echo "[$i/$MAX_RETRIES] RabbitMQ not ready. No more attempts, giving up."
@@ -24,7 +24,7 @@ for ((i=1; i<=MAX_RETRIES; i++)); do
 done
 
 if ! $RABBITMQ_STATUS; then
-  echo "RabbitMQ never became ready after $((MAX_RETRIES * SLEEP_SECONDS)) seconds."  
+  echo "RabbitMQ never became ready after $((MAX_RETRIES * SLEEP_SECONDS)) seconds."
   exit 1
 fi
 

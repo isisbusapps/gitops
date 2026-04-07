@@ -1,0 +1,63 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: uex-init-job
+  namespace: apps
+spec:
+  backoffLimit: 3
+#  ttlSecondsAfterFinished: 600 # seconds
+  template:
+    metadata:
+      labels:
+        app: uex-init-job        
+    spec:
+      containers:       
+        - name: uex-init-job
+          image: {{ $.Values.image }} 
+          imagePullPolicy: IfNotPresent
+          env:            
+            - name: MAX_RETRIES
+              value: "10"
+            - name: SLEEP_SECONDS
+              value: "5" 
+          volumeMounts:
+            - name: scripts
+              mountPath: {{ $.Values.configMap.uex_init_job_config.scriptMountPath }}
+              subPath: {{ $.Values.configMap.uex_init_job_config.scriptKey }}
+            - name: rabbitmq-data
+              mountPath: /var/lib/rabbitmq   
+          command: ["bash",  {{ $.Values.configMap.uex_init_job_config.scriptMountPath }}]
+      restartPolicy: OnFailure   
+
+      initContainers:
+        - name: setup-erlang-cookie
+          image: {{ $.Values.image }}
+          command:
+            - bash
+            - {{ $.Values.configMap.configure_rmq_cookie_permissions_config.scriptMountPath}} 
+          volumeMounts:
+            - name: erlang-cookie
+              mountPath: /secret            
+            - name: configure-cookie-script
+              mountPath: {{ $.Values.configMap.configure_rmq_cookie_permissions_config.scriptMountPath}} 
+              subPath: {{ $.Values.configMap.configure_rmq_cookie_permissions_config.scriptKey}}
+            - name: rabbitmq-data
+              mountPath: /var/lib/rabbitmq  
+      volumes:
+        - name: scripts
+          configMap:
+            name: {{ $.Values.configMap.uex_init_job_config.name }}
+            items:
+              - key: {{ $.Values.configMap.uex_init_job_config.scriptKey }}
+                path: {{ $.Values.configMap.uex_init_job_config.scriptKey }} 
+        - name: configure-cookie-script
+          configMap:
+            name: {{ $.Values.configMap.configure_rmq_cookie_permissions_config.name }}
+            items:
+              - key: {{ $.Values.configMap.configure_rmq_cookie_permissions_config.scriptKey}}
+                path: {{ $.Values.configMap.configure_rmq_cookie_permissions_config.scriptKey}}         
+        - name: erlang-cookie
+          secret:
+            secretName: {{ $.Values.erlang_cookie_secret }}
+        - name: rabbitmq-data
+          emptyDir: {}

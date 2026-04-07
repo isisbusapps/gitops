@@ -6,9 +6,5 @@
   {
     "domain": "devusers.facilities.rl.ac.uk",
     "paramName":"sessionid"
-  },
-    {
-    "domain": "devoffice.facilities.rl.ac.uk",
-    "paramName":"sessionid"
   }
 ]

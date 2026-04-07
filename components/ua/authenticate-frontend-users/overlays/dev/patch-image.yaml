@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authenticate-frontend-users
+spec:
+  template:
+    spec:
+      containers:
+        - name: authenticate-frontend
+          image: ghcr.io/isisbusapps/authenticate-frontend@sha256:79a81a343fd8651d74236f16ecc40646596c3274095cc36bd70a13106b1686e8
+          volumeMounts:
+            - mountPath: /front_end/config/allowed-redirects.json
+              name: allowed-redirects
+              subPath: allowed-redirects.json
+            - mountPath: /front_end/config/internal-redirects.json
+              name: internal-redirects
+              subPath: internal-redirects.json
+          envFrom:
+            - configMapRef:
+                name: authenticate-frontend-users-config
+            - secretRef:
+                name: authenticate-frontend-users
+      volumes:
+        - name: allowed-redirects
+          configMap:
+            name: allowed-redirects-users
+        - name: internal-redirects
+          configMap:
+            name: internal-redirects-users

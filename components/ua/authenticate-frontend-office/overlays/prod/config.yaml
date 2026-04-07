@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: authenticate-frontend-config
+  name: authenticate-frontend-office-config
   namespace: apps
 data:
   AUTH_FRONTEND_URL: "https://office.facilities.rl.ac.uk"
@@ -14,3 +14,4 @@ data:
   ICRD_EMAIL: "ICRD@stfc.ac.uk"
   NAFE_BASE_URL: "https://office.facilities.rl.ac.uk"
   APP_ENV: prod
+  PORTAL_TYPE: "office"

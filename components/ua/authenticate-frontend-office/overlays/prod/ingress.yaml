@@ -16,6 +16,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: authenticate-frontend
+                name: authenticate-frontend-office
                 port:
                   number: 3000

@@ -1,7 +1,5 @@
 #folder name in vault
-users: 
-  - username: uex-admin
-  - username: users-client   
-  - username: sharepoint-client    
-  - username: visits-client
-  - username: era-client
+# This values.yaml is for Admin user of RMQ exchange
+admin_users: 
+  name:
+    - uex-admin

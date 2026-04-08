@@ -1,5 +1,14 @@
-clients:
+#folder name in vault
+# This values.yaml is for client users of RMQ exchange
+client_users:
   name:
-    - users
+    - allocations
+    - duo
     - era
+    - iops-v4
+    - prop-clf-all
+    - safety-test
     - schedule
+    - users
+    - visits
+    - xpress

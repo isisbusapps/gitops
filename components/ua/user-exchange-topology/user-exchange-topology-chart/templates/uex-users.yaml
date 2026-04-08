@@ -1,0 +1,43 @@
+{{- range .Values.client_users.name }}
+apiVersion: rabbitmq.com/v1beta1
+kind: User
+metadata:
+  name: {{ . }}-user
+  namespace: {{ $.Values.namespace }}
+spec:  
+  {{- with index $.Values.userSettings . }}
+  {{- if .tags }}
+  tags:
+  {{- range .tags }}
+    - {{ . }}
+  {{- end }}
+  {{- end }}
+  {{- end }}
+  importCredentialsSecret:
+    name: uex-{{ . }}-client-secret
+  rabbitmqClusterReference:
+    name: {{ $.Values.rmq_cluster_name }}    
+---
+{{- end }}
+
+# For Admin user
+{{- range .Values.admin_users.name }}
+apiVersion: rabbitmq.com/v1beta1
+kind: User
+metadata:
+  name: {{ . }}-user
+  namespace: {{ $.Values.namespace }}
+spec:  
+  {{- $userSettings := index $.Values.userSettings . }} 
+  {{- if $userSettings.tags}}  
+  tags:
+  {{- range $userSettings.tags }}
+    - {{ . }}
+  {{- end }}
+  {{- end }}
+  importCredentialsSecret:
+    name: {{ . }}-secret
+  rabbitmqClusterReference:
+    name: {{ $.Values.rmq_cluster_name }} 
+---
+{{- end }}    

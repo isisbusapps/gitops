@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: authenticate-frontend-users
+  name: authenticate-frontend
 spec:
   replicas: 3
   template:

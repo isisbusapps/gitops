@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: authenticate-frontend-users
+  name: authenticate-frontend
   namespace: argocd
 spec:
   goTemplate: true
@@ -15,13 +15,14 @@ spec:
         #- name: dev-microk8s-alternative
   template:
     metadata:
-      name: '{{.name}}-authenticate-frontend-users'
+      name: '{{.name}}-authenticate-frontend'
       annotations:
         argocd.argoproj.io/sync-wave: "0"
+
     spec:
       project: u-a-project
       source:
-        path: components/ua/authenticate-frontend-users/overlays/dev
+        path: components/ua/authenticate-frontend/overlays/dev
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:

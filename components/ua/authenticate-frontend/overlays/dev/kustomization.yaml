@@ -5,12 +5,17 @@ namespace: apps
 resources:
 - ../../base
 - config.yaml
-- ingress.yaml
+- static-secrets.yaml
 
 configMapGenerator:
-  - name: allowed-redirects-office
+  - name: allowed-redirects
     files:
       - allowed-redirects.json
+    options:
+      disableNameSuffixHash: true
+  - name: internal-redirects
+    files:
+      - internal-redirects.json
     options:
       disableNameSuffixHash: true
 

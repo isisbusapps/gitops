@@ -1,5 +1,9 @@
 [
   {
+    "domain": "devoffice.facilities.rl.ac.uk",
+    "paramName":"sessionid"
+  },
+  {
     "domain": "devproposal.facilities.rl.ac.uk",
     "paramName":"sessionid"
   },

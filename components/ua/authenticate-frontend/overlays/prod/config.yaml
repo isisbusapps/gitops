@@ -1,10 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: authenticate-frontend-office-config
+  name: authenticate-frontend-config
   namespace: apps
 data:
-  AUTH_FRONTEND_URL: "https://office.facilities.rl.ac.uk"
   JWT_PUBLIC_KEY: "-----BEGIN PUBLIC KEY----- MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx653Gv4kx1I5fsJju/Ame7674HJAjsheIthRuT9RS96vrvyUyc3B+FTTXAyNvtY5jsJoUY9o/4YhbB4Ep8GrL9h3rmZjxIGLv8jPfyYYqV874t5xvSf0Bcew4c+Rc41vVWaQPaEqYkyBJ9sLnI/TWatS1Zbw0lFc5S5gxzealYaDLj3xLtoAEDoYwyoDS1AMxWK1IEFOYtdAwGyPBkR51xodyY0Hi+uu9sPx++lJ/Vokw66K79puakNqOa0pCMuon4h44/8b382aLb5yNXijWjqgfJN0oEYlXRjdCOIRSXyGACwozRrD7xHyT7nFC0NEmpK8UWC9kiBLlgtJS6HElwIDAQAB -----END PUBLIC KEY-----"
   USERS_API_URL: "http://user-office-web-service-rest-v2.apps.svc.cluster.local:8080"
   AUTH_API_URL: "http://auth-service.apps.svc.cluster.local:8080"
@@ -12,6 +11,4 @@ data:
   EST_API_URL: "http://establishment-service.apps.svc.cluster.local:8080"
   LOG_LEVEL: info
   ICRD_EMAIL: "ICRD@stfc.ac.uk"
-  NAFE_BASE_URL: "https://office.facilities.rl.ac.uk"
   APP_ENV: prod
-  PORTAL_TYPE: "office"

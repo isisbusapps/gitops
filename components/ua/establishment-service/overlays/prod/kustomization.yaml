@@ -7,9 +7,10 @@ bases:
 namespace: apps
 
 resources:
-  - config.yaml
   - static-secret.yaml
+  - config.yaml
+  - ingress.yaml
 
 patches:
-  - path: patch-image.yml
-  - path: enable-debug-service.yml
+  - path: patch-image.yaml
+  - path: enable-debug-service.yaml

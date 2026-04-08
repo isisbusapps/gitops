@@ -6,7 +6,7 @@ resources:
 - ../../base
 - config.yaml
 - static-secrets.yaml
-
+- HTTPRoute.yaml
 
 patches:
 - path: patch-image.yaml

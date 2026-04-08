@@ -5,11 +5,10 @@ labels:
 - includeSelectors: true
   includeTemplates: true
   pairs:
-    app: auth-service
+    app: merge-user-tool
 
 namespace: apps
 
 resources:
-  - deployment.yml
-  - HTTPRoute.yml
-  - service.yml
+  - deployment.yaml
+  - service.yaml

@@ -11,5 +11,5 @@ namespace: apps
 
 resources:
   - deployment.yml
-  - ingress.yml
+  - HTTPRoute.yml
   - service.yml

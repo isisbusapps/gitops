@@ -5,7 +5,6 @@ namespace: apps
 resources:
 - ../../base
 - config.yaml
-- ingress.yaml
 
 configMapGenerator:
   - name: allowed-redirects

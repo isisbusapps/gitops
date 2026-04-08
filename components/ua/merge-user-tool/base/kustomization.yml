@@ -5,10 +5,11 @@ labels:
 - includeSelectors: true
   includeTemplates: true
   pairs:
-    app: user-establishment-details
+    app: merge-user-tool
 
 namespace: apps
 
 resources:
-  - deployment.yaml
-  - service.yaml
+  - deployment.yml
+  - ingress.yml
+  - service.yml

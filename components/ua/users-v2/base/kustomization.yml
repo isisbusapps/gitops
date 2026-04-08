@@ -10,5 +10,6 @@ labels:
 namespace: apps
 
 resources:
-  - deployment.yaml
-  - service.yaml
+  - deployment.yml
+  - ingress.yml
+  - service.yml

@@ -5,10 +5,10 @@ labels:
 - includeSelectors: true
   includeTemplates: true
   pairs:
-    app: user-office-web-service
-
+    app: establishment-service
 namespace: apps
 
 resources:
-  - deployment.yaml
-  - service.yaml
+  - deployment.yml
+  - ingress.yml
+  - service.yml

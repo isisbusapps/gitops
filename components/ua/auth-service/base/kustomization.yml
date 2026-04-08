@@ -5,9 +5,11 @@ labels:
 - includeSelectors: true
   includeTemplates: true
   pairs:
-    app: establishment-service
+    app: auth-service
+
 namespace: apps
 
 resources:
-  - deployment.yaml
-  - service.yaml
+  - deployment.yml
+  - ingress.yml
+  - service.yml

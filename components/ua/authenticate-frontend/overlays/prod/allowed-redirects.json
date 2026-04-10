@@ -2,5 +2,25 @@
   {
     "domain": "office.facilities.rl.ac.uk",
     "paramName":"sessionid"
+  },
+  {
+    "domain": "proposal.facilities.rl.ac.uk",
+    "paramName":"sessionid"
+  },
+  {
+    "domain": "users.facilities.rl.ac.uk",
+    "paramName":"sessionid"
+  },
+  {
+    "domain": "reduce.isis.cclrc.ac.uk",
+    "paramName":"sessionid"
+  },
+  {
+    "domain": "isis.analysis.stfc.ac.uk",
+    "paramName":"ticket"
+  },
+  {
+    "domain": "clf.analysis.stfc.ac.uk",
+    "paramName":"ticket"
   }
 ]

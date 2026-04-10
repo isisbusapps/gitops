@@ -13,6 +13,9 @@ spec:
             - mountPath: /front_end/config/allowed-redirects.json
               name: allowed-redirects
               subPath: allowed-redirects.json
+            - mountPath: /front_end/config/internal-redirects.json
+              name: internal-redirects
+              subPath: internal-redirects.json
           envFrom:
             - configMapRef:
                 name: authenticate-frontend-config
@@ -20,3 +23,6 @@ spec:
         - name: allowed-redirects
           configMap:
             name: allowed-redirects
+        - name: internal-redirects
+          configMap:
+            name: internal-redirects

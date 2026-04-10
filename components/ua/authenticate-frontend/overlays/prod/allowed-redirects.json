@@ -22,5 +22,21 @@
   {
     "domain": "clf.analysis.stfc.ac.uk",
     "paramName":"ticket"
+  },
+  {
+    "domain": "ada-test.stfc.ac.uk",
+    "paramName":"ticket"
+  },
+  {
+    "domain": "isis-test.analysis.stfc.ac.uk",
+    "paramName":"ticket"
+  },
+  {
+    "domain": "clf-test.analysis.stfc.ac.uk",
+    "paramName":"ticket"
+  },
+  {
+    "domain": "data.isis.stfc.ac.uk",
+    "paramName":"ticket"
   }
 ]

@@ -5,11 +5,17 @@ namespace: apps
 resources:
 - ../../base
 - config.yaml
+- static-secrets.yaml
 
 configMapGenerator:
   - name: allowed-redirects
     files:
       - allowed-redirects.json
+    options:
+      disableNameSuffixHash: true
+  - name: internal-redirects
+    files:
+      - internal-redirects.json
     options:
       disableNameSuffixHash: true
 

@@ -24,5 +24,18 @@
         "value": "__userSession__"
       }
     ]
+  },
+  {
+    "service": "visits",
+    "extraParams": [
+      {
+        "name": "login",
+        "value": "__login__"
+      },
+      {
+        "name": "userSession",
+        "value": "__userSession__"
+      }
+    ]
   }
 ]

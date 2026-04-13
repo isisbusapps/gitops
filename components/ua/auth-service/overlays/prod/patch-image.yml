@@ -7,5 +7,5 @@ spec:
     spec:
       containers:
         - name: auth-service
-          # version: 1.4.0
-          image: ghcr.io/isisbusapps/auth-service@sha256:2fbd972be98c5e367759dd3dc5ac3ac83944bed78e52bf74d4d181fface98b6f
+          # version: 1.5.0
+          image: ghcr.io/isisbusapps/auth-service@sha256:b39011491c84026a97d76bf41c87653c816d2fba38272e7c2fd8efd314c53dce

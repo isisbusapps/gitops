@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: authenticate-frontend-pre-prod-testing
+  name: authenticate-frontend
   namespace: argocd
 spec:
   goTemplate: true
@@ -10,24 +10,24 @@ spec:
   - list:
       elements:
         # Names of clusters to deploy the app to
-        - name: dev-v3
-        # Uncomment if you want to deploy to dev-microk8s-alternative
-        #- name: dev-microk8s-alternative
+        - name: prod-v4
+        # Uncomment if you want to deploy to prod-fallback
+        #- name: prod-fallback
   template:
     metadata:
-      name: '{{.name}}-authenticate-frontend-pre-prod-testing'
+      name: '{{.name}}-authenticate-frontend'
       annotations:
         argocd.argoproj.io/sync-wave: "0"
 
     spec:
       project: u-a-project
       source:
-        path: components/ua/authenticate-frontend-pre-prod-testing/overlays/dev
+        path: components/ua/authenticate-frontend/overlays/prod
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:
         namespace: apps
         name: '{{.name}}'
       syncPolicy:
-        automated: 
+        automated:
           selfHeal: true

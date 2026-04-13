@@ -15,4 +15,6 @@ spec:
     namespace: argocd
     server: https://kubernetes.default.svc
   syncPolicy:
-    automated: {}
+    automated:
+      self-heal: true
+      prune: true

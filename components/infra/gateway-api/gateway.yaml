@@ -12,9 +12,10 @@ spec:
     - name: http
       protocol: HTTP
       port: 80
+      hostname: "*.rl.ac.uk" # Broad enough to cover both apps
       allowedRoutes:
         namespaces:
-          from: All
+          from: Same
 
     # HTTPS listener for *.facilities.rl.ac.uk
     - name: https-facilities

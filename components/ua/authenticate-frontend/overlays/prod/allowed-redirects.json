@@ -28,6 +28,10 @@
     "paramName":"ticket"
   },
   {
+    "domain": "ada.stfc.ac.uk",
+    "paramName":"ticket"
+  },
+  {
     "domain": "isis-test.analysis.stfc.ac.uk",
     "paramName":"ticket"
   },

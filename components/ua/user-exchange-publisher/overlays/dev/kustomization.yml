@@ -10,4 +10,4 @@ resources:
   - static-secret.yaml
 
 patches:
-  - path: patch-image.yml
+  - path: patch-image.yml 

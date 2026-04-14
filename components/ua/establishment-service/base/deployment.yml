@@ -4,6 +4,7 @@ metadata:
   name: establishment-service
 spec:
   replicas: 3
+  revisionHistoryLimit: 3
   template:
     spec:
       containers:

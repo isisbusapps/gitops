@@ -4,6 +4,7 @@ metadata:
   name: ua-dev-tools
 spec:
   replicas: 3
+  revisionHistoryLimit: 3
   template:
     spec:
       containers:

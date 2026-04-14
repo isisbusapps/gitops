@@ -4,6 +4,7 @@ metadata:
   name: auth-service
 spec:
   replicas: 3
+  revisionHistoryLimit: 3
   template:
     metadata:
       annotations:

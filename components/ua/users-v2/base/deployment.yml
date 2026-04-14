@@ -8,6 +8,7 @@ spec:
       app: user-office-web-service
       rest-api-version: v2
   replicas: 3
+  revisionHistoryLimit: 3
   template:
     metadata:
       labels:

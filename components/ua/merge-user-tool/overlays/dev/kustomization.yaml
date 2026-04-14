@@ -6,6 +6,9 @@ bases:
 
 namespace: apps
 
+resources:
+  - HTTPRoute.yaml
+
 patches:
   - path: patch-image.yaml
   - path: enable-debug-service.yaml

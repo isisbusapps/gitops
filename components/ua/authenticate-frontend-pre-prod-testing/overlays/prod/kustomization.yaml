@@ -6,7 +6,6 @@ resources:
 - ../../base
 - config.yaml
 - static-secrets.yaml
-- ingress.yaml
 
 configMapGenerator:
   - name: allowed-redirects

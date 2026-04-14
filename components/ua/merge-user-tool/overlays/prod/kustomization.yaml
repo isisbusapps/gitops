@@ -6,9 +6,5 @@ bases:
 
 namespace: apps
 
-resources:
-  - ingress.yaml
-
-
 patches:
   - path: patch-image.yaml

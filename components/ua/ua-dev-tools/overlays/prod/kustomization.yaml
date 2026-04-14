@@ -8,7 +8,6 @@ namespace: apps
 
 resources:
   - config.yaml
-  - ingress.yaml
 
 patches:
 - path: patch-image.yaml

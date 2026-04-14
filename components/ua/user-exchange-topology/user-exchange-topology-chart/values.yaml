@@ -1,1 +1,19 @@
 user_exchange_vhost: "uex"
+
+# user settings
+userSettings:
+  uex-admin:
+    tags: [management, administrator]
+    vhost: "uex"
+    permissions:
+      configure: ".*"
+      write: ".*"
+      read: ".*"
+   
+  users:
+    tags: [management, administrator]
+    vhost: "uex"
+    permissions:
+      configure: ".*"
+      write: "amq\\.topic|amq\\.default"
+      read: "users_pending" 

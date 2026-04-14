@@ -10,5 +10,13 @@
   {
     "domain": "devusers.facilities.rl.ac.uk",
     "paramName":"sessionid"
+  },
+  {
+    "domain": "dev.analysis.stfc.ac.uk",
+    "paramName":"ticket"
+  },
+  {
+    "domain": "reducedev2.isis.cclrc.ac.uk",
+    "paramName":"sessionid"
   }
 ]

@@ -7,16 +7,24 @@ spec:
     spec:
       containers:
         - name: authenticate-frontend
-          # version 0.0.1
-          image: ghcr.io/isisbusapps/authenticate-frontend@sha256:778f841535e474fa1c50aa46b34355f163addbc82963b1b665d0f1a672904659
+          # version: 1.0.6
+          image: ghcr.io/isisbusapps/authenticate-frontend@sha256:7a857555536f3c7672b5d2810c05e8376f57b707ed0cef854096370f7966edae
           volumeMounts:
             - mountPath: /front_end/config/allowed-redirects.json
               name: allowed-redirects
               subPath: allowed-redirects.json
+            - mountPath: /front_end/config/internal-redirects.json
+              name: internal-redirects
+              subPath: internal-redirects.json
           envFrom:
             - configMapRef:
                 name: authenticate-frontend-config
+            - secretRef:
+                name: authenticate-frontend
       volumes:
         - name: allowed-redirects
           configMap:
             name: allowed-redirects
+        - name: internal-redirects
+          configMap:
+            name: internal-redirects

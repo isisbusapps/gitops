@@ -11,5 +11,70 @@
         "value": "__userSession__"
       }
     ]
+  },
+  {
+    "service": "eras",
+    "extraParams": [
+      {
+        "name": "login",
+        "value": "__login__"
+      },
+      {
+        "name": "userSession",
+        "value": "__userSession__"
+      }
+    ]
+  },
+  {
+    "service": "visits",
+    "extraParams": [
+      {
+        "name": "login",
+        "value": "__login__"
+      },
+      {
+        "name": "userSession",
+        "value": "__userSession__"
+      }
+    ]
+  },
+  {
+    "service": "experimentalreports",
+    "extraParams": [
+      {
+        "name": "login",
+        "value": "__login__"
+      },
+      {
+        "name": "userSession",
+        "value": "__userSession__"
+      }
+    ]
+  },
+  {
+    "service": "reporting",
+    "extraParams": [
+      {
+        "name": "login",
+        "value": "__login__"
+      },
+      {
+        "name": "userSession",
+        "value": "__userSession__"
+      }
+    ]
+  },
+  {
+    "service": "safetytest",
+    "extraParams": [
+      {
+        "name": "login",
+        "value": "__login__"
+      },
+      {
+        "name": "userSession",
+        "value": "__userSession__"
+      }
+    ]
   }
 ]

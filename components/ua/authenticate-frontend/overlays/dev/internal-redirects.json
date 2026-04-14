@@ -26,19 +26,6 @@
     ]
   },
   {
-    "service": "auth",
-    "extraParams": [
-      {
-        "name": "login",
-        "value": "__login__"
-      },
-      {
-        "name": "userSession",
-        "value": "__userSession__"
-      }
-    ]
-  },
-  {
     "service": "visits",
     "extraParams": [
       {
@@ -66,6 +53,19 @@
   },
   {
     "service": "reporting",
+    "extraParams": [
+      {
+        "name": "login",
+        "value": "__login__"
+      },
+      {
+        "name": "userSession",
+        "value": "__userSession__"
+      }
+    ]
+  },
+  {
+    "service": "safetytest",
     "extraParams": [
       {
         "name": "login",

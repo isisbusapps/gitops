@@ -4,6 +4,8 @@ kind: Queue
 metadata:
   name: {{ .name | lower | replace "_" "-"}}-queue
   namespace: {{ $.Values.namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
 spec:
   vhost: {{ $.Values.user_exchange_vhost }}
   name: {{ .name }} 

@@ -1,0 +1,7 @@
+#UEX specfic kv
+configMap: 
+# enable firehose   
+  uex_init_job_config:
+    name: uex-init-job-config
+    scriptKey: uex-init-job.sh
+    scriptMountPath: /uex-init-job.sh

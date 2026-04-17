@@ -3,6 +3,8 @@ kind: Vhost
 metadata:
   name: {{ $.Values.user_exchange_vhost }}-vhost
   namespace: {{ $.Values.namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   name: {{ $.Values.user_exchange_vhost }}
   rabbitmqClusterReference:

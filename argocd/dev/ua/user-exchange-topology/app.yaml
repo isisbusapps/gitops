@@ -30,6 +30,7 @@ spec:
             - ../../message-broker-secrets/broker-secret-chart/values.yaml
             - ../../user-exchange-client-secret/user-exchange-client-secret-chart/values-dev.yaml
             #---add topology values.yaml file from here---
+            - values-init-job.yaml
             - values.yaml
       destination:
         namespace: apps

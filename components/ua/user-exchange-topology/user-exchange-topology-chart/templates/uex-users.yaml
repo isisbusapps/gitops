@@ -4,6 +4,8 @@ kind: User
 metadata:
   name: {{ . }}-client
   namespace: {{ $.Values.namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "7"
 spec:  
   {{- with index $.Values.userSettings . }}
   {{- if .tags }}

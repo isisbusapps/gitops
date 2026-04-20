@@ -4,6 +4,8 @@ kind: Permission
 metadata: 
   name: {{ $client_name }}-permission 
   namespace: {{ $.Values.namespace | default "apps" }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "8"
 spec:
   vhost: {{ $settings.vhost | default $.Values.user_exchange_vhost }} 
   user: {{ $client_name }}  

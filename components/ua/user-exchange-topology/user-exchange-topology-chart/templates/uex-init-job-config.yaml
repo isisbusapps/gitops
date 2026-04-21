@@ -1,3 +1,4 @@
+# This job will run everytime there is a change in any topology CR 
 apiVersion: v1
 data:
   uex-init-job.sh: |

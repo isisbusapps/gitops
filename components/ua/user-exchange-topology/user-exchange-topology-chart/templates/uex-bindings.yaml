@@ -4,8 +4,6 @@ kind: Binding
 metadata:
   name: {{ .name | lower | replace "_" "-" }}-binding
   namespace: {{ $.Values.namespace }}
-  annotations:
-    argocd.argoproj.io/sync-wave: "5"
 spec:
   vhost : {{ $.Values.user_exchange_vhost }}
   source: {{ .source }}

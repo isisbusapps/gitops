@@ -1,3 +1,4 @@
+# This job will run everytime there is a change in any topology CR 
 #!/bin/bash
 set -e
 MAX_RETRIES="${MAX_RETRIES:-10}"

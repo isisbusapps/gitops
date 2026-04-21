@@ -62,5 +62,7 @@ data:
 kind: ConfigMap
 metadata:
   name: uex-init-job-config
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
 
 

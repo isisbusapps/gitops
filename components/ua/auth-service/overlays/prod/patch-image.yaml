@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+spec:
+  template:
+    spec:
+      containers:
+        - name: auth-service
+          # version: 1.5.0
+          image: ghcr.io/isisbusapps/auth-service@sha256:b39011491c84026a97d76bf41c87653c816d2fba38272e7c2fd8efd314c53dce

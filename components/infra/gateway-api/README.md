@@ -53,8 +53,10 @@ The `ReferenceGrant` in `apps` namespace grants the Gateway in `envoy-gateway-sy
 | File | Description |
 |---|---|
 | `gatewayclass.yaml` | Defines the `envoy-gateway` GatewayClass pointing to the Envoy Gateway controller |
+| `envoy-proxy-config.yaml` | EnvoyProxy resource that configures the Envoy data plane as a DaemonSet |
 | `reference-grant.yaml` | Grants cross-namespace access from the Gateway to TLS secrets in `apps` |
 | `gateway.yaml` | The Gateway resource with HTTP→HTTPS redirect and two HTTPS listeners |
+| `https-redirect.yaml` | HTTPRoute that redirects all HTTP traffic to HTTPS with a 301 |
 
 ## Installation
 
@@ -83,10 +85,11 @@ kubectl get gateway -n envoy-gateway-system
 # NAME            CLASS           ADDRESS           PROGRAMMED   AGE
 # envoy-gateway   envoy-gateway   130.246.214.231   True         ...
 
-# Envoy proxy pods running
-kubectl get pods -n envoy-gateway-system
-# envoy-envoy-gateway-system-envoy-gateway-...   2/2   Running
-# envoy-gateway-...                               1/1   Running
+# Envoy proxy pods running (DaemonSet — one per worker node)
+kubectl get pods -n envoy-gateway-system -l app.kubernetes.io/component=proxy -o wide
+# envoy-...-2jx26   2/2   Running   ...   dev-v3-default-md-0-sqm5j-cz5ck
+# envoy-...-9wf8l   2/2   Running   ...   dev-v3-default-md-0-sqm5j-ksqs5
+# envoy-...-fn8g8   2/2   Running   ...   dev-v3-default-md-0-sqm5j-bfkm8
 
 # LoadBalancer with floating IP
 kubectl get svc -n envoy-gateway-system
@@ -155,6 +158,94 @@ To test routes like `visits-httproute.yaml` in this environment, explicitly reso
 # Ensure you use curl.exe in PowerShell to avoid the Invoke-WebRequest alias
 curl.exe -I -k --resolve test.developers.facilities.rl.ac.uk:<HTTPS_NODEPORT>:<VM_IP> https://test.developers.facilities.rl.ac.uk:<HTTPS_NODEPORT>/visits-alpha
 ```
+
+## Troubleshooting: Intermittent 5–10 Second Request Delays
+
+### Symptom
+
+Requests to services routed through Envoy Gateway intermittently take 5 or 10 seconds, while the same services respond instantly through the nginx Ingress controller.
+
+```text
+Request 1 - Total: 0.489s   ← fast (hit the right node)
+Request 2 - Total: 5.459s   ← slow (1 retry)
+Request 3 - Total: 0.401s   ← fast
+Request 4 - Total: 10.330s  ← slow (2 retries)
+Request 5 - Total: 10.560s  ← slow (2 retries)
+```
+
+### Root Cause
+
+By default, Envoy Gateway deploys the Envoy proxy as a single-replica **Deployment**. The proxy pod runs on only one of the worker nodes. However, the OpenStack LoadBalancer (Octavia) distributes incoming traffic across **all** worker nodes in a round-robin fashion.
+
+The Envoy proxy service is created with `externalTrafficPolicy: Local`, which means kube-proxy on nodes **without** the Envoy pod will silently drop the traffic rather than forwarding it. When Octavia sends a request to a node without the pod, the connection hangs until the LB's 5-second retry timeout kicks in. If it retries to another empty node, you get a 10-second delay.
+
+With 3 worker nodes and only 1 running the proxy, roughly 2 out of 3 requests would hit an empty node.
+
+### Diagnostic Commands
+
+```bash
+# 1. Break down request timing to identify where the delay occurs
+curl.exe -o NUL -s -w "DNS: %{time_namelookup}s\nConnect: %{time_connect}s\nTLS: %{time_appconnect}s\nFirstByte: %{time_starttransfer}s\nTotal: %{time_total}s\n" -k https://devkubernetes.developers.facilities.rl.ac.uk/messages
+
+# 2. Run multiple requests to observe the intermittent pattern
+for i in $(seq 1 5); do
+  curl -o /dev/null -s -w "Request $i - Total: %{time_total}s\n" -k https://devkubernetes.developers.facilities.rl.ac.uk/messages
+done
+
+# 3. Check which nodes have the Envoy proxy pod
+kubectl get pods -n envoy-gateway-system -l app.kubernetes.io/component=proxy -o wide
+
+# 4. Verify backend health via the Envoy admin interface
+kubectl port-forward -n envoy-gateway-system <envoy-pod> 19000:19000
+curl http://localhost:19000/clusters | grep messages
+```
+
+### Fix: DaemonSet via EnvoyProxy Resource
+
+The fix is to run the Envoy proxy as a **DaemonSet** so that every worker node has a proxy pod. This ensures that no matter which node the OpenStack LB sends traffic to, there is always a local Envoy pod ready to handle it.
+
+This is configured via two resources:
+
+1. **`envoy-proxy-config.yaml`** — an `EnvoyProxy` custom resource that tells the Envoy Gateway controller to use a DaemonSet:
+
+```yaml
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+metadata:
+  name: envoy-daemonset-config
+  namespace: envoy-gateway-system
+spec:
+  provider:
+    type: Kubernetes
+    kubernetes:
+      envoyDaemonSet: {}
+```
+
+2. **`gatewayclass.yaml`** — updated with a `parametersRef` that links to the EnvoyProxy resource:
+
+```yaml
+spec:
+  controllerName: gateway.envoyproxy.io/gatewayclass-controller
+  parametersRef:
+    group: gateway.envoyproxy.io
+    kind: EnvoyProxy
+    name: envoy-daemonset-config
+    namespace: envoy-gateway-system
+```
+
+Once applied, Envoy Gateway automatically replaces the single-replica Deployment with a DaemonSet. The `externalTrafficPolicy: Local` is preserved, which means **real client source IPs are retained** in request headers.
+
+### Results After Fix
+
+```text
+Request 1 - Total: 0.532s
+Request 2 - Total: 0.496s
+Request 3 - Total: 0.512s
+Request 4 - Total: 0.744s
+Request 5 - Total: 0.366s
+```
+
+All requests consistently complete in under 1 second.
 
 ## Uninstalling
 

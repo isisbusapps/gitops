@@ -5,10 +5,10 @@ labels:
 - includeSelectors: true
   includeTemplates: true
   pairs:
-    app: establishment-service
+    app: messages-service
 namespace: apps
 
 resources:
-  - deployment.yml
-  - ingress.yml
-  - service.yml
+  - deployment.yaml
+  - ingress.yaml
+  - service.yaml

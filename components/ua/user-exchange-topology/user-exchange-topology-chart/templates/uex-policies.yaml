@@ -4,8 +4,6 @@ kind: Policy
 metadata:
   name: {{ .name | lower | replace "_" "-" }}-policy
   namespace: {{ $.Values.namespace }}
-  annotations:
-    argocd.argoproj.io/sync-wave: "6"
 spec:
   name: {{ .name }}
   pattern: {{ .pattern }}

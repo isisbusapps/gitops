@@ -5,10 +5,11 @@ labels:
 - includeSelectors: true
   includeTemplates: true
   pairs:
-    app: messages-service
+    app: ua-dev-tools
+
 namespace: apps
 
 resources:
-  - deployment.yml
-  - ingress.yml
-  - service.yml
+  - deployment.yaml
+  - ingress.yaml
+  - service.yaml

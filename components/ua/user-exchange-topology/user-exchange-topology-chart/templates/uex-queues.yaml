@@ -4,8 +4,6 @@ kind: Queue
 metadata:
   name: {{ .name | lower | replace "_" "-"}}-queue
   namespace: {{ $.Values.namespace }}
-  annotations:
-    argocd.argoproj.io/sync-wave: "4"
 spec:
   name: {{ .name }} 
   autoDelete: {{ index . "auto-delete" | default "false" }}

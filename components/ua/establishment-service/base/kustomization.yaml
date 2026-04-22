@@ -5,11 +5,10 @@ labels:
 - includeSelectors: true
   includeTemplates: true
   pairs:
-    app: user-establishment-details
-
+    app: establishment-service
 namespace: apps
 
 resources:
-  - deployment.yml
-  - ingress.yml
-  - service.yml
+  - deployment.yaml
+  - ingress.yaml
+  - service.yaml

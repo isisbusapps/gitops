@@ -14,12 +14,12 @@ spec:
         type: PathPrefix
         value: /users-service/v1
     backendRefs:
-    - name: user-office-web-service-v1
+    - name: user-office-web-service-rest-v1
       port: 8080
   - matches:
     - path:
         type: PathPrefix
         value: /users-service/v1/quarkus
     backendRefs:
-    - name: user-office-web-service-v1
+    - name: user-office-web-service-rest-v1
       port: 8080

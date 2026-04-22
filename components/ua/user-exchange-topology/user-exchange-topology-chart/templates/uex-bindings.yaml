@@ -1,0 +1,16 @@
+{{- range .Values.binding }}
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: {{ .name | lower | replace "_" "-" }}-binding
+  namespace: {{ $.Values.namespace }}
+spec:
+  vhost : {{ $.Values.user_exchange_vhost }}
+  source: {{ .source }}
+  destination: {{ .destination }}
+  destinationType: {{ $.Values.binding_destination}}
+  routingKey: {{ .routing_key }}
+  rabbitmqClusterReference:
+    name: {{ $.Values.rmq_cluster_name }} 
+---
+{{ end }}

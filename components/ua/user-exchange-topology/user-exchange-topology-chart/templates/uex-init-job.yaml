@@ -3,6 +3,10 @@ kind: Job
 metadata:
   name: uex-init-job
   namespace: apps
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   backoffLimit: 3
 #  ttlSecondsAfterFinished: 600 # seconds

@@ -1,0 +1,17 @@
+{{- range .Values.queue}}
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: {{ .name | lower | replace "_" "-"}}-queue
+  namespace: {{ $.Values.namespace }}
+spec:
+  vhost: {{ $.Values.user_exchange_vhost }}
+  name: {{ .name }} 
+  autoDelete: {{ .auto_delete }}
+  durable: {{ .durable }}
+  type: quorum
+  rabbitmqClusterReference:
+    name: {{ $.Values.rmq_cluster_name }}
+  deletionPolicy: retain     
+---
+{{ end }}    

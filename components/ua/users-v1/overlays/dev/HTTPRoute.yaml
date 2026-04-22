@@ -8,6 +8,9 @@ spec:
     kind: Gateway
     namespace: envoy-gateway-system
     sectionName: https-facilities
+  hostnames:
+  - "*.facilities.rl.ac.uk"
+  - "*.developers.facilities.rl.ac.uk"
   rules:
   - matches:
     - path:

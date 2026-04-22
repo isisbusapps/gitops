@@ -7,12 +7,12 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "5"
 spec:
-  vhost : {{ $.Values.user_exchange_vhost }}
+  vhost : {{ index .Values "user-exchange-vhost" }}
+  routingKey: {{ index . "routing-key" }}
   source: {{ .source }}
   destination: {{ .destination }}
-  destinationType: {{ $.Values.binding_destination}}
-  routingKey: {{ .routing_key }}
+  destinationType: {{ index . "destination-type" | default "queue"}}
   rabbitmqClusterReference:
-    name: {{ $.Values.rmq_cluster_name }} 
+    name: {{ $.Values.rmq_cluster_name }}
 ---
 {{ end }}

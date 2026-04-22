@@ -4,24 +4,22 @@ metadata:
   name: user-office-web-service-rest-v2
 spec:
   parentRefs:
-  - name: envoy-gateway
-    kind: Gateway
-    namespace: envoy-gateway-system
-    sectionName: https-facilities
+    - name: envoy-gateway
+      namespace: envoy-gateway-system
   hostnames:
-  - "*.facilities.rl.ac.uk"
-  - "*.developers.facilities.rl.ac.uk"
+    - "*.facilities.rl.ac.uk"
+    - "*.developers.facilities.rl.ac.uk"
   rules:
-  - matches:
-    - path:
-        type: PathPrefix
-        value: /users-service/v2
-    backendRefs:
-    - name: user-office-web-service-rest-v2
-      port: 8080
-    filters:
-      - type: URLRewrite
-        urlRewrite:
-          path:
-            type: ReplacePrefixMatch
-            replacePrefixMatch: /
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /users-service/v2
+      backendRefs:
+        - name: user-office-web-service-rest-v2
+          port: 8080
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /

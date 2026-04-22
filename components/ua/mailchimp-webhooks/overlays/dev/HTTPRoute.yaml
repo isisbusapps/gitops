@@ -18,3 +18,9 @@ spec:
       backendRefs:
         - name: mailchimp-webhooks
           port: 3000
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /

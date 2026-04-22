@@ -18,3 +18,10 @@ spec:
       backendRefs:
         - name: auth-service
           port: 8080
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      

@@ -1,3 +1,16 @@
+# Only client users are created here as RabbitMQ users.
+# The admin user is automatically created when the broker is deployed.
+
+# Do NOT create the admin user here:
+# If an admin user is defined in this resource, deleting it will also remove
+# the admin user from the broker.
+
+# Without the admin user, no other entities can be created.
+# Recovery requires redeploying the broker to recreate the admin user.
+
+# WARNING: Redeploying the broker will delete all messages on that broker.
+
+# NOTE: If you need to manage the admin user, do so through the secrets in the message-broker-secrets. 
 {{- range .Values.client_users.name }}
 apiVersion: rabbitmq.com/v1beta1
 kind: User
@@ -18,26 +31,4 @@ spec:
   rabbitmqClusterReference:
     name: {{ $.Values.rmq_cluster_name }}    
 ---
-{{- end }}
-
-# For Admin user
-{{- range .Values.admin_users.name }}
-apiVersion: rabbitmq.com/v1beta1
-kind: User
-metadata:
-  name: {{ . }}-user
-  namespace: {{ $.Values.namespace }}
-spec:  
-  {{- $userSettings := index $.Values.userSettings . }} 
-  {{- if $userSettings.tags}}  
-  tags:
-  {{- range $userSettings.tags }}
-    - {{ . }}
-  {{- end }}
-  {{- end }}
-  importCredentialsSecret:
-    name: {{ . }}-secret
-  rabbitmqClusterReference:
-    name: {{ $.Values.rmq_cluster_name }} 
----
-{{- end }}    
+{{- end }}  

@@ -7,8 +7,10 @@ spec:
   parentRefs:
     - name: envoy-gateway
       namespace: envoy-gateway-system
-  hostnames:
-    - "*.facilities.rl.ac.uk"
+      sectionName: https-developers
+    - name: envoy-gateway
+      namespace: envoy-gateway-system
+      sectionName: https-facilities
   rules:
     - matches:
         - path:

@@ -8,7 +8,6 @@ spec:
     - name: envoy-gateway
       namespace: envoy-gateway-system
   hostnames:
-    - "*.developers.facilities.rl.ac.uk"
     - "*.facilities.rl.ac.uk"
   rules:
     - matches:

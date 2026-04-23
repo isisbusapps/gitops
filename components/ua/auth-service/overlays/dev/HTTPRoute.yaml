@@ -14,7 +14,7 @@ spec:
     - matches:
         - path:
             type: PathPrefix
-            value: /auth-service
+            value: /auth-service/v0
       backendRefs:
         - name: auth-service
           port: 8080

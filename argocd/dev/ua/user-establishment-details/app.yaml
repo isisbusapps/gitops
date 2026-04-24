@@ -31,6 +31,6 @@ spec:
       destination:
         namespace: apps
         name: '{{.name}}'
-      # syncPolicy:
-      #   automated: 
-      #     selfHeal: true
+      syncPolicy:
+        automated: 
+          selfHeal: true

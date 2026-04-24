@@ -7,9 +7,7 @@ bases:
 namespace: apps
 
 resources:
-  - static-secret.yaml
-  - HTTPRoute.yaml
+  - config.yaml
 
 patches:
 - path: patch-image.yaml
-- path: enable-debug-service.yaml

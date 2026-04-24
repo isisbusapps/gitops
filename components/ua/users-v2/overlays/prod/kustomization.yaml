@@ -7,9 +7,9 @@ bases:
 namespace: apps
 
 resources:
+  - config.yaml
   - static-secret.yaml
-  - HTTPRoute.yaml
+  - liquibase-config.yaml
 
 patches:
-- path: patch-image.yaml
-- path: enable-debug-service.yaml
+  - path: patch-image.yaml

@@ -8,8 +8,10 @@ namespace: apps
 
 resources:
   - static-secret.yaml
+  - config.yaml
+  - liquibase-config.yaml
   - HTTPRoute.yaml
 
 patches:
-- path: patch-image.yaml
-- path: enable-debug-service.yaml
+  - path: patch-image.yaml
+  - path: enable-debug-service.yaml

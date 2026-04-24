@@ -5,8 +5,7 @@ labels:
 - includeSelectors: true
   includeTemplates: true
   pairs:
-    app: authenticate-frontend
-
+    app: messages-service
 namespace: apps
 
 resources:

@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ua-dev-tools
+spec:
+  template:
+    spec:
+      containers:
+        - name: ua-dev-tools
+          image: ghcr.io/isisbusapps/ua-dev-tools@sha256:78787ceeb0ba4c4c258f644fcc69b560dba2b77f31d218756db60bd045703851
+          envFrom:
+            - configMapRef:
+                name: ua-dev-tools

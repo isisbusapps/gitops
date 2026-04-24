@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: messages-service
+spec:
+  template:
+    spec:
+      containers:
+        - name: messages-service
+          image: ghcr.io/isisbusapps/messages-service@sha256:1e3c25a80c2908b97c30cf07cf7eadc40daa730056ea63e0e9b6c19c9bf41ad0
+          ports:
+            - containerPort: 4013

@@ -4,18 +4,16 @@ metadata:
   name: authenticate-frontend
 spec:
   parentRefs:
-  - name: envoy-gateway
-    kind: Gateway
-    namespace: envoy-gateway-system
-    sectionName: https-facilities
+    - name: envoy-gateway
+      namespace: envoy-gateway-system
   hostnames:
-  - "*.facilities.rl.ac.uk"
-  - "*.developers.facilities.rl.ac.uk"
+    - "*.facilities.rl.ac.uk"
+    - "*.developers.facilities.rl.ac.uk"
   rules:
   - matches:
     - path:
         type: PathPrefix
         value: /auth
     backendRefs:
-    - name: authenticate-frontend
-      port: 3000
+      - name: authenticate-frontend
+        port: 3000

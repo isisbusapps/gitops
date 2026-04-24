@@ -4,18 +4,16 @@ metadata:
   name: user-establishment-details
 spec:
   parentRefs:
-  - name: envoy-gateway
-    kind: Gateway
-    namespace: envoy-gateway-system
-    sectionName: https-facilities
+    - name: envoy-gateway
+      namespace: envoy-gateway-system
   hostnames:
-  - "*.facilities.rl.ac.uk"
-  - "*.developers.facilities.rl.ac.uk"
+    - "*.facilities.rl.ac.uk"
+    - "*.developers.facilities.rl.ac.uk"
   rules:
-  - matches:
-    - path:
-        type: PathPrefix
-        value: /UserEstablishmentDetails
-    backendRefs:
-    - name: user-establishment-details
-      port: 8080
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /UserEstablishmentDetails
+      backendRefs:
+        - name: user-establishment-details
+          port: 8080

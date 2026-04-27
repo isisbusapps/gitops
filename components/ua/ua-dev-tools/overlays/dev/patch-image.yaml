@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: ua-dev-tools
-          image: ghcr.io/isisbusapps/ua-dev-tools@sha256:ed13022ec4397f4f294329cef7aea336aaa38c85920c1f1a7d25b2c9bfeefacc
+          image: ghcr.io/isisbusapps/ua-dev-tools@sha256:4e2a0f7dca4089ca8fe0c37f987f0fc6594894cd133867505c609ff29b7040b4
           envFrom:
             - configMapRef:
                 name: ua-dev-tools

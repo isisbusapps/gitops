@@ -7,8 +7,8 @@ spec:
     spec:
       containers:
         - name: merge-user-tool
-          # version: 1.2.0
-          image: ghcr.io/isisbusapps/merge-user-tool:1.2.0
+          # version: 1.3.0
+          image: ghcr.io/isisbusapps/merge-user-tool@sha256:251e4c3a48f04d67fc26d5443e2f2bd0f6e517696fac51eafc5eb119b9dc1711
           env:
             - name: APP_ENV
               value: prod

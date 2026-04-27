@@ -3,9 +3,7 @@ apiVersion: rabbitmq.com/v1beta1
 kind: Shovel
 metadata:
   name: {{ .name | lower | replace "_" "-"}}-shovel
-  namespace: {{ $.Values.namespace }}
-  annotations:
-    argocd.argoproj.io/sync-wave: "8"
+  namespace: {{ $.Values.namespace }} 
 spec:
   name: {{ .name }} 
   uriSecret:
@@ -15,7 +13,7 @@ spec:
   acknowledge: on-confirm
   deleteAfter: never
   addHeaders: false
-  vhost: {{ index .Values "user-exchange-vhost" }}
+  vhost: {{ $.Values.user_exchange_vhost}}
   rabbitmqClusterReference:
     name: {{ $.Values.rmq_cluster_name }}
   deletionPolicy: retain

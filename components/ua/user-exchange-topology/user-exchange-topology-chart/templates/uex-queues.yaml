@@ -9,7 +9,7 @@ spec:
   autoDelete: {{ index . "auto-delete" | default "false" }}
   durable: {{ .durable | default "true" }}
   type: quorum
-  vhost: {{ index .Values "user-exchange-vhost" }}
+  vhost: {{ $.Values.user_exchange_vhost}}
   rabbitmqClusterReference:
     name: {{ $.Values.rmq_cluster_name }}
   deletionPolicy: retain

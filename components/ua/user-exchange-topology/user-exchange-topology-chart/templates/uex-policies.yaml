@@ -27,9 +27,9 @@ spec:
   {{- if hasKey . "priority" }}
   priority: {{ .priority }}
   {{- else }}
-  priority: {{ index .Values "policy-priority" | default "100 "}}
+  priority: {{ $.Values.policy_priority | default "100 "}}
   {{- end }}
-  vhost: {{ index .Values "user-exchange-vhost" }}
+  vhost: {{ $.Values.user_exchange_vhost}}
   rabbitmqClusterReference:
     name: {{ $.Values.rmq_cluster_name }}
 ---

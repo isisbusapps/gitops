@@ -48,15 +48,25 @@ The Gateway references existing wildcard TLS secrets from the `apps` namespace v
 
 The `ReferenceGrant` in `apps` namespace grants the Gateway in `envoy-gateway-system` permission to read these secrets.
 
-## Files
+## Directory Structure
 
-| File | Description |
-|---|---|
-| `gatewayclass.yaml` | Defines the `envoy-gateway` GatewayClass pointing to the Envoy Gateway controller |
-| `envoy-proxy-config.yaml` | EnvoyProxy resource that configures the Envoy data plane as a DaemonSet |
-| `reference-grant.yaml` | Grants cross-namespace access from the Gateway to TLS secrets in `apps` |
-| `gateway.yaml` | The Gateway resource with HTTP→HTTPS redirect and two HTTPS listeners |
-| `https-redirect.yaml` | HTTPRoute that redirects all HTTP traffic to HTTPS with a 301 |
+The Gateway manifests are structured using Kustomize overlays, allowing you to deploy the same core configuration to both development and production clusters.
+
+```text
+gateway-api/
+├── base/
+│   ├── envoy-proxy-config.yaml  # Configures Envoy data plane as a DaemonSet
+│   ├── gateway.yaml             # Gateway resource with HTTPS listeners
+│   ├── gatewayclass.yaml        # Defines envoy-gateway GatewayClass
+│   ├── https-redirect.yaml      # HTTPRoute that redirects HTTP to HTTPS
+│   ├── reference-grant.yaml     # Grants cross-namespace access to TLS secrets
+│   └── kustomization.yaml       # Base kustomization definition
+└── overlays/
+    ├── dev/
+    │   └── kustomization.yaml   # Dev-specific overrides
+    └── prod/
+        └── kustomization.yaml   # Prod-specific overrides
+```
 
 ## Installation
 
@@ -66,10 +76,14 @@ Envoy Gateway was installed via Helm:
 helm install eg oci://docker.io/envoyproxy/gateway-helm --version v1.7.1 -n envoy-gateway-system --create-namespace
 ```
 
-Then the manifests were applied:
+Then, apply the Gateway resources using the appropriate Kustomize overlay for your cluster:
 
 ```bash
-kubectl apply -f gatewayclass.yaml -f reference-grant.yaml -f gateway.yaml
+# For Development cluster
+kubectl apply -k overlays/dev
+
+# For Production cluster
+kubectl apply -k overlays/prod
 ```
 
 ## Verification
@@ -252,7 +266,10 @@ All requests consistently complete in under 1 second.
 To remove Envoy Gateway completely:
 
 ```bash
-kubectl delete -f gateway.yaml -f reference-grant.yaml -f gatewayclass.yaml
+# Delete the kustomize overlay resources
+kubectl delete -k overlays/prod # or overlays/dev
+
+# Uninstall the Helm chart and namespace
 helm uninstall eg -n envoy-gateway-system
 kubectl delete namespace envoy-gateway-system
 ```

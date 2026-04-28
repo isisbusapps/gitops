@@ -24,8 +24,8 @@ spec:
     spec:
       project: infrastructure-project
       source:
-        path: gitops/k8s/overlays/dev
-        repoURL: 'https://github.com/isisbusapps/health-check-service'
+        path: components/infra/health-check-service/overlays/dev
+        repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:
         namespace: apps

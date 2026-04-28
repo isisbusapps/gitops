@@ -39,7 +39,7 @@
   },
   {
     "name": "authenticate-frontend",
-    "url": "https://devoffice.facilities.rl.ac.uk/auth"
+    "url": "https://devusers.facilities.rl.ac.uk/auth"
   },
   {
     "name": "Visits",

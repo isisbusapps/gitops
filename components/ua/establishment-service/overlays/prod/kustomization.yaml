@@ -12,4 +12,3 @@ resources:
 
 patches:
   - path: patch-image.yaml
-  - path: enable-debug-service.yaml

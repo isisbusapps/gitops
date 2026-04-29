@@ -154,23 +154,58 @@ If testing via a browser, add an entry to your local `hosts` file (`C:\Windows\S
 
 Once confirmed working, update your actual DNS to point to the new Envoy Gateway IP (`130.246.214.231`) and remove the old Ingress resource.
 
-## Fallback VM Environment
+## Fallback VM Environment (MicroK8s)
 
-When deploying this identical stack to a cluster without an external Load Balancer provider (like the single-VM `dev-fallback` cluster), Envoy Gateway will create the proxy service but the `EXTERNAL-IP` will remain `<pending>`. 
+When deploying to a single-node fallback VM without an external Load Balancer provider (like OpenStack Octavia), the Envoy Gateway Service's `EXTERNAL-IP` will remain `<pending>`.
 
-Instead of routing traffic through standard 80/443 ports, Kubernetes allocates **NodePorts** for the Proxy service. This allows it to run entirely in parallel with the nginx DaemonSet (which uses HostPort 80/443 natively) without any port conflicts.
+To mimic the behavior of the legacy Nginx Ingress (which natively binds to ports 80 and 443 on the host), we provide a dedicated `dev-fallback` Kustomize overlay. This overlay patches the `EnvoyProxy` configuration to map the host's physical ports directly to the Envoy proxy container.
 
-To determine the automatically assigned NodePorts:
 ```bash
-kubectl get svc -n envoy-gateway-system
-# Example Port Spec: 80:30138/TCP, 443:32696/TCP
+# 1. Disable legacy nginx ingress first to free up ports 80 and 443
+microk8s disable ingress
+
+# 2. Apply the fallback overlay
+kubectl apply -k overlays/dev-fallback
 ```
 
-To test routes like `visits-httproute.yaml` in this environment, explicitly resolve the hostname to the VM IP and target the NodePort:
+### Troubleshooting: Envoy Proxy CrashLoopBackOff on Fallback Cluster
 
-```bash
-# Ensure you use curl.exe in PowerShell to avoid the Invoke-WebRequest alias
-curl.exe -I -k --resolve test.developers.facilities.rl.ac.uk:<HTTPS_NODEPORT>:<VM_IP> https://test.developers.facilities.rl.ac.uk:<HTTPS_NODEPORT>/visits-alpha
+If you attempt to bind Envoy to ports 80/443 by forcing `hostNetwork: true` and `useListenerPortAsContainerPort: true`, the Envoy proxy pod will crash loop with these errors:
+
+1. **`cannot bind '0.0.0.0:19001': Address already in use`**
+   MicroK8s runs its internal distributed database (`k8s-dqlite`) on port `19001` on the VM host. If the Envoy proxy pod shares the host network, its default Prometheus stats listener collides with MicroK8s, causing an instant crash.
+2. **`cannot bind '0.0.0.0:80': Permission denied`**
+   Envoy Gateway forces strict security contexts (e.g., `allowPrivilegeEscalation: false`) and runs Envoy as a non-root user. Even if you try to manually patch `runAsUser: 0` or inject Linux capabilities like `NET_BIND_SERVICE`, the Envoy Gateway controller intercepts and drops those overrides, permanently blocking access to privileged ports (< 1024).
+
+**The Solution (`hostPort` mapping):**
+The `dev-fallback` overlay avoids `hostNetwork` entirely. Instead, it relies on standard Kubernetes `hostPort` routing. Envoy runs normally and binds internally to its default unprivileged high ports (`10080` and `10443`). We then use a Kustomize StrategicMerge patch to instruct Kubernetes to forward traffic from the VM's physical `80`/`443` ports into those unprivileged container ports.
+
+```yaml
+# Inside overlays/dev-fallback/envoy-proxy-hostnetwork-patch.yaml
+spec:
+  # Disable Prometheus to avoid any internal conflicts with MicroK8s on port 19001
+  telemetry:
+    metrics:
+      prometheus:
+        disable: true
+  provider:
+    kubernetes:
+      envoyDaemonSet:
+        patch:
+          type: StrategicMerge
+          value:
+            spec:
+              template:
+                spec:
+                  containers:
+                    - name: envoy
+                      ports:
+                        - containerPort: 10080
+                          hostPort: 80
+                          protocol: TCP
+                        - containerPort: 10443
+                          hostPort: 443
+                          protocol: TCP
 ```
 
 ## Troubleshooting: Intermittent 5–10 Second Request Delays

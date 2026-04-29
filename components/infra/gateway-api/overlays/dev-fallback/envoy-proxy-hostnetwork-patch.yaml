@@ -1,0 +1,31 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+metadata:
+  name: envoy-daemonset-config
+  namespace: envoy-gateway-system
+spec:
+  telemetry:
+    metrics:
+      prometheus:
+        disable: true
+  provider:
+    type: Kubernetes
+    kubernetes:
+      envoyService:
+        type: ClusterIP
+      envoyDaemonSet:
+        patch:
+          type: StrategicMerge
+          value:
+            spec:
+              template:
+                spec:
+                  containers:
+                    - name: envoy
+                      ports:
+                        - containerPort: 10080
+                          hostPort: 80
+                          protocol: TCP
+                        - containerPort: 10443
+                          hostPort: 443
+                          protocol: TCP

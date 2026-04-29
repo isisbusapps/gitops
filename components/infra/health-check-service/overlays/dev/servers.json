@@ -39,7 +39,7 @@
   },
   {
     "name": "authenticate-frontend",
-    "url": "https://devusers.facilities.rl.ac.uk/auth"
+    "url": "https://devusers.facilities.rl.ac.uk/authenticate-frontend"
   },
   {
     "name": "Visits",
@@ -84,5 +84,9 @@
   {
     "name": "user-exchange-client-users",
     "url": "http://user-exchange-client-users-service.apps.svc.cluster.local:8080/q/health"
+  },
+  {
+    "name": "THIS IS A TEST",
+    "url": ""
   }
 ]

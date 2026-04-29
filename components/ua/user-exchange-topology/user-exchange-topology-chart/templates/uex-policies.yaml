@@ -1,4 +1,4 @@
-{{- range .Values.policies }}
+{{- range .Values.policy }}
 apiVersion: rabbitmq.com/v1beta1
 kind: Policy
 metadata:
@@ -7,7 +7,7 @@ metadata:
 spec:
   name: {{ .name }}
   pattern: {{ .pattern }}
-  applyTo: {{ $.Values.policies_apply_to}}
+  applyTo: {{ index . "apply-to" | default "queues"}}
   definition:
     {{- if index .definition "max-length" }}
     max-length: {{ index .definition "max-length" }}
@@ -18,15 +18,19 @@ spec:
     {{- if index .definition "overflow" }}
     overflow: {{ index .definition "overflow" }}
     {{- end }}    
+    {{- if index .definition "dead-letter-exchange" }}
+    dead-letter-exchange: {{ index .definition "dead-letter-exchange" }}
+    {{- end }}
     {{- if index .definition "dead-letter-routing-key" }}
     dead-letter-routing-key: {{ index .definition "dead-letter-routing-key" }}
     {{- end }}
-    {{- if index .definition "queue-type" }}
-    queue-type: quorum
-    {{- end }}
-  priority: {{ $.Values.policy_priority }}
+  {{- if hasKey . "priority" }}
+  priority: {{ .priority }}
+  {{- else }}
+  priority: {{ $.Values.policy_priority | default "100 "}}
+  {{- end }}
   vhost: {{ $.Values.user_exchange_vhost}}
   rabbitmqClusterReference:
     name: {{ $.Values.rmq_cluster_name }}
----    
+---
  {{ end }}

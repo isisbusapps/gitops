@@ -5,12 +5,12 @@ metadata:
   name: {{ .name | lower | replace "_" "-" }}-binding
   namespace: {{ $.Values.namespace }}
 spec:
-  vhost : {{ $.Values.user_exchange_vhost }}
+  vhost: {{ $.Values.user_exchange_vhost}}
+  routingKey: {{ index . "routing_key" }}
   source: {{ .source }}
   destination: {{ .destination }}
-  destinationType: {{ $.Values.binding_destination}}
-  routingKey: {{ .routing_key }}
+  destinationType: {{ index . "destination_type" | default "queue"}}
   rabbitmqClusterReference:
-    name: {{ $.Values.rmq_cluster_name }} 
+    name: {{ $.Values.rmq_cluster_name }}
 ---
 {{ end }}

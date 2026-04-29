@@ -1,18 +1,18 @@
 {{- range $client_name, $settings := .Values.userSettings }}
 apiVersion: rabbitmq.com/v1beta1
 kind: Permission
-metadata: 
-  name: {{ $client_name }}-permission 
+metadata:
+  name: {{ $client_name }}-permission
   namespace: {{ $.Values.namespace | default "apps" }}
 spec:
-  vhost: {{ $settings.vhost | default $.Values.user_exchange_vhost }} 
-  user: {{ $client_name }}  
+  vhost: {{ $settings.vhost | default $.Values.user_exchange_vhost }}
+  user: {{ $client_name }}
   permissions:
-    configure: {{ $settings.permissions.configure | default ".*" }}
-    write: {{ $settings.permissions.write | default ".*" }}
-    read: {{ $settings.permissions.read | default ".*" }}
+    configure: {{ $settings.permissions.configure | default "(?!)" }}
+    write: {{ $settings.permissions.write | default "(?!)" }}
+    read: {{ $settings.permissions.read | default "(?!)" }}
   rabbitmqClusterReference:
-    name: {{ $.Values.rmq_cluster_name }}  
+    name: {{ $.Values.rmq_cluster_name }}
 ---
 
 {{- end }}
@@ -20,17 +20,17 @@ spec:
 {{- range $admin_name, $settings := .Values.userSettings }}
 apiVersion: rabbitmq.com/v1beta1
 kind: Permission
-metadata: 
-  name: {{ $admin_name }}-permission 
+metadata:
+  name: {{ $admin_name }}-permission
   namespace: {{ $.Values.namespace | default "apps" }}
 spec:
-  vhost: {{ $settings.vhost | default $.Values.user_exchange_vhost }} 
-  user: {{ $admin_name }}  
+  vhost: {{ $settings.vhost | default $.Values.user_exchange_vhost }}
+  user: {{ $admin_name }}
   permissions:
     configure: {{ $settings.permissions.configure | default ".*" }}
     write: {{ $settings.permissions.write | default ".*" }}
     read: {{ $settings.permissions.read | default ".*" }}
   rabbitmqClusterReference:
-    name: {{ $.Values.rmq_cluster_name }}  
+    name: {{ $.Values.rmq_cluster_name }}
 ---
 {{- end }}

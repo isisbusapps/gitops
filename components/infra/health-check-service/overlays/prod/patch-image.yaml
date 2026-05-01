@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: health-check-service
-          image: harbor.stfc.ac.uk/isisbusapps/health-check-service@sha256:9b72ac1aedde65a610bcf4e8f2129711317e93fd8cb0cdcc2426c5b67a6a5c40
+          image: ghcr.io/isisbusapps/health-check-service@sha256:19ee0b818b475be8f4670ba6e56f114483be2e0fbeff0a4994358ed41c297392
   selector:
     matchLabels:
       app: health-check-service

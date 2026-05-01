@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: health-check-service
+spec:
+  template:
+    spec:
+      containers:
+        - name: health-check-service
+          volumeMounts:
+            - name: servers-config
+              mountPath: /config/
+              readOnly: true
+      volumes:
+        - name: servers-config
+          configMap:
+            name: health-check-service-servers
+            items:
+              - key: servers.json
+                path: servers.json

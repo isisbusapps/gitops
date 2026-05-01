@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: health-check-service
+spec:
+  selector:
+    matchLabels:
+      app: health-check-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: health-check-service
+    spec:
+      containers:
+        - name: health-check-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+      imagePullSecrets:
+        - name: registry-creds

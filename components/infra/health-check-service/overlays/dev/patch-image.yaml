@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: health-check-service
+spec:
+  template:
+    spec:
+      containers:
+        - name: health-check-service
+          image: ghcr.io/isisbusapps/health-check-service@sha256:981a14a5b017345e5b69ec7673a7c708948df01346328f591ac11902ef76e201
+  selector:
+    matchLabels:
+      app: health-check-service

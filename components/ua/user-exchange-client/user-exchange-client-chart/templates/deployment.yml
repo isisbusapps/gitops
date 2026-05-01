@@ -25,7 +25,7 @@ spec:
               subPath: {{.cm_name}}.yaml                   
           envFrom:
             - secretRef:
-                name:  uex-{{ . }}-client-secret
+                name:  uex-{{ .name }}-client-secret
       imagePullSecrets:
         - name: registry-creds
       volumes:        

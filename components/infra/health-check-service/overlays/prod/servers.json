@@ -64,5 +64,9 @@
   {
     "name": "manage-consumables-frontend",
     "url": "https://office.facilities.rl.ac.uk/manage-consumables"
+  },
+  {
+    "name": "TEST-DO_NOT_MERGE",
+    "url": "TEST TEST"
   }
 ]

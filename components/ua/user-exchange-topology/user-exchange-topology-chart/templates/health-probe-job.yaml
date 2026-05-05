@@ -1,0 +1,48 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: uex-health-probe-job
+  namespace: apps
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  backoffLimit: 3
+#  ttlSecondsAfterFinished: 600 # seconds
+  template:
+    metadata:
+      labels:
+        app: uex-health-probe-job        
+    spec:
+      containers:       
+        - name: uex-health-probe-job
+          image: {{ $.Values.image }} 
+          imagePullPolicy: IfNotPresent
+          env:            
+            - name: MAX_RETRIES
+              value: "10"
+            - name: SLEEP_SECONDS
+              value: "5" 
+            - name: QUEUES
+              value: >-
+                {{- $names := list -}}
+                {{- range .Values.queue -}}
+                  {{- $names = append $names .name -}}
+                {{- end -}}
+                {{- $names | join "," -}}  
+          volumeMounts:
+            - name: scripts
+              mountPath: {{ $.Values.configMap.uex_health_probe_job_config.scriptMountPath }}
+              subPath: {{ $.Values.configMap.uex_health_probe_job_config.scriptKey }}
+            - name: rabbitmq-data
+              mountPath: /var/lib/rabbitmq   
+          command: ["bash",  {{ $.Values.configMap.uex_health_probe_job_config.scriptMountPath }}]
+      restartPolicy: OnFailure 
+      volumes:
+        - name: scripts
+          configMap:
+            name: {{ $.Values.configMap.uex_health_probe_job_config.name }}
+            items:
+              - key: {{ $.Values.configMap.uex_health_probe_job_config.scriptKey }}
+                path: {{ $.Values.configMap.uex_health_probe_job_config.scriptKey }} 

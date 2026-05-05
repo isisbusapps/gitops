@@ -25,12 +25,7 @@ spec:
             - name: SLEEP_SECONDS
               value: "5" 
             - name: QUEUES
-              value: >-
-                {{- $names := list -}}
-                {{- range .Values.queue -}}
-                  {{- $names = append $names .name -}}
-                {{- end -}}
-                {{- $names | join "," -}}  
+              value: "{{ range $i, $q := .Values.queue }}{{ if $i }},{{ end }}{{ $q.name }}{{ end }}"
           volumeMounts:
             - name: scripts
               mountPath: {{ $.Values.configMap.uex_health_probe_job_config.scriptMountPath }}

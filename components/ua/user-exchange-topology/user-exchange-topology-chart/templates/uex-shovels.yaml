@@ -3,7 +3,9 @@ apiVersion: rabbitmq.com/v1beta1
 kind: Shovel
 metadata:
   name: {{ .name | lower | replace "_" "-"}}-shovel
-  namespace: {{ $.Values.namespace }} 
+  namespace: {{ $.Values.namespace }}
+   annotations:
+    argocd.argoproj.io/sync-wave: "2" 
 spec:
   name: {{ .name }} 
   uriSecret:

@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: message-broker-secret
+  name: message-broker-admin
   namespace: argocd
 spec:
   goTemplate: true
@@ -15,13 +15,13 @@ spec:
         #- name: dev-microk8s-alternative
   template:
     metadata:
-      name: '{{.name}}-message-broker-secret'
+      name: '{{.name}}-message-broker-admin'
       annotations:
         argocd.argoproj.io/sync-wave: "0"        
     spec:
       project: u-a-project
       source:
-        path: components/ua/message-broker-secrets/broker-secret-chart
+        path: components/ua/message-broker-admin/message-broker-admin-chart
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
         helm:

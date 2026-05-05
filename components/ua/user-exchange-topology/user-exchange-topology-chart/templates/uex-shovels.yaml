@@ -4,7 +4,7 @@ kind: Shovel
 metadata:
   name: {{ .name | lower | replace "_" "-"}}-shovel
   namespace: {{ $.Values.namespace }}
-   annotations:
+  annotations:
     argocd.argoproj.io/sync-wave: "2" 
 spec:
   name: {{ .name }} 

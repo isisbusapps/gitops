@@ -3,3 +3,13 @@
 admin_users: 
   name:
     - uex-admin
+
+userSettings:
+  uex-admin:
+    tags:
+    - management
+    - administrator
+    permissions:
+      configure: .*
+      write: .*
+      read: .*   

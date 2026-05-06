@@ -26,6 +26,7 @@ spec:
         targetRevision: main
         helm:
           valueFiles:
+            - ../../message-broker/rmq-message-broker-chart/values.yaml
             - values.yaml
       destination:
         namespace: apps

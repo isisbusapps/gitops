@@ -5,7 +5,15 @@ user_exchange_vhost: uex
 userSettings:
 # User permissions are generated from the permissions section of the merged config. Any user with a name matching the regex "^\w*_admin$" will be given
 # administrator and management tags,all others will have no tags. The configure, write, and read permissions for each user are taken directly from the
-# merged config. 
+# merged config.
+  uex-admin:
+    tags:
+    - management
+    - administrator
+    permissions:
+      configure: .*
+      write: .*
+      read: .*
   era-client:
     tags: []
     permissions:

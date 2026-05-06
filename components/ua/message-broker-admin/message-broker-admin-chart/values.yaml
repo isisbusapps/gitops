@@ -12,4 +12,5 @@ userSettings:
     permissions:
       configure: .*
       write: .*
-      read: .*   
+      read: .* 
+    vhost: uex    

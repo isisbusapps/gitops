@@ -27,7 +27,6 @@ spec:
         helm:
           valueFiles:          
             - ../../message-broker/rmq-message-broker-chart/values.yaml
-            - ../../message-broker-secrets/broker-secret-chart/values.yaml
             - ../../message-broker-admin/message-broker-admin-chart/values.yaml
             - ../../user-exchange-client-secret/user-exchange-client-secret-chart/values-dev.yaml
             #---add topology values.yaml file from here---

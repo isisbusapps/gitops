@@ -21,12 +21,12 @@
   },
   {
     "name": "message",
-    "externalUrl": "https://devexternal-api.facilities.rl.ac.uk/messages",
+    "defaultUrl": "https://devexternal-api.facilities.rl.ac.uk/messages",
     "localUrl": "http://messages-service.apps.svc.cluster.local:30000/q/health"
   },
   {
     "name": "mailchimp-webhooks",
-    "externalUrl": "https://devexternal-api.facilities.rl.ac.uk/mailchimp/status",
+    "defaultUrl": "https://devexternal-api.facilities.rl.ac.uk/mailchimp/status",
     "localUrl": "http://mailchimp-webhooks.apps.svc.cluster.local:3000/status"
   },
   {

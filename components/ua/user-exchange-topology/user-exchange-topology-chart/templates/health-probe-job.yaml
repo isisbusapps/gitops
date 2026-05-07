@@ -30,8 +30,6 @@ spec:
             - name: scripts
               mountPath: {{ $.Values.configMap.uex_health_probe_job_config.scriptMountPath }}
               subPath: {{ $.Values.configMap.uex_health_probe_job_config.scriptKey }}
-            - name: rabbitmq-data
-              mountPath: /var/lib/rabbitmq   
           command: ["bash",  {{ $.Values.configMap.uex_health_probe_job_config.scriptMountPath }}]
       restartPolicy: OnFailure 
       volumes:

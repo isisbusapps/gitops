@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: health-check-service
-          image: ghcr.io/isisbusapps/health-check-service@sha256:509b2beedd39beed23235a95937b7a618770e36e730f31f60ea52ffab2242a6e
+          image: ghcr.io/isisbusapps/health-check-service@sha256:5ae5aa23ab80d8d89642356d69500c6b4db9d98c94536bf31c3fee32104a7299
   selector:
     matchLabels:
       app: health-check-service

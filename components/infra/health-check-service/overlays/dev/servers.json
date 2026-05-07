@@ -1,88 +1,92 @@
 [
   {
     "name": "UOWS-v1",
-    "url": "https://devapi.facilities.rl.ac.uk/users-service/v1/quarkus/health",
+    "defaultUrl": "https://devapi.facilities.rl.ac.uk/users-service/v1/quarkus/health",
     "localUrl": "http://user-office-web-service-rest-v1.apps.svc.cluster.local:8080/users-service/v1/quarkus/health"
   },
   {
     "name": "UOWS-v2",
-    "url": "https://devapi.facilities.rl.ac.uk/users-service/v2/quarkus/health",
+    "defaultUrl": "https://devapi.facilities.rl.ac.uk/users-service/v2/quarkus/health",
     "localUrl": "http://user-office-web-service-rest-v2.apps.svc.cluster.local:8080/quarkus/health"
   },
   {
     "name": "auth-service",
-    "url": "https://devapi.facilities.rl.ac.uk/auth-service/v0/q/health",
+    "defaultUrl": "https://devapi.facilities.rl.ac.uk/auth-service/v0/q/health",
     "localUrl": "http://auth-service.apps.svc.cluster.local:8080/q/health"
   },
   {
     "name": "merge-user-tool",
-    "url": "https://devapi.facilities.rl.ac.uk/users/merges/uptime",
+    "defaultUrl": "https://devapi.facilities.rl.ac.uk/users/merges/uptime",
     "localUrl": "http://merge-user-tool.apps.svc.cluster.local:8080/users/merges/uptime"
   },
   {
     "name": "message",
-    "url": "https://devexternal-api.facilities.rl.ac.uk/messages",
+    "defaultUrl": "https://devapi.facilities.rl.ac.uk/messages",
+    "externalUrl": "https://devexternal-api.facilities.rl.ac.uk/messages",
     "localUrl": "http://messages-service.apps.svc.cluster.local:30000/q/health"
   },
   {
     "name": "mailchimp-webhooks",
-    "url": "https://devexternal-api.facilities.rl.ac.uk/mailchimp/status",
+    "defaultUrl": "https://devapi.facilities.rl.ac.uk/mailchimp/status",
+    "externalUrl": "https://devexternal-api.facilities.rl.ac.uk/mailchimp/status",
     "localUrl": "http://mailchimp-webhooks.apps.svc.cluster.local:3000/status"
   },
   {
     "name": "ua-dev-tools",
-    "url": "https://devoffice.facilities.rl.ac.uk/ua-dev-tools"
+    "defaultUrl": "https://devoffice.facilities.rl.ac.uk/ua-dev-tools"
   },
   {
     "name": "user-establishment-details",
-    "url": "https://devoffice.facilities.rl.ac.uk/UserEstablishmentDetails"
+    "defaultUrl": "https://devoffice.facilities.rl.ac.uk/UserEstablishmentDetails"
   },
   {
     "name": "authenticate-frontend",
-    "url": "https://devusers.facilities.rl.ac.uk/auth"
+    "defaultUrl": "https://defoffice.facilities.rl.ac.uk/auth",
+    "externalUrl": "https://devusers.facilities.rl.ac.uk/auth",
+    "localUrl": "http://authenticate-frontend"
   },
   {
     "name": "Visits",
-    "url": "https://devapi.facilities.rl.ac.uk/visits-service/quarkus/health"
+    "defaultUrl": "https://devapi.facilities.rl.ac.uk/visits-service/quarkus/health"
   },
   {
     "name": "schedule-service",
-    "url": "https://devapis.facilities.rl.ac.uk/ws/ScheduleWebService/health"
+    "defaultUrl": "https://devapis.facilities.rl.ac.uk/ws/ScheduleWebService/health"
   },
   {
     "name": "schedule-web-app",
-    "url": "https://devoffice.facilities.rl.ac.uk/schedule/HealthCheck.ashx"
+    "defaultUrl": "https://devoffice.facilities.rl.ac.uk/schedule/HealthCheck.ashx"
   },
   {
     "name": "era-web-app",
-    "url": "https://devusers.facilities.rl.ac.uk/eras/HealthCheck.ashx"
+    "defaultUrl": "https://devusers.facilities.rl.ac.uk/eras/HealthCheck.ashx"
   },
   {
     "name": "era-web-service",
-    "url": "https://devapis.facilities.rl.ac.uk/eraservice/HealthCheck.ashx"
+    "defaultUrl": "https://devapis.facilities.rl.ac.uk/eraservice/HealthCheck.ashx"
   },
   {
     "name": "era-reports-service",
-    "url": "https://devapis.facilities.rl.ac.uk/erareportservice/HealthCheck.ashx"
+    "defaultUrl": "https://devapis.facilities.rl.ac.uk/erareportservice/HealthCheck.ashx"
   },
   {
     "name": "manage-consumables-backend",
-    "url": "https://devapis.facilities.rl.ac.uk/manage-consumables-service/api/health"
+    "defaultUrl": "https://devapis.facilities.rl.ac.uk/manage-consumables-service/api/health"
   },
   {
     "name": "manage-consumables-frontend",
-    "url": "https://devoffice.facilities.rl.ac.uk/manage-consumables"
+    "defaultUrl": "https://devoffice.facilities.rl.ac.uk/manage-consumables"
   },
   {
     "name": "user-exchange-publisher",
-    "url": "https://devapi.facilities.rl.ac.uk/publisher/q/health"
+    "defaultUrl": "https://devapi.facilities.rl.ac.uk/publisher/q/health"
   },
   {
     "name": "user-exchange",
-    "url": "http://user-exchange.apps.svc.cluster.local:15692/metrics"
+    "defaultUrl": "http://user-exchange.apps.svc.cluster.local:15692/metrics"
   },
   {
     "name": "user-exchange-client-users",
-    "url": "http://user-exchange-client-users-service.apps.svc.cluster.local:8080/q/health"
+    "defaultUrl": "http://user-exchange-client-users-service.apps.svc.cluster.local:8080/q/health"
   }
 ]

@@ -43,7 +43,7 @@
     "name": "authenticate-frontend",
     "defaultUrl": "https://devoffice.facilities.rl.ac.uk/auth",
     "externalUrl": "https://devusers.facilities.rl.ac.uk/auth",
-    "localUrl": "http://authenticate-frontend.apps.svc.cluster.local:3000/auth"
+    "localUrl": "http://authenticate-frontend.apps.svc.cluster.local:3000/auth/read"
   },
   {
     "name": "Visits",

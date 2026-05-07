@@ -21,29 +21,29 @@
   },
   {
     "name": "message",
-    "defaultUrl": "https://devapi.facilities.rl.ac.uk/messages",
     "externalUrl": "https://devexternal-api.facilities.rl.ac.uk/messages",
     "localUrl": "http://messages-service.apps.svc.cluster.local:30000/q/health"
   },
   {
     "name": "mailchimp-webhooks",
-    "defaultUrl": "https://devapi.facilities.rl.ac.uk/mailchimp/status",
     "externalUrl": "https://devexternal-api.facilities.rl.ac.uk/mailchimp/status",
     "localUrl": "http://mailchimp-webhooks.apps.svc.cluster.local:3000/status"
   },
   {
     "name": "ua-dev-tools",
-    "defaultUrl": "https://devoffice.facilities.rl.ac.uk/ua-dev-tools"
+    "defaultUrl": "https://devoffice.facilities.rl.ac.uk/ua-dev-tools",
+    "localUrl": "http://ua-dev-tools.apps.svc.cluster.local:8100/status"
   },
   {
     "name": "user-establishment-details",
-    "defaultUrl": "https://devoffice.facilities.rl.ac.uk/UserEstablishmentDetails"
+    "defaultUrl": "https://devoffice.facilities.rl.ac.uk/UserEstablishmentDetails",
+    "localUrl": "http://user-establishment-details.apps.svc.cluster.local:8080/status"
   },
   {
     "name": "authenticate-frontend",
-    "defaultUrl": "https://defoffice.facilities.rl.ac.uk/auth",
+    "defaultUrl": "https://devoffice.facilities.rl.ac.uk/auth",
     "externalUrl": "https://devusers.facilities.rl.ac.uk/auth",
-    "localUrl": "http://authenticate-frontend"
+    "localUrl": "http://authenticate-frontend.apps.svc.cluster.local:3000/status"
   },
   {
     "name": "Visits",

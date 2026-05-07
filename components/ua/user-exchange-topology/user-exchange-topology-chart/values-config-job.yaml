@@ -5,9 +5,3 @@ configMap:
     name: uex-init-job-config
     scriptKey: uex-init-job.sh
     scriptMountPath: /uex-init-job.sh
-
-# health probe    
-  uex_health_probe_job_config:
-    name: uex-health-probe-job-config
-    scriptKey: uex-health-probe.sh
-    scriptMountPath: /uex-health-probe.sh

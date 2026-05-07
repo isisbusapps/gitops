@@ -32,18 +32,18 @@
   {
     "name": "ua-dev-tools",
     "defaultUrl": "https://devoffice.facilities.rl.ac.uk/ua-dev-tools",
-    "localUrl": "http://ua-dev-tools.apps.svc.cluster.local:8100/status"
+    "localUrl": "http://ua-dev-tools.apps.svc.cluster.local:8100/ua-dev-tools"
   },
   {
     "name": "user-establishment-details",
     "defaultUrl": "https://devoffice.facilities.rl.ac.uk/UserEstablishmentDetails",
-    "localUrl": "http://user-establishment-details.apps.svc.cluster.local:8080/status"
+    "localUrl": "http://user-establishment-details.apps.svc.cluster.local:8080/UserEstablishmentDetails"
   },
   {
     "name": "authenticate-frontend",
     "defaultUrl": "https://devoffice.facilities.rl.ac.uk/auth",
     "externalUrl": "https://devusers.facilities.rl.ac.uk/auth",
-    "localUrl": "http://authenticate-frontend.apps.svc.cluster.local:3000/status"
+    "localUrl": "http://authenticate-frontend.apps.svc.cluster.local:3000/auth"
   },
   {
     "name": "Visits",

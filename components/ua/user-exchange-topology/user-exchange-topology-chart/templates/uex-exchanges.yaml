@@ -12,6 +12,5 @@ spec:
   vhost: {{ $.Values.user_exchange_vhost}}
   rabbitmqClusterReference:
     name: {{ $.Values.rmq_cluster_name }}
-  deletionPolicy: retain     
 ---
 {{ end }}    

@@ -5,7 +5,7 @@ metadata:
   name: {{ .name | lower | replace "_" "-"}}-shovel
   namespace: {{ $.Values.namespace }}
   annotations:
-    argocd.argoproj.io/sync-wave: "2" 
+    argocd.argoproj.io/sync-wave: "1" 
 spec:
   name: {{ .name }} 
   uriSecret:

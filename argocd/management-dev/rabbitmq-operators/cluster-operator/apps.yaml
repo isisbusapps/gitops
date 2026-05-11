@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: rabbitmq-topology-operator
+  name: rabbitmq-cluster-operator
   namespace: argocd
 spec:
   goTemplate: true
@@ -15,11 +15,11 @@ spec:
         #- name: dev-microk8s-alternative
   template:
     metadata:
-      name: rabbitmq-topology-operator     
+      name: rabbitmq-cluster-operator      
     spec:
-      project: u-a-project
+      project: infrastructure-project
       source:
-        path: components/infra/rabbitmq-operators/operators/topology-operator
+        path: components/infra/rabbitmq-operators/operators/cluster-operator
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:
@@ -29,4 +29,4 @@ spec:
         automated: 
           selfHeal: true
         syncOptions:
-          - ServerSideApply=true   
+          - ServerSideApply=true  

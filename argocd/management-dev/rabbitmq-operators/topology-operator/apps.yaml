@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: cert-manager
+  name: rabbitmq-topology-operator
   namespace: argocd
 spec:
   goTemplate: true
@@ -15,19 +15,18 @@ spec:
         #- name: dev-microk8s-alternative
   template:
     metadata:
-      name: cert-manager      
+      name: rabbitmq-topology-operator     
     spec:
-      project: u-a-project
+      project: infrastructure-project
       source:
-        path: components/infra/cert-manager
+        path: components/infra/rabbitmq-operators/operators/topology-operator
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:
-        namespace: cert-manager
+        namespace: rabbitmq-system
         name: '{{.name}}'
       syncPolicy:
         automated: 
           selfHeal: true
         syncOptions:
-          - CreateNamespace=true
-          - ServerSideApply=true  
+          - ServerSideApply=true   

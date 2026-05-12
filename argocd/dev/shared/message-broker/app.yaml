@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: message-broker-admin
+  name: rmq-message-broker
   namespace: argocd
 spec:
   goTemplate: true
@@ -15,18 +15,17 @@ spec:
         #- name: dev-microk8s-alternative
   template:
     metadata:
-      name: '{{.name}}-message-broker-admin'
+      name: '{{.name}}-rmq-message-broker'
       annotations:
         argocd.argoproj.io/sync-wave: "0"        
     spec:
-      project: u-a-project
+      project: infrastructure-project
       source:
-        path: components/ua/message-broker-admin/message-broker-admin-chart
+        path: components/shared/message-broker/rmq-message-broker-chart
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
         helm:
           valueFiles:
-            - ../../message-broker/rmq-message-broker-chart/values.yaml
             - values.yaml
       destination:
         namespace: apps
@@ -34,3 +33,4 @@ spec:
       syncPolicy:
         automated: 
           selfHeal: true
+          enabled: true

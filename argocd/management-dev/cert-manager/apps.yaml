@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: rmq-message-broker
+  name: cert-manager
   namespace: argocd
 spec:
   goTemplate: true
@@ -15,22 +15,19 @@ spec:
         #- name: dev-microk8s-alternative
   template:
     metadata:
-      name: '{{.name}}-rmq-message-broker'
-      annotations:
-        argocd.argoproj.io/sync-wave: "0"        
+      name: cert-manager      
     spec:
-      project: u-a-project
+      project: infrastructure-project
       source:
-        path: components/ua/message-broker/rmq-message-broker-chart
+        path: components/infra/cert-manager
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
-        helm:
-          valueFiles:
-            - values.yaml
       destination:
-        namespace: apps
+        namespace: cert-manager
         name: '{{.name}}'
       syncPolicy:
         automated: 
           selfHeal: true
-          enabled: true
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true  

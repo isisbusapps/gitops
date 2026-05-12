@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: rabbitmq-cluster-operator
+  name: message-broker-admin
   namespace: argocd
 spec:
   goTemplate: true
@@ -15,18 +15,22 @@ spec:
         #- name: dev-microk8s-alternative
   template:
     metadata:
-      name: rabbitmq-cluster-operator      
+      name: '{{.name}}-message-broker-admin'
+      annotations:
+        argocd.argoproj.io/sync-wave: "0"        
     spec:
-      project: u-a-project
+      project: infrastructure-project
       source:
-        path: components/infra/rabbitmq-operators/operators/cluster-operator
+        path: components/shared/message-broker-admin/message-broker-admin-chart
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
+        helm:
+          valueFiles:
+            - ../../message-broker/rmq-message-broker-chart/values.yaml
+            - values.yaml
       destination:
-        namespace: rabbitmq-system
+        namespace: apps
         name: '{{.name}}'
       syncPolicy:
         automated: 
           selfHeal: true
-        syncOptions:
-          - ServerSideApply=true  

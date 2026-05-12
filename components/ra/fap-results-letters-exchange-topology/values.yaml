@@ -19,10 +19,10 @@ exchange:
    type: fanout
 
 queue:
- - name: FAP-Results-Letters
+ - name: fap-results-letters
 
 binding:
-- name: FAP-Results-Letters
+- name: fap-results-letters
   source: fap-results-letters.fanout
-  destination: FAP-Results-Letters
+  destination: fap-results-letters
   destination_type: queue

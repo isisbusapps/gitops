@@ -1,6 +1,4 @@
 
-rmq_cluster_name: rmq-message-broker
-namespace: apps
 uop_exchange_vhost: proposals
 
 users:

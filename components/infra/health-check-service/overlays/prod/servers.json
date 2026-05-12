@@ -1,72 +1,73 @@
 [
   {
     "name": "UOWS-v1",
-    "url": "https://api.facilities.rl.ac.uk/users-service/v1/quarkus/health",
+    "defaultUrl": "https://api.facilities.rl.ac.uk/users-service/v1/quarkus/health",
      "localUrl": "http://user-office-web-service-rest-v1.apps.svc.cluster.local:8080/users-service/v1/quarkus/health"
   },
   {
     "name": "UOWS-v2",
-    "url": "https://api.facilities.rl.ac.uk/users-service/v2/quarkus/health",
+    "defaultUrl": "https://api.facilities.rl.ac.uk/users-service/v2/quarkus/health",
     "localUrl": "http://user-office-web-service-rest-v2.apps.svc.cluster.local:8080/quarkus/health"
   },
   {
     "name": "auth-service",
-    "url": "https://api.facilities.rl.ac.uk/auth-service/v0/q/health",
+    "defaultUrl": "https://api.facilities.rl.ac.uk/auth-service/v0/q/health",
     "localUrl": "http://auth-service.apps.svc.cluster.local:8080/q/health"
   },
   {
     "name": "merge-user-tool",
-    "url": "https://api.facilities.rl.ac.uk/users/merges/uptime",
+    "defaultUrl": "https://api.facilities.rl.ac.uk/users/merges/uptime",
     "localUrl": "http://merge-user-tool.apps.svc.cluster.local:8080/users/merges/uptime"
   },
   {
     "name": "message",
-    "url": "https://external-api.facilities.rl.ac.uk/messages",
+    "defaultUrl": "https://external-api.facilities.rl.ac.uk/messages",
     "localUrl": "http://messages-service.apps.svc.cluster.local:30000/q/health"
   },
   {
     "name": "mailchimp-webhooks",
-    "url": "https://external-api.facilities.rl.ac.uk/mailchimp/status",
+    "defaultUrl": "https://external-api.facilities.rl.ac.uk/mailchimp/status",
     "localUrl": "http://mailchimp-webhooks.apps.svc.cluster.local:3000/status"
   },
   {
     "name": "ua-dev-tools",
-    "url": "https://office.facilities.rl.ac.uk/ua-dev-tools"
+    "defaultUrl": "https://office.facilities.rl.ac.uk/ua-dev-tools"
   },
   {
     "name": "user-establishment-details",
-    "url": "https://office.facilities.rl.ac.uk/UserEstablishmentDetails"
+    "defaultUrl": "https://office.facilities.rl.ac.uk/UserEstablishmentDetails"
+  },
+  {
+    "name": "authenticate-frontend",
+    "defaultUrl": "https://office.facilities.rl.ac.uk/auth",
+    "externalUrl": "https://users.facilities.rl.ac.uk/auth"
   },
   {
     "name": "schedule-service",
-    "url": "https://api.facilities.rl.ac.uk/ws/ScheduleWebService/health"
+    "defaultUrl": "https://api.facilities.rl.ac.uk/ws/ScheduleWebService/health"
   },
   {
     "name": "schedule-web-app",
-    "url": "https://office.facilities.rl.ac.uk/schedule/HealthCheck.ashx"
+    "defaultUrl": "https://office.facilities.rl.ac.uk/schedule/HealthCheck.ashx"
   },
   {
     "name": "era-web-app",
-    "url": "https://users.facilities.rl.ac.uk/eras/HealthCheck.ashx"
+    "defaultUrl": "https://users.facilities.rl.ac.uk/eras/HealthCheck.ashx"
   },
   {
     "name": "era-web-service",
-    "url": "https://api.facilities.rl.ac.uk/eraservice/HealthCheck.ashx"
+    "defaultUrl": "https://api.facilities.rl.ac.uk/eraservice/HealthCheck.ashx"
   },
   {
     "name": "era-reports-service",
-    "url": "https://api.facilities.rl.ac.uk/erareportservice/HealthCheck.ashx"
+    "defaultUrl": "https://api.facilities.rl.ac.uk/erareportservice/HealthCheck.ashx"
   },
   {
     "name": "manage-consumables-backend",
-    "url": "https://api.facilities.rl.ac.uk/manage-consumables-service/api/health"
+    "defaultUrl": "https://api.facilities.rl.ac.uk/manage-consumables-service/api/health"
   },
   {
     "name": "manage-consumables-frontend",
-    "url": "https://office.facilities.rl.ac.uk/manage-consumables"
-  },
-  {
-    "name": "TEST-DO_NOT_MERGE",
-    "url": "TEST TEST"
+    "defaultUrl": "https://office.facilities.rl.ac.uk/manage-consumables"
   }
 ]

@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: management-prod-rabbitmq-topology-operator
+  namespace: argocd
+spec:
+  project: infrastructure-project
+  source:
+    path: components/infra/rabbitmq-operators/operators/topology-operator
+    repoURL: 'https://github.com/isisbusapps/gitops'
+    targetRevision: main
+  destination:
+    namespace: rabbitmq-system
+    server: https://kubernetes.default.svc
+    syncPolicy:
+      automated: 
+        selfHeal: true
+      syncOptions:       
+        - ServerSideApply=true

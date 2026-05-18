@@ -1,0 +1,54 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: 
+  namespace: argocd
+spec:
+  project: infrastructure-project
+  source:
+    path: components/infra/cert-manager
+    repoURL: 'https://github.com/isisbusapps/gitops'
+    targetRevision: main
+  destination:
+    namespace: cert-manager
+    server: https://kubernetes.default.svc
+    syncPolicy:
+      automated: 
+        selfHeal: true
+      syncOptions:
+        - CreateNamespace=true
+        - ServerSideApply=true  
+
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cert-manager
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+        # Names of clusters to deploy the app to
+        - name: prod-v4
+        # Uncomment if you want to deploy to dev-microk8s-alternative
+        #- name: dev-microk8s-alternative
+  template:
+    metadata:
+      name: cert-manager      
+    spec:
+      project: infrastructure-project
+      source:
+        path: components/infra/cert-manager
+        repoURL: 'https://github.com/isisbusapps/gitops'
+        targetRevision: main
+      destination:
+        namespace: cert-manager
+        name: '{{.name}}'
+      syncPolicy:
+        automated: 
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true          

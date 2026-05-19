@@ -3,3 +3,5 @@
 admin_users: 
   name:
     - uex-admin
+
+env: prod

@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: user-exchange-client-secret
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+        # Names of clusters to deploy the app to
+        - name: prod-v4
+        # Uncomment if you want to deploy to prod-fallback
+        #- name: prod-fallback
+  template:
+    metadata:
+      name: '{{.name}}-user-exchange-client-secret'
+      annotations:
+        argocd.argoproj.io/sync-wave: "0"        
+    spec:
+      project: u-a-project
+      source:
+        path: components/ua/user-exchange-client-secret/user-exchange-client-secret-chart
+        repoURL: 'https://github.com/isisbusapps/gitops'
+        targetRevision: main
+        helm:
+          valueFiles:
+            - values-prod.yaml
+      destination:
+        namespace: apps
+        name: '{{.name}}'
+      syncPolicy:
+        automated: 
+          selfHeal: true

@@ -1,0 +1,19 @@
+apiVersion: v1
+data:
+  user-exchange-client-config-prop-clf-all.yaml: |
+    exchangeConfig:
+      clientName: prop-clf-all-client
+      pendingQueue: prop-clf-all_pending
+      holdingQueue: prop-clf-all_holding
+      failedQueue: prop-clf-all_failed
+      successQueue: prop-clf-all_successful
+      failReasonsHeader: fail-reasons
+      retryCountHeader: retry-count
+      maxRetries: 5
+    databaseActions:
+      merge:
+      - sqlStatement: UPDATE EXPERIMENTER SET USER_ID = TO_NUMBER(:newUser) WHERE USER_ID = TO_NUMBER(:oldUser)
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: user-exchange-client-config-prop-clf-all

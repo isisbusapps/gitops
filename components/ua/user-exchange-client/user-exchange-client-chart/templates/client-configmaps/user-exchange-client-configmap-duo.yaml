@@ -1,0 +1,19 @@
+apiVersion: v1
+data:
+  user-exchange-client-config-duo.yaml: |
+    exchangeConfig:
+      clientName: duo-client
+      pendingQueue: duo_pending
+      holdingQueue: duo_holding
+      failedQueue: duo_failed
+      successQueue: duo_successful
+      failReasonsHeader: fail-reasons
+      retryCountHeader: retry-count
+      maxRetries: 5
+    databaseActions:
+      merge:
+      - sqlStatement: CALL REPLACE_OLD_USER_ID_WITH_NEW(:oldUser, :newUser)
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: user-exchange-client-config-duo

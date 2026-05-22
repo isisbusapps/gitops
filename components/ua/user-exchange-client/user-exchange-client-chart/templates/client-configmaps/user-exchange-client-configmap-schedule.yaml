@@ -32,4 +32,5 @@ data:
       - sqlStatement: CALL update_user_number(:oldUser, :newUser)
 kind: ConfigMap
 metadata:
+  creationTimestamp: null
   name: user-exchange-client-config-schedule

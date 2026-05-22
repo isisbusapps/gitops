@@ -1,0 +1,20 @@
+apiVersion: v1
+data:
+  user-exchange-client-config-xpress.yaml: |
+    exchangeConfig:
+      clientName: xpress-client
+      pendingQueue: xpress_pending
+      holdingQueue: xpress_holding
+      failedQueue: xpress_failed
+      successQueue: xpress_successful
+      failReasonsHeader: fail-reasons
+      retryCountHeader: retry-count
+      maxRetries: 5
+    databaseActions:
+      merge:
+      - sqlStatement: UPDATE PARTY_PROPOSAL SET PARTY_ID = TO_NUMBER(:newUser) WHERE PARTY_ID = TO_NUMBER(:oldUser)
+      - sqlStatement: UPDATE SAMPLE_CAN_PARTY SET PARTY_ID = TO_NUMBER(:newUser) WHERE PARTY_ID = TO_NUMBER(:oldUser)
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: user-exchange-client-config-xpress

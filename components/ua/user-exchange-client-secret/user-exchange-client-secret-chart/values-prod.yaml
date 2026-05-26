@@ -13,4 +13,4 @@ client_users:
     - visits
     - xpress
 
-env: dev    
+env: prod    

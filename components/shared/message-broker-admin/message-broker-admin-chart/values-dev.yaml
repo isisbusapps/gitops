@@ -1,0 +1,7 @@
+#folder name in vault
+# This values.yaml is for Admin user of RMQ exchange
+admin_users: 
+  name:
+    - uex-admin
+
+env: dev

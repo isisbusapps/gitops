@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: message-broker-admin
+  name: user-exchange-client-secret
   namespace: argocd
 spec:
   goTemplate: true
@@ -10,24 +10,23 @@ spec:
   - list:
       elements:
         # Names of clusters to deploy the app to
-        - name: dev-v3
-        # Uncomment if you want to deploy to dev-microk8s-alternative
-        #- name: dev-microk8s-alternative
+        - name: prod-v4
+        # Uncomment if you want to deploy to prod-fallback
+        #- name: prod-fallback
   template:
     metadata:
-      name: '{{.name}}-message-broker-admin'
+      name: '{{.name}}-user-exchange-client-secret'
       annotations:
         argocd.argoproj.io/sync-wave: "0"        
     spec:
-      project: infrastructure-project
+      project: u-a-project
       source:
-        path: components/shared/message-broker-admin/message-broker-admin-chart
+        path: components/ua/user-exchange-client-secret/user-exchange-client-secret-chart
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
         helm:
           valueFiles:
-            - ../../message-broker/rmq-message-broker-chart/values.yaml
-            - values-dev.yaml
+            - values-prod.yaml
       destination:
         namespace: apps
         name: '{{.name}}'

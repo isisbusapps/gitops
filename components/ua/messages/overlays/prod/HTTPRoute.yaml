@@ -1,0 +1,19 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: messages-service
+  namespace: apps
+spec:
+  parentRefs:
+    - name: envoy-gateway
+      namespace: envoy-gateway-system
+  hostnames:
+    - "*.facilities.rl.ac.uk"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /messages
+      backendRefs:
+        - name: messages-service
+          port: 30000

@@ -8,6 +8,7 @@ namespace: apps
 
 resources:
   - config.yaml
+  - HTTPRoute.yaml
 
 patches:
 - path: patch-image.yaml

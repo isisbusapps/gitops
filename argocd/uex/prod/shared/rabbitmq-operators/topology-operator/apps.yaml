@@ -16,7 +16,7 @@ spec:
   template:
     metadata:
       name: rabbitmq-topology-operator
-      nnotations:
+      annotations:
         argocd.argoproj.io/sync-wave: "1"     
     spec:
       project: infrastructure-project

@@ -16,7 +16,7 @@ spec:
   template:
     metadata:
       name: rabbitmq-cluster-operator
-      nnotations:
+      annotations:
         argocd.argoproj.io/sync-wave: "0"      
     spec:
       project: infrastructure-project

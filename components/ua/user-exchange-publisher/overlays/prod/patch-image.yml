@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-exchange-publisher
+spec:
+  template:
+    spec:
+      containers:
+        - name: user-exchange-publisher
+          image: ghcr.io/isisbusapps/merge-user-tool/user-exchange-publisher@sha256:22746451e74afe5cbdfac6033fafcddbe40913ff2b870faa52df3e3a643be312
+      initContainers:
+        - name: setup-h2-permissions
+          image: ghcr.io/isisbusapps/user-exchange-publisher@sha256:a3060d0166fcc9d71bafd8db44e6c27c4da32e637143f3d3abf02a2c06f3f502

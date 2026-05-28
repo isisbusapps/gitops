@@ -1,0 +1,25 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: user-exchange-publisher
+spec:
+  parentRefs:
+    - name: envoy-gateway
+      namespace: envoy-gateway-system
+  hostnames:
+    - "*.facilities.rl.ac.uk"
+    - "*.developers.facilities.rl.ac.uk"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /publisher
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: user-exchange-publisher
+          port: 8080

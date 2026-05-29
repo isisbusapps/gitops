@@ -39,17 +39,7 @@
     ]
   },
   {
-    "service": "visits-alpha",
-    "extraParams": [
-      {
-        "name": "login",
-        "value": "__login__"
-      },
-      {
-        "name": "userSession",
-        "value": "__userSession__"
-      }
-    ]
+    "service": "visits-alpha"
   },
   {
     "service": "experimentalreports",

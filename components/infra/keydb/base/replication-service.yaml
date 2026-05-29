@@ -1,0 +1,73 @@
+# All three headless services are deployed to every cluster so CoreDNS can
+# resolve peer hostnames locally. Cilium syncs EndpointSlices cross-cluster
+# so the remote pod IP is returned even when there are no local endpoints.
+# Prerequisite: Cilium >= v1.19.3 with enableEndpointSliceSynchronization=true.
+# Run: bash components/infra/keydb/enable-endpoint-slice-sync.sh
+apiVersion: v1
+kind: Service
+metadata:
+  name: keydb-isis-vms
+  namespace: apps
+  labels:
+    app: keydb
+    cluster: isis-vms
+  annotations:
+    service.cilium.io/global: "true"
+    service.cilium.io/shared: "true"
+    service.cilium.io/global-sync-endpoint-slices: "true"
+spec:
+  clusterIP: None
+  ports:
+  - port: 6379
+    targetPort: 6379
+    name: keydb
+    protocol: TCP
+  selector:
+    app: keydb
+    cluster: isis-vms
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: keydb-proxmox-vms
+  namespace: apps
+  labels:
+    app: keydb
+    cluster: proxmox-vms
+  annotations:
+    service.cilium.io/global: "true"
+    service.cilium.io/shared: "true"
+    service.cilium.io/global-sync-endpoint-slices: "true"
+spec:
+  clusterIP: None
+  ports:
+  - port: 6379
+    targetPort: 6379
+    name: keydb
+    protocol: TCP
+  selector:
+    app: keydb
+    cluster: proxmox-vms
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: keydb-stfc-cloud
+  namespace: apps
+  labels:
+    app: keydb
+    cluster: stfc-cloud
+  annotations:
+    service.cilium.io/global: "true"
+    service.cilium.io/shared: "true"
+    service.cilium.io/global-sync-endpoint-slices: "true"
+spec:
+  clusterIP: None
+  ports:
+  - port: 6379
+    targetPort: 6379
+    name: keydb
+    protocol: TCP
+  selector:
+    app: keydb
+    cluster: stfc-cloud

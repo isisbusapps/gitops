@@ -1,0 +1,102 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keydb-config
+  labels:
+    app: keydb
+    instance: keydb
+data:
+  keydb.conf: |
+    ################################## NETWORK #####################################
+
+    bind 0.0.0.0
+    port 6379
+    protected-mode no
+    tcp-backlog 511
+    timeout 0
+    tcp-keepalive 300
+
+    ################################# GENERAL #####################################
+
+    daemonize no
+    supervised no
+    loglevel notice
+    logfile ""
+    databases 16
+
+    ################################ SNAPSHOTTING (RDB) ###########################
+
+    save 900 1
+    save 300 10
+    save 60 10000
+    stop-writes-on-bgsave-error yes
+    rdbcompression yes
+    rdbchecksum yes
+    dbfilename dump.rdb
+    dir /data
+
+    ################################# REPLICATION ##################################
+
+    # replicaof targets injected via --replicaof deployment args to avoid
+    # circular startup dependency during initial cluster formation
+    multi-master yes
+    active-replica yes
+    replica-read-only no
+    replica-serve-stale-data yes
+    replica-priority 100
+    repl-diskless-sync no
+    repl-backlog-size 64mb
+    repl-backlog-ttl 3600
+    repl-ping-replica-period 10
+    repl-timeout 60
+    repl-disable-tcp-nodelay no
+
+    ################################### CLIENTS ####################################
+
+    maxclients 10000
+
+    ############################## MEMORY MANAGEMENT ##############################
+
+    maxmemory 1gb
+    maxmemory-policy allkeys-lru
+    maxmemory-samples 5
+    replica-ignore-maxmemory yes
+
+    ############################# LAZY FREEING ####################################
+
+    lazyfree-lazy-eviction yes
+    lazyfree-lazy-expire yes
+    lazyfree-lazy-server-del yes
+    replica-lazy-flush yes
+
+    ############################## APPEND ONLY MODE ###############################
+
+    appendonly yes
+    appendfilename "appendonly.aof"
+    appendfsync everysec
+    no-appendfsync-on-rewrite no
+    auto-aof-rewrite-percentage 100
+    auto-aof-rewrite-min-size 64mb
+    aof-load-truncated yes
+    aof-use-rdb-preamble yes
+
+    ################################ KEYDB CLUSTER ################################
+
+    cluster-enabled no
+
+    ################################## SLOW LOG ###################################
+
+    slowlog-log-slower-than 10000
+    slowlog-max-len 128
+
+    ############################# LATENCY MONITOR #################################
+
+    latency-monitor-threshold 100
+
+    ################################ ADVANCED #####################################
+
+    activerehashing yes
+    hz 10
+    dynamic-hz yes
+    aof-rewrite-incremental-fsync yes
+    rdb-save-incremental-fsync yes

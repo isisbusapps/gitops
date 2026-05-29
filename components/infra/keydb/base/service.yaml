@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: keydb
+  namespace: apps
+  labels:
+    app: keydb
+    instance: keydb
+  annotations:
+    service.cilium.io/global: "false"
+    service.cilium.io/shared: "false"
+    io.cilium/service-affinity: "local"
+spec:
+  type: ClusterIP
+  ports:
+  - port: 6379
+    targetPort: 6379
+    name: keydb
+    protocol: TCP
+  - port: 9121
+    targetPort: 9121
+    name: metrics
+    protocol: TCP
+  selector:
+    app: keydb
+    instance: keydb

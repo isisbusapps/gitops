@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keydb
+  labels:
+    cluster: proxmox-vms
+spec:
+  selector:
+    matchLabels:
+      app: keydb
+      instance: keydb
+  template:
+    metadata:
+      labels:
+        cluster: proxmox-vms
+    spec:
+      containers:
+      - name: keydb
+        command:
+        - keydb-server
+        - /etc/keydb/keydb.conf
+        - --requirepass
+        - $(KEYDB_PASSWORD)
+        - --masterauth
+        - $(KEYDB_PASSWORD)
+        - --replicaof
+        - keydb-isis-vms.apps.svc.cluster.local
+        - "6379"
+        - --replicaof
+        - keydb-stfc-cloud.apps.svc.cluster.local
+        - "6379"

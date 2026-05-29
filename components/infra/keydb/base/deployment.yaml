@@ -1,0 +1,128 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keydb
+  labels:
+    app: keydb
+    instance: keydb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keydb
+      instance: keydb
+  template:
+    metadata:
+      labels:
+        app: keydb
+        instance: keydb
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9121"
+        prometheus.io/path: "/metrics"
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers:
+      - name: keydb
+        image: eqalpha/keydb:x86_64_v6.3.4
+        ports:
+        - containerPort: 6379
+          name: keydb
+        command:
+        - keydb-server
+        - /etc/keydb/keydb.conf
+        - --requirepass
+        - $(KEYDB_PASSWORD)
+        - --masterauth
+        - $(KEYDB_PASSWORD)
+        volumeMounts:
+        - name: config
+          mountPath: /etc/keydb
+        - name: data
+          mountPath: /data
+        env:
+        - name: KEYDB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: keydb-secret
+              key: password
+              optional: true
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "2000m"
+        startupProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - keydb-cli -a $KEYDB_PASSWORD --no-auth-warning ping
+          failureThreshold: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - keydb-cli -a $KEYDB_PASSWORD --no-auth-warning ping
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - keydb-cli -a $KEYDB_PASSWORD --no-auth-warning ping
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+
+      - name: metrics
+        image: oliver006/redis_exporter:v1.62.0
+        ports:
+        - containerPort: 9121
+          name: metrics
+        env:
+        - name: REDIS_ADDR
+          value: "redis://localhost:6379"
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: keydb-secret
+              key: password
+              optional: true
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "10m"
+          limits:
+            memory: "64Mi"
+            cpu: "50m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 9121
+          initialDelaySeconds: 10
+          periodSeconds: 15
+          timeoutSeconds: 5
+
+      volumes:
+      - name: config
+        configMap:
+          name: keydb-config
+      - name: data
+        emptyDir: {}
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app: keydb
+              topologyKey: kubernetes.io/hostname

@@ -1,4 +1,4 @@
-image_ref: ghcr.io/isisbusapps/merge-user-tool/user-exchange-client@sha256:9c8befca98216570786cd8301995f1fdabae746e5481bbfa4a76599eeefa87e0
+image_ref: ghcr.io/isisbusapps/merge-user-tool/user-exchange-client@sha256:97dd505c4739197b53dcfe016aede76027ba38b3fb0483014553fe9460cb2421
 clients:
   - name: users
     cm_name: user-exchange-client-config-users

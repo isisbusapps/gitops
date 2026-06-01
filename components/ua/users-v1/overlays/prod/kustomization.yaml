@@ -9,6 +9,7 @@ namespace: apps
 resources:
   - config.yaml
   - static-secret.yaml
+  - HTTPRoute.yaml
 
 patches:
   - path: patch-image.yaml

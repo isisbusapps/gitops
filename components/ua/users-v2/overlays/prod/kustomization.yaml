@@ -10,6 +10,7 @@ resources:
   - config.yaml
   - static-secret.yaml
   - liquibase-config.yaml
+  - HTTPRoute.yaml
 
 patches:
   - path: patch-image.yaml

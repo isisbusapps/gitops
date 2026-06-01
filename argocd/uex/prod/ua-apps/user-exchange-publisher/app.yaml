@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: cert-manager
+  name: user-exchange-publisher
   namespace: argocd
 spec:
   goTemplate: true
@@ -15,19 +15,18 @@ spec:
         #- name: prod-fallback
   template:
     metadata:
-      name: cert-manager      
+      name: '{{.name}}-user-exchange-publisher'
+      annotations:
+        argocd.argoproj.io/sync-wave: "5"        
     spec:
-      project: infrastructure-project
+      project: u-a-project
       source:
-        path: components/infra/cert-manager
+        path: components/ua/user-exchange-publisher/overlays/prod
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:
-        namespace: cert-manager
+        namespace: apps
         name: '{{.name}}'
       syncPolicy:
         automated: 
           selfHeal: true
-        syncOptions:
-          - CreateNamespace=true
-          - ServerSideApply=true          

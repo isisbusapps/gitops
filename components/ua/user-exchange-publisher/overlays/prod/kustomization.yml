@@ -11,4 +11,4 @@ resources:
   - HTTPRoute.yaml
 
 patches:
-- path: patch-image.yaml
+  - path: patch-image.yml 

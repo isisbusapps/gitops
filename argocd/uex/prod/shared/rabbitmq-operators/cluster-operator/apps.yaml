@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: rabbitmq-topology-operator
+  name: rabbitmq-cluster-operator
   namespace: argocd
 spec:
   goTemplate: true
@@ -15,11 +15,13 @@ spec:
         #- name: prod-fallback
   template:
     metadata:
-      name: rabbitmq-topology-operator     
+      name: rabbitmq-cluster-operator
+      annotations:
+        argocd.argoproj.io/sync-wave: "0"      
     spec:
       project: infrastructure-project
       source:
-        path: components/infra/rabbitmq-operators/operators/topology-operator
+        path: components/infra/rabbitmq-operators/operators/cluster-operator
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:
@@ -29,4 +31,4 @@ spec:
         automated: 
           selfHeal: true
         syncOptions:
-          - ServerSideApply=true   
+          - ServerSideApply=true  

@@ -79,8 +79,8 @@
     "defaultUrl": "https://devapi.facilities.rl.ac.uk/publisher/q/health"
   },
   {
-    "name": "user-exchange",
-    "defaultUrl": "http://user-exchange.apps.svc.cluster.local:15692/metrics"
+    "name": "rmq-message-broker",
+    "defaultUrl": "http://rmq-message-broker.apps.svc.cluster.local:15692/metrics"
   },
   {
     "name": "user-exchange-client-users",

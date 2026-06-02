@@ -3,6 +3,7 @@ data:
   user-exchange-client-config-iops-v4.yaml: |
     exchangeConfig:
       clientName: iops-v4-client
+      republishExchange: iops-v4_direct
       pendingQueue: iops-v4_pending
       holdingQueue: iops-v4_holding
       failedQueue: iops-v4_failed

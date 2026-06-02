@@ -3,6 +3,7 @@ data:
   user-exchange-client-config-visits.yaml: |
     exchangeConfig:
       clientName: visits-client
+      republishExchange: visits_direct
       pendingQueue: visits_pending
       holdingQueue: visits_holding
       failedQueue: visits_failed

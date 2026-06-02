@@ -3,6 +3,7 @@ data:
   user-exchange-client-config-schedule.yaml: |
     exchangeConfig:
       clientName: schedule-client
+      republishExchange: schedule_direct
       pendingQueue: schedule_pending
       holdingQueue: schedule_holding
       failedQueue: schedule_failed

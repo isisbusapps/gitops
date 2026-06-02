@@ -3,6 +3,7 @@ data:
   user-exchange-client-config-xpress.yaml: |
     exchangeConfig:
       clientName: xpress-client
+      republishExchange: xpress_direct
       pendingQueue: xpress_pending
       holdingQueue: xpress_holding
       failedQueue: xpress_failed

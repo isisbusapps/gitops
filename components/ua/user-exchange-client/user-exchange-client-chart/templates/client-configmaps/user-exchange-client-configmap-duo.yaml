@@ -3,6 +3,7 @@ data:
   user-exchange-client-config-duo.yaml: |
     exchangeConfig:
       clientName: duo-client
+      republishExchange: duo_direct
       pendingQueue: duo_pending
       holdingQueue: duo_holding
       failedQueue: duo_failed

@@ -3,6 +3,7 @@ data:
   user-exchange-client-config-prop-clf-all.yaml: |
     exchangeConfig:
       clientName: prop-clf-all-client
+      republishExchange: prop-clf-all_direct
       pendingQueue: prop-clf-all_pending
       holdingQueue: prop-clf-all_holding
       failedQueue: prop-clf-all_failed

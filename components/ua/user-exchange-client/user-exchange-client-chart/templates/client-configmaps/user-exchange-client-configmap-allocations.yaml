@@ -3,6 +3,7 @@ data:
   user-exchange-client-config-allocations.yaml: |
     exchangeConfig:
       clientName: allocations-client
+      republishExchange: allocations_direct
       pendingQueue: allocations_pending
       holdingQueue: allocations_holding
       failedQueue: allocations_failed

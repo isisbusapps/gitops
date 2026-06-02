@@ -3,6 +3,7 @@ data:
   user-exchange-client-config-safety-test.yaml: |
     exchangeConfig:
       clientName: safety-test-client
+      republishExchange: safety-test_direct
       pendingQueue: safety-test_pending
       holdingQueue: safety-test_holding
       failedQueue: safety-test_failed

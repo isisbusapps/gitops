@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proposal-factory
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: proposal-factory
+  template:
+    metadata:
+      annotations:
+        co.elastic.logs/processors.add_fields.target: ""
+        co.elastic.logs/processors.add_fields.fields.application.name: "proposal-factory"
+        co.elastic.logs/processors.add_fields.fields.application.domain: "proposal"
+        co.elastic.logs/processors.add_fields.fields.application.tier: "service"
+        co.elastic.logs/processors.add_fields.fields.application.language: "javascript"
+    spec:
+      containers:
+        - name: proposal-factory
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4500
+          env:
+            - name: DATABASE_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: proposal-db-connection-string
+                  key: connection-string
+            - name: HEADER_LOGO_PATH
+              value: /config/images/STFC-Logo.png
+            - name: DEPENDENCY_CONFIG
+              value: stfc
+            - name: OTEL_SERVICE_NAME
+              value: proposal-factory
+            - name: REQUEST_BODY_LIMIT
+              value: "500mb"
+          resources:
+            limits:
+              cpu: "2"
+              ephemeral-storage: 2Gi
+              memory: 3Gi
+            requests:
+              cpu: 500m
+              ephemeral-storage: 1Gi
+              memory: 1Gi
+          volumeMounts:
+            - name: images
+              mountPath: "/config/images"
+              readOnly: true
+      volumes:
+        - name: images
+          configMap:
+            name: proposal-images

@@ -3,3 +3,7 @@ kind: Kustomization
 
 resources:
   - ../../base
+
+patches:
+  - path: patch-gateway-ip.yaml
+  - path: patch-envoy-proxy-ip.yaml

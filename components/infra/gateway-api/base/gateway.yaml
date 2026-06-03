@@ -1,0 +1,48 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: envoy-gateway
+  namespace: envoy-gateway-system
+  annotations:
+    gateway.envoyproxy.io/http-to-https-redirect: "true"
+spec:
+  gatewayClassName: envoy-gateway
+  listeners:
+    # HTTP listener — redirects all traffic to HTTPS
+    - name: http
+      protocol: HTTP
+      port: 80
+      hostname: "*.rl.ac.uk" # Broad enough to cover both apps
+      allowedRoutes:
+        namespaces:
+          from: Same
+
+    # HTTPS listener for *.facilities.rl.ac.uk
+    - name: https-facilities
+      protocol: HTTPS
+      port: 443
+      hostname: "*.facilities.rl.ac.uk"
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: facilities-tls-certificate
+            namespace: apps
+      allowedRoutes:
+        namespaces:
+          from: All
+
+    # HTTPS listener for *.developers.facilities.rl.ac.uk
+    - name: https-developers
+      protocol: HTTPS
+      port: 443
+      hostname: "*.developers.facilities.rl.ac.uk"
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: developers-tls-certificate
+            namespace: apps
+      allowedRoutes:
+        namespaces:
+          from: All

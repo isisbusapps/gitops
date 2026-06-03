@@ -3,6 +3,7 @@ data:
   user-exchange-client-config-era.yaml: |
     exchangeConfig:
       clientName: era-client
+      republishExchange: era_direct
       pendingQueue: era_pending
       holdingQueue: era_holding
       failedQueue: era_failed

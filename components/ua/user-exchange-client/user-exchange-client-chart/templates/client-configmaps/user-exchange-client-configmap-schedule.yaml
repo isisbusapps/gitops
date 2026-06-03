@@ -3,6 +3,7 @@ data:
   user-exchange-client-config-schedule.yaml: |
     exchangeConfig:
       clientName: schedule-client
+      republishExchange: schedule_direct
       pendingQueue: schedule_pending
       holdingQueue: schedule_holding
       failedQueue: schedule_failed
@@ -32,4 +33,5 @@ data:
       - sqlStatement: CALL update_user_number(:oldUser, :newUser)
 kind: ConfigMap
 metadata:
+  creationTimestamp: null
   name: user-exchange-client-config-schedule

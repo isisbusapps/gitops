@@ -1,0 +1,17 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: global-redirect
+  namespace: envoy-gateway-system
+spec:
+  parentRefs:
+    - name: envoy-gateway
+      sectionName: http # This targets port 80 listener specifically
+  hostnames:
+    - "*.rl.ac.uk"
+  rules:
+    - filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            statusCode: 301

@@ -39,6 +39,9 @@
     ]
   },
   {
+    "service": "visits-alpha"
+  },
+  {
     "service": "experimentalreports",
     "extraParams": [
       {

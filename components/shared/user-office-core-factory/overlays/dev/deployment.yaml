@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proposal-factory
+  namespace: apps
+spec:
+  template:
+    metadata:
+      labels:
+        bypass-alloy-scraper: bypass
+    spec:
+      containers:
+        - name: proposal-factory
+          image: ghcr.io/userofficeproject/user-office-factory@sha256:13e66eaea977296964a3334ad6aed6c5a40b4720972ee25b595ce4530478fbc6
+          env:
+            - name: NODE_ENV
+              value: development
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: http://alloy.alloy.svc.cluster.local:4318/v1/traces
+            - name: OTEL_EXPORTER_OTLP_METRICS_ENDPOINT
+              value: http://alloy.alloy.svc.cluster.local:4318/v1/metrics
+            - name: OTEL_EXPORTER_OTLP_LOGS_ENDPOINT
+              value: http://alloy.alloy.svc.cluster.local:4318/v1/logs
+            - name: LOG_LEVEL
+              value: info
+            - name: BROWSER_WS_ENDPOINT
+              value: ws://browserless.apps.svc.cluster.local:3000
+            - name: FACTORY_BASE_URL
+              value: http://proposal-factory.apps.svc.cluster.local:4500
+            - name: MAX_CONCURRENT_PDF_GENERATIONS
+              value: "15"

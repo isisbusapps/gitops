@@ -1,7 +1,8 @@
 # These owners will be the default owners for everything in the repo.
 # All PRs will need to be approved by at least on of them.
-* @isisbusapps/ua-code-owner @isisbusapps/reviews-and-allocations-code-owners
+* @isisbusapps/ua-code-owner @isisbusapps/reviews-and-allocations-code-owners @isisbusapps/p-o-code-owners
 
 # Only request reviews from teams on their specific directories. Later matches take precedence.
 **/ua @isisbusapps/ua-code-owner
 **/ra @isisbusapps/reviews-and-allocations-code-owners
+**/submissions @isisbusapps/p-o-code-owners

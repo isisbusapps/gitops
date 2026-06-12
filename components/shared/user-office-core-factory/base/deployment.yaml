@@ -9,6 +9,8 @@ spec:
       app: proposal-factory
   template:
     metadata:
+      labels:
+        app: proposal-factory
       annotations:
         co.elastic.logs/processors.add_fields.target: ""
         co.elastic.logs/processors.add_fields.fields.application.name: "proposal-factory"

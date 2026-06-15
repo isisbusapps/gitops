@@ -10,3 +10,10 @@ resources:
   - deployment.yaml
   - httproute.yaml
   - service.yaml
+
+configMapGenerator:
+  - name: filters
+    files:
+      - filters.json
+    options:
+      disableNameSuffixHash: true

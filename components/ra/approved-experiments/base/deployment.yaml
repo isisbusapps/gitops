@@ -33,7 +33,7 @@ spec:
               mountPath: "/app/build/common-public/js"
               readOnly: true
             - name: filters
-              mountPath: /filters.json
+              mountPath: /app/filters.json
               subPath: filters.json
           readinessProbe:
             httpGet:

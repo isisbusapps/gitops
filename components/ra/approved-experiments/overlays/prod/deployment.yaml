@@ -7,4 +7,4 @@ spec:
     spec:
       containers:
         - name: approved-experiments
-          image: ghcr.io/isisbusapps/approved-experiments:1.8.0
+          image: ghcr.io/isisbusapps/approved-experiments@sha256:ab80b944b21d4ec0b0cdffeb7fdb7d10dff55b8e2a7862a22689560a52d4180f

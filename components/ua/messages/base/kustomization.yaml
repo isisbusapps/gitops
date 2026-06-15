@@ -10,5 +10,4 @@ namespace: apps
 
 resources:
   - deployment.yaml
-  - ingress.yaml
   - service.yaml

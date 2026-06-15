@@ -12,7 +12,7 @@ resources:
   - service.yaml
 
 configMapGenerator:
-  - name: filters
+  - name: approved-experiments-filters
     files:
       - filters.json
     options:

@@ -32,7 +32,7 @@ spec:
             - name: common-js
               mountPath: "/app/build/common-public/js"
               readOnly: true
-            - name: filters
+            - name: approved-experiments-filters
               mountPath: /app/filters.json
               subPath: filters.json
           readinessProbe:
@@ -50,6 +50,6 @@ spec:
         - name: common-js
           configMap:
             name: common-pug-content-js
-        - name: filters
+        - name: approved-experiments-filters
           configMap:
-            name: filters
+            name: approved-experiments-filters

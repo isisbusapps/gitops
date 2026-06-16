@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  project: infrastructure-project
+  sources:
+    - repoURL: 'https://github.com/isisbusapps/gitops'
+      targetRevision: main
+      path: components/infra/argocd/overlays/dev
+    - repoURL: 'https://git.developers.facilities.rl.ac.uk/isisbusapps/BisAppSettings'
+      targetRevision: develop
+      path: secret-config/dev/argocd
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

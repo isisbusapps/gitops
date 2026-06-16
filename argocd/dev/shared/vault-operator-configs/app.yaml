@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: shared-vault-operator-config
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+        # Names of clusters to deploy the app to
+        - name: dev-v3
+          path: dev
+        # Uncomment if you want to deploy to dev-microk8s-alternative
+        - name: dev-microk8s-alternative
+          path: dev-fallback
+  template:
+    metadata:
+      name: '{{.name}}-shared-vault-operator-config'
+      annotations:
+        argocd.argoproj.io/sync-wave: "-1"
+    spec:
+      project: u-a-project
+      source:
+        path: components/shared/vault-operator-config/{{.path}}
+        repoURL: 'https://github.com/isisbusapps/gitops'
+        targetRevision: main
+      destination:
+        namespace: apps
+        name: '{{.name}}'
+      syncPolicy:
+        automated: 
+          selfHeal: true

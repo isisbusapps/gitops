@@ -9,3 +9,9 @@ resources:
 
 patches:
   - path: httproute.yaml
+
+configMapGenerator:
+  - name: argocd-cm
+    behavior: merge
+    literals:
+      - urlTest=https://devargocd.developers.facilities.rl.ac.uk

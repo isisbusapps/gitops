@@ -4,6 +4,10 @@ metadata:
   creationTimestamp: null
   name: argocd-notifications-cm
   namespace: argocd
+  labels:
+    app.kubernetes.io/component: notifications-controller
+    app.kubernetes.io/name: argocd-notifications-controller
+    app.kubernetes.io/part-of: argocd
 data:
   template.app-deployed: |
     email:

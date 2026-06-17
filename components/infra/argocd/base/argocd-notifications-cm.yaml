@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: argocd-notifications-cm
+  namespace: argocd
+data:
+  template.app-deployed: |
+    email:
+      subject: New version of an application {{.app.metadata.name}} is up and running.
+    message: |
+      Application {{.app.metadata.name}} is now running new version of deployments manifests.
+  template.app-health-degraded: |
+    email:
+      subject: Application {{.app.metadata.name}} has degraded.
+    message: |
+      {{if eq .serviceType "slack"}}:exclamation:{{end}} Application {{.app.metadata.name}} has degraded.
+      Application details: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}.
+      
+  template.app-sync-failed: |
+    email:
+      subject: Failed to sync application {{.app.metadata.name}}.
+    message: |
+      {{if eq .serviceType "slack"}}:exclamation:{{end}}  The sync operation of application {{.app.metadata.name}} has failed at {{.app.status.operationState.finishedAt}} with the following error: {{.app.status.operationState.message}}
+      Sync operation details are available at: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true .
+
+  template.app-sync-status-unknown: |
+    email:
+      subject: Application {{.app.metadata.name}} sync status is 'Unknown'
+    message: |
+      {{if eq .serviceType "slack"}}:exclamation:{{end}} Application {{.app.metadata.name}} sync is 'Unknown'.
+      Application details: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}.
+      {{if ne .serviceType "slack"}}
+      {{range $c := .app.status.conditions}}
+          * {{$c.message}}
+      {{end}}
+      {{end}}
+
+  trigger.on-deployed: |
+    - description: Application is synced and healthy. Triggered once per commit.
+      oncePer: app.status.operationState?.syncResult?.revision
+      send:
+      - app-deployed
+      when: app.status.operationState != nil and app.status.operationState.phase in ['Succeeded']
+        and app.status.health.status == 'Healthy' and (!time.Parse(app.status.health.lastTransitionTime).Add(1
+        * time.Minute).Before(time.Parse(app.status.operationState.finishedAt)) or time.Parse(app.status.health.lastTransitionTime).Before(time.Parse(app.status.operationState.startedAt)))
+
+  trigger.on-health-degraded: |
+    - description: Application has degraded
+      oncePer: app.status.operationState?.syncResult?.revision
+      send:
+      - app-health-degraded
+      when: app.status.health.status == 'Degraded'
+
+  trigger.on-sync-failed: |
+    - description: Application syncing has failed
+      oncePer: app.status.operationState?.syncResult?.revision
+      send:
+      - app-sync-failed
+      when: app.status.operationState != nil and app.status.operationState.phase in ['Error',
+        'Failed']
+        
+  trigger.on-sync-status-unknown: |
+    - description: Application status is 'Unknown'
+      oncePer: app.status.operationState?.syncResult?.revision
+      send:
+      - app-sync-status-unknown
+      when: app.status.sync.status == 'Unknown'

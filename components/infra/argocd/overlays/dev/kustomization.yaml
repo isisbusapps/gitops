@@ -14,4 +14,4 @@ configMapGenerator:
   - name: argocd-cm
     behavior: merge
     literals:
-      - urlTest=https://devargocd.developers.facilities.rl.ac.uk
+      - url=https://devargocd.developers.facilities.rl.ac.uk

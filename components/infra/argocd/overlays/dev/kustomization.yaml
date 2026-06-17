@@ -8,7 +8,7 @@ resources:
 - argocd-ingress.yaml
 
 patches:
-  - path: httproute.yaml
+#  - path: httproute.yaml
 
 configMapGenerator:
   - name: argocd-cm

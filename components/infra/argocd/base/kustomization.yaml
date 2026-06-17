@@ -5,7 +5,7 @@ namespace: argocd
 
 resources:
 - https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/ha/install.yaml
-- httproute.yaml
+#- httproute.yaml
 
 patches:
   - path: argocd-cm.yaml

@@ -7,9 +7,6 @@ resources:
 - ../../base
 - argocd-ingress.yaml
 
-patches:
-#  - path: httproute.yaml
-
 configMapGenerator:
   - name: argocd-cm
     behavior: merge

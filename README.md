@@ -21,10 +21,10 @@ GitOps repository for managing Kubernetes deployments via ArgoCD. All changes to
 │
 ├── components/                      # Kubernetes manifests (Kustomize + Helm)
 │   ├── infra/                       # Infrastructure components
-│   │   ├── alloy-config-management-{dev,prod}/
+│   │   ├── alloy-config-management-{dev, infra, prod}/
 │   │   ├── cert-manager/
 │   │   ├── rabbitmq-operators/
-│   │   └── vault-config-management-{dev,prod}/
+│   │   └── vault-config-management-{dev, prod}/
 │   ├── ra/                          # Reviews & Allocations components
 │   │   └── approved-experiments/
 │   └── ua/                          # Users & Auth components
@@ -95,7 +95,7 @@ generators:
       #- name: prod-fallback
 ```
 
-See [docs/fallback-cluster-guide.md](docs/fallback-cluster-guide.md) for details.
+See [moving UA apps to the fallback cluster](https://github.com/isisbusapps/ISISBusApps/wiki/Moving-UA-apps-to-the-fallback-cluster) for details.
 
 ### Clusters
 

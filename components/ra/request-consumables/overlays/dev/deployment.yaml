@@ -13,5 +13,5 @@ spec:
               value: development
           envFrom:
             - secretRef:
-                name: approved-experiments
+                name: request-consumables
           

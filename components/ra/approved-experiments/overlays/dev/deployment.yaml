@@ -11,4 +11,3 @@ spec:
           envFrom:
             - secretRef:
                 name: approved-experiments
-        

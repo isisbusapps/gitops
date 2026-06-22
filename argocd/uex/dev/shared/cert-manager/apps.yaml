@@ -10,14 +10,12 @@ spec:
   - list:
       elements:
         # Names of clusters to deploy the app to
-        - name: prod-v4
-        # Uncomment if you want to deploy to prod-fallback
-        #- name: prod-fallback
+        - name: dev-v3
+        # Uncomment if you want to deploy to dev-microk8s-alternative
+        #- name: dev-microk8s-alternative
   template:
     metadata:
-      name: cert-manager
-      annotations:
-        argocd.argoproj.io/sync-wave: "0"      
+      name: cert-manager      
     spec:
       project: infrastructure-project
       source:
@@ -32,4 +30,4 @@ spec:
           selfHeal: true
         syncOptions:
           - CreateNamespace=true
-          - ServerSideApply=true          
+          - ServerSideApply=true  

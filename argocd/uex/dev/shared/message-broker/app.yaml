@@ -10,14 +10,14 @@ spec:
   - list:
       elements:
         # Names of clusters to deploy the app to
-        - name: prod-v4
-        # Uncomment if you want to deploy to prod-fallback
-        #- name: prod-fallback
+        - name: dev-v3
+        # Uncomment if you want to deploy to dev-microk8s-alternative
+        #- name: dev-microk8s-alternative
   template:
     metadata:
       name: '{{.name}}-rmq-message-broker'
       annotations:
-        argocd.argoproj.io/sync-wave: "2"        
+        argocd.argoproj.io/sync-wave: "0"        
     spec:
       project: infrastructure-project
       source:

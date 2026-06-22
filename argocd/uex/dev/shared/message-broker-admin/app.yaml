@@ -10,9 +10,9 @@ spec:
   - list:
       elements:
         # Names of clusters to deploy the app to
-        - name: prod-v4
-        # Uncomment if you want to deploy to prod-fallback
-        #- name: prod-fallback
+        - name: dev-v3
+        # Uncomment if you want to deploy to dev-microk8s-alternative
+        #- name: dev-microk8s-alternative
   template:
     metadata:
       name: '{{.name}}-message-broker-admin'
@@ -27,7 +27,7 @@ spec:
         helm:
           valueFiles:
             - ../../message-broker/rmq-message-broker-chart/values.yaml
-            - values-prod.yaml
+            - values-dev.yaml
       destination:
         namespace: apps
         name: '{{.name}}'

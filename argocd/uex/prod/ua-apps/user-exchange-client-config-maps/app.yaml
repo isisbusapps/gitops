@@ -15,7 +15,7 @@ spec:
         #- name: prod-fallback
   template:
     metadata:
-      name: '{{.name}}-user-exchange-client'
+      name: '{{.name}}-user-exchange-client-config-maps'
       annotations:
         argocd.argoproj.io/sync-wave: "5"        
     spec:

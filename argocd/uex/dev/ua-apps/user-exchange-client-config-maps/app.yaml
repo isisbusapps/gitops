@@ -15,7 +15,7 @@ spec:
         #- name: dev-microk8s-alternative
   template:
     metadata:
-      name: '{{.name}}-user-exchange-client'
+      name: '{{.name}}-user-exchange-client-config-maps'
       annotations:
         argocd.argoproj.io/sync-wave: "0"
         notifications.argoproj.io/subscribe.on-sync-failed.smtp-ua: users-and-auth-team@stfc365.onmicrosoft.com

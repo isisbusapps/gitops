@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app-of-apps-prod-uex
+  name: app-of-apps-dev-uex
   namespace: argocd
 spec:
   project: infrastructure-project
   source:
-    path: argocd/uex/prod
+    path: argocd/uex/dev
     repoURL: https://github.com/isisbusapps/gitops
     targetRevision: main
     directory:

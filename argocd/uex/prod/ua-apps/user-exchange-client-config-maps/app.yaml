@@ -24,9 +24,8 @@ spec:
         path: components/ua/user-exchange-client/user-exchange-client-chart/config-maps/prod
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
-        helm:
-          valueFiles:
-            - values-prod.yaml
+        directory:
+          recurse: false
       destination:
         namespace: apps
         name: '{{.name}}'

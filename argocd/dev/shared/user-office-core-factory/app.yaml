@@ -12,7 +12,7 @@ spec:
         # Names of clusters to deploy the app to
         - name: dev-v3
         # Uncomment if you want to deploy to dev-microk8s-alternative
-        #- name: dev-microk8s-alternative
+        - name: dev-microk8s-alternative
   ignoreApplicationDifferences:
     - jsonPointers:
         - /spec/syncPolicy

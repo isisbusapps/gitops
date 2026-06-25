@@ -28,10 +28,7 @@ spec:
           helm:
             valueFiles:
              - values.yaml
-        # Kustomize config for httproute
-        - path: components/shared/message-broker/overlays/prod
-          repoURL: 'https://github.com/isisbusapps/gitops'
-          targetRevision: main
+             - values-httpRoute.yaml
       destination:
         namespace: apps
         name: '{{.name}}'

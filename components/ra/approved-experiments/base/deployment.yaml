@@ -20,20 +20,18 @@ spec:
           ports:
             - containerPort: 3000
           env:
-            - name: CONFIG_PATH
-              value: /FBS/.env
             - name: FILTERS_PATH
-              value: /FBS/filters.json
+              value: /app/filters.json
           volumeMounts:
-            - name: env-config
-              mountPath: "/FBS"
-              readOnly: true
             - name: common-views
               mountPath: "/app/build/common-views"
               readOnly: true
             - name: common-js
               mountPath: "/app/build/common-public/js"
               readOnly: true
+            - name: approved-experiments-filters
+              mountPath: /app/filters.json
+              subPath: filters.json
           readinessProbe:
             httpGet:
               path: /approved-experiments/health/ready
@@ -43,12 +41,12 @@ spec:
       imagePullSecrets:
         - name: registry-creds
       volumes:
-        - name: env-config
-          secret:
-            secretName: approved-experiments-environment
         - name: common-views
           configMap:
             name: common-pug-views
         - name: common-js
           configMap:
             name: common-pug-content-js
+        - name: approved-experiments-filters
+          configMap:
+            name: approved-experiments-filters

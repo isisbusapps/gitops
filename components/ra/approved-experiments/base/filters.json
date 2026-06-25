@@ -1,0 +1,73 @@
+{
+  "accessRoutes": {
+    "ISIS": [
+      "Direct Access",
+      "Rapid Access",
+      "Industry Collaboration Research and Development",
+      "Commercial",
+      "Dutch Access",
+      "Indian Access",
+      "Canadian Access"
+    ],
+    "HPL": [
+      "Vulcan shutdown Support",
+      "Direct Access",
+      "Commercial Access",
+      "Unknown"
+    ],
+    "LSF": ["Direct Access", "Programme Access", "Unknown"],
+    "ARTEMIS": ["Direct Access", "Unknown"]
+  },
+  "instruments": {
+    "ISIS": [
+      "LOQ",
+      "GEM",
+      "VESUVIO",
+      "MARI",
+      "TOSCA",
+      "HRPD",
+      "SXD",
+      "ENGIN_X",
+      "PEARL",
+      "CRISP",
+      "IRIS",
+      "SURF",
+      "POLARIS",
+      "MAPS",
+      "MUSR",
+      "EMU",
+      "OSIRIS",
+      "SANDALS",
+      "ARGUS",
+      "ALF",
+      "MERLIN",
+      "SANS2D",
+      "INES",
+      "HIFI",
+      "LET",
+      "INTER",
+      "POLREF",
+      "OFFSPEC",
+      "NIMROD",
+      "WISH",
+      "ChipIR",
+      "CHRONUS",
+      "PORT-1",
+      "PORT-3",
+      "LARMOR",
+      "ZOOM",
+      "IMAT",
+      "EMMA",
+      "NILE"
+    ],
+    "HPL": [
+      "Vulcan Petawatt",
+      "Vulcan TAW",
+      "Vulcan TAP",
+      "Gemini",
+      "Astra TA2"
+    ],
+    "LSF": ["Ultra", "Octopus"],
+    "ARTEMIS": ["Artemis"]
+  }
+}

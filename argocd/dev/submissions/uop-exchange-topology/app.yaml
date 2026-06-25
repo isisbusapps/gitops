@@ -28,7 +28,7 @@ spec:
           valueFiles:          
             - ../../shared/message-broker/rmq-message-broker-chart/values.yaml
             - ../../shared/message-broker-admin/message-broker-admin-chart/values.yaml
-            - values.yaml
+            - values-dev.yaml
       destination:
         namespace: apps
         name: '{{.name}}'

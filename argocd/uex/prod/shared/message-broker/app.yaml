@@ -20,13 +20,18 @@ spec:
         argocd.argoproj.io/sync-wave: "2"        
     spec:
       project: infrastructure-project
-      source:
-        path: components/shared/message-broker/rmq-message-broker-chart
-        repoURL: 'https://github.com/isisbusapps/gitops'
-        targetRevision: main
-        helm:
-          valueFiles:
-            - values.yaml
+      sources:
+        # Helm chart to install rabbitmq
+        - path: components/shared/message-broker/rmq-message-broker-chart
+          repoURL: 'https://github.com/isisbusapps/gitops'
+          targetRevision: main
+          helm:
+            valueFiles:
+             - values.yaml
+        # Kustomize config for httproute
+        - path: components/shared/message-broker/overlays/prod
+          repoURL: 'https://github.com/isisbusapps/gitops'
+          targetRevision: main
       destination:
         namespace: apps
         name: '{{.name}}'

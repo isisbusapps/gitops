@@ -28,7 +28,7 @@ spec:
           helm:
             valueFiles:
              - values.yaml
-        # Kustomize config for ingress
+        # Kustomize config for httproute
         - path: components/shared/message-broker/overlays/dev
           repoURL: 'https://github.com/isisbusapps/gitops'
           targetRevision: main

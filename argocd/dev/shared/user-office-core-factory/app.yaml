@@ -7,12 +7,10 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-  - list:
-      elements:
-        # Names of clusters to deploy the app to
-        - name: dev-v3
-        # Uncomment if you want to deploy to dev-microk8s-alternative
-        - name: dev-microk8s-alternative
+  - clusters:
+      selector:
+        matchLabels:
+          appEnvironment: dev
   ignoreApplicationDifferences:
     - jsonPointers:
         - /spec/syncPolicy

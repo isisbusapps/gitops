@@ -10,8 +10,8 @@ spec:
   name: {{ .name }} 
   uriSecret:
     name: uex-shovel-secret
-  srcQueue: {{ index . "source-queue" }}
-  destQueue: {{ index . "destination-queue" }}
+  srcQueue: {{ index . "source_queue" }}
+  destQueue: {{ index . "destination_queue" }}
   ackMode: on-confirm
   deleteAfter: never
   addForwardHeaders: false

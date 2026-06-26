@@ -2,7 +2,7 @@
 apiVersion: rabbitmq.com/v1beta1
 kind: Queue
 metadata:
-  name: {{ .name | lower }}
+  name: {{ .name | lower | replace "_" "-"}}-queue
   namespace: {{ $.Values.namespace }}
 spec:
   name: {{ .name }} 

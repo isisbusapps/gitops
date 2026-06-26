@@ -9,26 +9,12 @@ spec:
   pattern: {{ .pattern }}
   applyTo: {{ index . "apply-to" | default "queues"}}
   definition:
-    {{- if index .definition "max-length" }}
-    max-length: {{ index .definition "max-length" }}
-    {{- end}}
-    {{- if index .definition "max-length-bytes" }}
-    max-length-bytes: {{ index .definition "max-length-bytes"}}
-    {{- end }}
-    {{- if index .definition "overflow" }}
-    overflow: {{ index .definition "overflow" }}
-    {{- end }}    
     {{- if index .definition "dead-letter-exchange" }}
     dead-letter-exchange: {{ index .definition "dead-letter-exchange" }}
     {{- end }}
     {{- if index .definition "dead-letter-routing-key" }}
     dead-letter-routing-key: {{ index .definition "dead-letter-routing-key" }}
     {{- end }}
-  {{- if hasKey . "priority" }}
-  priority: {{ .priority }}
-  {{- else }}
-  priority: {{ $.Values.policy_priority | default "100 "}}
-  {{- end }}
   vhost: {{ $.Values.uop_exchange_vhost}}
   rabbitmqClusterReference:
     name: {{ $.Values.rmq_cluster_name }}

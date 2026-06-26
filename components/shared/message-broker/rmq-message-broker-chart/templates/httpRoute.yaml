@@ -1,8 +1,8 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: {{ $.Values.httpRoute.name }}
-  namespace: {{ $.Values.httpRoute.namespace }}
+  name: {{ $.Values.rmq_cluster_name }}
+  namespace: {{ $.Values.namespace }}
 spec:
   parentRefs:
     - name: {{ $.Values.httpRoute.parentRef.name }}
@@ -21,5 +21,5 @@ spec:
               type: {{ $.Values.httpRoute.rewrite.path.type }}
               replacePrefixMatch: {{ $.Values.httpRoute.rewrite.path.replacePrefixMatch }}
       backendRefs:
-        - name: {{ $.Values.httpRoute.backendRef.name }}
+        - name: {{ $.Values.rmq_cluster_name }}
           port: {{ $.Values.httpRoute.backendRef.port }}

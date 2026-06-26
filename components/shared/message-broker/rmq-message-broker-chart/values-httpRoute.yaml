@@ -1,6 +1,4 @@
 httpRoute:
-  name: rmq-message-broker
-  namespace: apps
   parentRef:
     name: envoy-gateway
     namespace: envoy-gateway-system
@@ -13,5 +11,4 @@ httpRoute:
       type: ReplacePrefixMatch
       replacePrefixMatch: ""
   backendRef:
-    name: rmq-message-broker
     port: 15672

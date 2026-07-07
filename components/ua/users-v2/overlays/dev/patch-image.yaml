@@ -7,7 +7,7 @@ spec:
     spec:
       initContainers:
         - name: db-updater
-          image: ghcr.io/isisbusapps/users-db-updater@sha256:da6ca74edd01180fb2310022f489549a8a09d40d6388f6c5d9f9a64a672f6ac5
+          image: ghcr.io/isisbusapps/users-db-updater@sha256:57da648ce1e718fe1bf01e11584c504f107e8226feebd641863314d47850a58c
           args: ["update"]
           env:
             - name: LIQUIBASE_COMMAND_URL
@@ -40,7 +40,7 @@ spec:
             name: users-db-updater-config
       containers:
         - name: user-office-web-service
-          image: ghcr.io/isisbusapps/user-office-web-service@
+          image: ghcr.io/isisbusapps/user-office-web-service@sha256:a6dabc16fe276743f078c141e855e6096544b3182384197a9efc68ac9abd4dd2
           ports:
             - containerPort: 7005
           env:

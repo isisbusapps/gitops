@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
         - name: proposal-factory
-          image: ghcr.io/userofficeproject/user-office-factory@sha256:13e66eaea977296964a3334ad6aed6c5a40b4720972ee25b595ce4530478fbc6
+          image: ghcr.io/userofficeproject/user-office-factory@sha256:3745c6c60e8b73bd164632124c1135bf89f8564fad8b2b6f4211d37f7d981088
           env:
             - name: NODE_ENV
               value: development

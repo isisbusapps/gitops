@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: rmq-message-broker
+  name: frl-exchange-topology
   namespace: argocd
 spec:
   goTemplate: true
@@ -15,19 +15,20 @@ spec:
         #- name: dev-microk8s-alternative
   template:
     metadata:
-      name: '{{.name}}-rmq-message-broker'
+      name: '{{.name}}-frl-exchange-topology'
       annotations:
         argocd.argoproj.io/sync-wave: "0"        
     spec:
-      project: infrastructure-project
+      project: r-a-project
       source:
-        path: components/shared/message-broker/rmq-message-broker-chart
+        path: components/ra/fap-results-letters-exchange-topology
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
         helm:
-          valueFiles:
-            - values.yaml
-            - values-httpRoute.yaml
+          valueFiles:          
+            - ../../shared/message-broker/rmq-message-broker-chart/values.yaml
+            - ../../shared/message-broker-admin/message-broker-admin-chart/values-dev.yaml
+            - values-dev.yaml
       destination:
         namespace: apps
         name: '{{.name}}'

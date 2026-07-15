@@ -19,7 +19,7 @@ spec:
           urlRewrite:
             path:
               type: {{ $.Values.httpRoute.rewrite.path.type }}
-              replacePrefixMatch: {{ $.Values.httpRoute.rewrite.path.replacePrefixMatch }}
+              replacePrefixMatch: {{ $.Values.httpRoute.rewrite.path.replacePrefixMatch | quote}}
       backendRefs:
         - name: {{ $.Values.rmq_cluster_name }}
           port: {{ $.Values.httpRoute.backendRef.port }}

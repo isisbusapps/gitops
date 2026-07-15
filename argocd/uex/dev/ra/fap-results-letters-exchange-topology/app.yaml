@@ -23,7 +23,7 @@ spec:
       source:
         path: components/ra/fap-results-letters-exchange-topology
         repoURL: 'https://github.com/isisbusapps/gitops'
-        targetRevision: add-uop-specific-rabbitmq-definitions
+        targetRevision: main
         helm:
           valueFiles:          
             - ../../shared/message-broker/rmq-message-broker-chart/values.yaml

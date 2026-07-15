@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: approved-experiments
-          image: ghcr.io/isisbusapps/approved-experiments@sha256:5f3c2afff7221c63774854ad7197e7e887a5549e24275db3ed631b1f02f0edd3
+          image: ghcr.io/isisbusapps/approved-experiments@sha256:b4a3b256baca9bada2bcab58150fac52b6a506058c778774951c3076c00043a4
           envFrom:
             - secretRef:
                 name: approved-experiments

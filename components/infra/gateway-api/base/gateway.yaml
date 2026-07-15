@@ -46,3 +46,17 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
+
+    # HTTPS default listener for clients without SNI (e.g. Apache mod_proxy_hcheck)
+    - name: https-default
+      protocol: HTTPS
+      port: 443
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: developers-tls-certificate
+            namespace: apps
+      allowedRoutes:
+        namespaces:
+          from: All

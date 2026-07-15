@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: approved-experiments
-          image: ghcr.io/isisbusapps/approved-experiments:1.8.0
+          image: ghcr.io/isisbusapps/approved-experiments:1.8.1
           env:
             - name: CONFIG_PATH
               value: /FBS/.env

@@ -85,5 +85,41 @@
   {
     "name": "user-exchange-client-users",
     "defaultUrl": "http://user-exchange-client-users-service.apps.svc.cluster.local:8080/q/health"
+  },
+  {
+    "name": "user-exchange-client-visits",
+    "defaultUrl": "http://user-exchange-client-visits-service.apps.svc.cluster.local:8080/q/health"
+  },
+  {
+    "name": "user-exchange-client-schedule",
+    "defaultUrl": "http://user-exchange-client-schedule-service.apps.svc.cluster.local:8080/q/health"
+  },
+  {
+    "name": "user-exchange-client-safety-test",
+    "defaultUrl": "http://user-exchange-client-safety-test-service.apps.svc.cluster.local:8080/q/health"
+  },
+  {
+    "name": "user-exchange-client-proposal-allocations",
+    "defaultUrl": "http://user-exchange-client-allocations-service.apps.svc.cluster.local:8080/q/health"
+  },
+  {
+    "name": "user-exchange-client-era",
+    "defaultUrl": "http://user-exchange-client-era-service.apps.svc.cluster.local:8080/q/health"
+  },
+  {
+    "name": "user-exchange-client-duo",
+    "defaultUrl": "http://user-exchange-client-duo-service.apps.svc.cluster.local:8080/q/health"
+  },
+  {
+    "name": "user-exchange-client-prop-clf-all",
+    "defaultUrl": "http://user-exchange-client-prop-clf-all-service.apps.svc.cluster.local:8080/q/health"
+  },
+  {
+    "name": "user-exchange-client-iops-v4",
+    "defaultUrl": "http://user-exchange-client-iops-v4-service.apps.svc.cluster.local:8080/q/health"
+  },
+  {
+    "name": "user-exchange-client-xpress",
+    "defaultUrl": "http://user-exchange-client-xpress-service.apps.svc.cluster.local:8080/q/health"
   }
 ]

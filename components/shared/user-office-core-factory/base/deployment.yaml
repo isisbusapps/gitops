@@ -50,6 +50,19 @@ spec:
             - name: images
               mountPath: "/config/images"
               readOnly: true
+          livenessProbe:
+            httpGet:
+              path: /health-check
+              port: 4500
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 4500
+            initialDelaySeconds: 10
+            periodSeconds: 3
       volumes:
         - name: images
           configMap:

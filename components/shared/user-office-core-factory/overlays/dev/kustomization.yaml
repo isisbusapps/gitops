@@ -4,7 +4,6 @@ namespace: apps
 
 resources:
   - ../../base
-  - static-secrets.yaml
 
 patches:
   - path: deployment.yaml

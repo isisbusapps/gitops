@@ -12,7 +12,7 @@ spec:
   {{- end }}
   {{- end }}
   importCredentialsSecret:
-    name: uop-exchange-secret
+    name: {{ $config.credentialsSecret }}
   rabbitmqClusterReference:
     name: {{ $.Values.rmq_cluster_name }}    
 ---

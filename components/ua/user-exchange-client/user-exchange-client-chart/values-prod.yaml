@@ -4,7 +4,21 @@ image_duo_ref: ghcr.io/isisbusapps/merge-user-tool/user-exchange-client@sha256:9
 clients:
   - name: users
     cm_name: user-exchange-client-config-users
-  # - name: era
-  #   cm_name: user-exchange-client-config-era
-  # - name: schedule
-  #   cm_name: user-exchange-client-config-schedule
+  - name: era
+    cm_name: user-exchange-client-config-era
+  - name: schedule
+    cm_name: user-exchange-client-config-schedule
+  - name: allocations
+    cm_name: user-exchange-client-config-allocations
+  - name: safety-test
+    cm_name: user-exchange-client-config-safety-test
+  - name: visits
+    cm_name: user-exchange-client-config-visits
+  - name: duo
+    cm_name: user-exchange-client-config-duo
+  - name: prop-clf-all
+    cm_name: user-exchange-client-config-prop-clf-all
+  - name: iops-v4
+    cm_name: user-exchange-client-config-iops-v4
+  - name: xpress
+    cm_name: user-exchange-client-config-xpress

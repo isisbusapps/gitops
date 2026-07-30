@@ -1,5 +1,5 @@
-image_ref: ghcr.io/isisbusapps/merge-user-tool/user-exchange-client@sha256:9c8befca98216570786cd8301995f1fdabae746e5481bbfa4a76599eeefa87e0
-image_duo_ref: ghcr.io/isisbusapps/merge-user-tool/user-exchange-client@sha256:9aeb6067cf9b1011be1fe1da250f77a6f32f13501a4d56147f8eaf54c1ff7563
+image_ref: ghcr.io/isisbusapps/merge-user-tool/user-exchange-client-ora@sha256:6b5aaf587f32b0f953cb466bead99e6270c2cafdad0ff70aa83d4645814c87c8
+image_duo_ref: ghcr.io/isisbusapps/merge-user-tool/user-exchange-client-psql@sha256:e30a6580f0e3f2cfc38575fad71b9320864fc8d55b8721be3638b58147200947
 
 clients:
   - name: users

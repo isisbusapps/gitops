@@ -10,4 +10,4 @@ spec:
           image: ghcr.io/isisbusapps/merge-user-tool/user-exchange-publisher@sha256:d22d6b341d14459be889bdb87873bd6930d7fa375b7a19409bfc3e7250e03b8d
       initContainers:
         - name: setup-h2-permissions
-          image: ghcr.io/isisbusapps/merge-user-tool/user-exchange-publisher@sha256:87cd52f2d44d1e5100225ca14405e024aac4f160c062d10bb84e7fb79acc3517
+          image: ghcr.io/isisbusapps/merge-user-tool/user-exchange-publisher@sha256:d22d6b341d14459be889bdb87873bd6930d7fa375b7a19409bfc3e7250e03b8d

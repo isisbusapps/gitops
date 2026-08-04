@@ -16,7 +16,7 @@ spec:
         #- name: dev-microk8s-alternative
   template:
     metadata:
-      name: rabbitmq-topology-operator     
+      name: '{{.name}}-rabbitmq-topology-operator'     
     spec:
       project: infrastructure-project
       source:

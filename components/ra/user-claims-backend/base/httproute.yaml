@@ -1,0 +1,19 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: user-claims-backend
+spec:
+  parentRefs:
+    - name: envoy-gateway
+      namespace: envoy-gateway-system
+  hostnames:
+    - "*.developers.facilities.rl.ac.uk"
+    - "*.facilities.rl.ac.uk"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /user-claims-api
+      backendRefs:
+        - name: user-claims-backend
+          port: 3001

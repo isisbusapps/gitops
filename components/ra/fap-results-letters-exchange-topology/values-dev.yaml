@@ -9,20 +9,6 @@ users:
       configure: .*
       write: .*
       read: .*
-    topicPermissions:
-      exchange:
-      write: .*
-      read: .*
      
-exchange:
- - name: fap-results-letters.fanout
-   type: fanout
-
 queue:
  - name: fap-results-letters
-
-binding:
-- name: fap-results-letters
-  source: fap-results-letters.fanout
-  destination: fap-results-letters
-  destination_type: queue

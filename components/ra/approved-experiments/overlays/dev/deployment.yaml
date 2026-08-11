@@ -12,9 +12,6 @@ spec:
             - secretRef:
                 name: approved-experiments
           volumeMounts:
-            - name: env-config
-              mountPath: "/FBS"
-              readOnly: true
             - name: common-public
               mountPath: "/app/build/common-public"
               readOnly: true

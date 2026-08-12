@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-of-apps-dev-uex
+  namespace: argocd
+spec:
+  project: infrastructure-project
+  source:
+    path: argocd/uex/dev
+    repoURL: https://github.com/isisbusapps/gitops
+    targetRevision: main
+    directory:
+      recurse: true
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true

@@ -9,7 +9,7 @@ spec:
   replicas: 1
   terminationGracePeriodSeconds: 180
   persistence:
-    storageClassName: csi-cinder
+    storageClassName: {{ $.Values.storageClassName }}
     storage: 20Gi  
   image: {{ $.Values.image }}  
   override:

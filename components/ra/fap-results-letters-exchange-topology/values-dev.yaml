@@ -1,0 +1,14 @@
+
+frl_exchange_vhost: fap-results-letters
+
+users:
+  fap-results-letters-user:
+    tags:
+     - management
+    permissions:
+      configure: .*
+      write: .*
+      read: .*
+     
+queue:
+ - name: fap-results-letters

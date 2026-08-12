@@ -1,0 +1,19 @@
+{{- range $user, $config := .Values.users }}
+apiVersion: rabbitmq.com/v1beta1
+kind: User
+metadata:
+  name: {{ $user }}
+  namespace: {{ $.Values.namespace }}
+spec:  
+  {{- if $config.tags }}
+  tags:
+  {{- range $config.tags }}
+    - {{ . }}
+  {{- end }}
+  {{- end }}
+  importCredentialsSecret:
+    name: {{ $config.credentialsSecret }}
+  rabbitmqClusterReference:
+    name: {{ $.Values.rmq_cluster_name }}    
+---
+{{- end }}  

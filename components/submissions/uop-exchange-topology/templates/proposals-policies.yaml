@@ -1,0 +1,22 @@
+{{- range .Values.policy }}
+apiVersion: rabbitmq.com/v1beta1
+kind: Policy
+metadata:
+  name: {{ .name | lower | replace "_" "-" }}-policy
+  namespace: {{ $.Values.namespace }}
+spec:
+  name: {{ .name }}
+  pattern: {{ .pattern }}
+  applyTo: {{ index . "apply-to" | default "queues"}}
+  definition:
+    {{- if index .definition "dead-letter-exchange" }}
+    dead-letter-exchange: {{ index .definition "dead-letter-exchange" }}
+    {{- end }}
+    {{- if index .definition "dead-letter-routing-key" }}
+    dead-letter-routing-key: {{ index .definition "dead-letter-routing-key" }}
+    {{- end }}
+  vhost: {{ $.Values.uop_exchange_vhost}}
+  rabbitmqClusterReference:
+    name: {{ $.Values.rmq_cluster_name }}
+---
+ {{ end }}

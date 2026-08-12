@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+data:
+  #Add health check for the Applicaion resources so the wave sync works correctly
+  resource.customizations: |
+    argoproj.io/Application:
+      health.lua: |
+        hs = {}
+        hs.status = "Progressing"
+        hs.message = ""
+        if obj.status ~= nil then
+          if obj.status.health ~= nil then
+            hs.status = obj.status.health.status
+            if obj.status.health.message ~= nil then
+              hs.message = obj.status.health.message
+            end
+          end
+        end
+        return hs
+        
+    rabbitmq.com/Queue:
+      health.lua: |
+        hs = {}
+        hs.status = "Progressing"
+        hs.message = "Queue is being created"
+        if obj.status ~= nil then
+          if obj.status.conditions ~= nil then
+            for i, condition in ipairs(obj.status.conditions) do
+              if condition.type == "Ready" then
+                if condition.status == "True" then
+                  hs.status = "Healthy"
+                  hs.message = "Queue is ready"
+                else
+                  hs.status = "Degraded"
+                  hs.message = condition.message or "Queue not ready"
+                end
+                return hs
+              end
+            end
+          end
+        end
+        return hs
+  #So the HTTPs is terminated at the ingress level
+  server.insecure: "true"
+  statusbadge.enabled: "true"

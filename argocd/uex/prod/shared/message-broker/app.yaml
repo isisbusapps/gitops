@@ -27,6 +27,7 @@ spec:
         helm:
           valueFiles:
             - values.yaml
+            - values-httpRoute.yaml
       destination:
         namespace: apps
         name: '{{.name}}'

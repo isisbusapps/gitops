@@ -1,0 +1,14 @@
+httpRoute:
+  parentRef:
+    name: envoy-gateway
+    namespace: envoy-gateway-system
+  hostnames: "*.developers.facilities.rl.ac.uk"
+  path:
+    type: PathPrefix
+    value: /rmq
+  rewrite:
+    path:
+      type: ReplacePrefixMatch
+      replacePrefixMatch: ""
+  backendRef:
+    port: 15672

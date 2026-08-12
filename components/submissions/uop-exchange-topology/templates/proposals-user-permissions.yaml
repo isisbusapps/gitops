@@ -1,0 +1,17 @@
+{{- range $user, $config := .Values.users }}
+apiVersion: rabbitmq.com/v1beta1
+kind: Permission
+metadata:
+  name: {{ $user }}-permission
+  namespace: {{ $.Values.namespace | default "apps" }}
+spec:
+  vhost: {{ $.Values.uop_exchange_vhost }}
+  user: {{ $user }}
+  permissions:
+    configure: {{ $config.permissions.configure | default "(?!)" }}
+    write: {{ $config.permissions.write | default "(?!)" }}
+    read: {{ $config.permissions.read | default "(?!)" }}
+  rabbitmqClusterReference:
+    name: {{ $.Values.rmq_cluster_name }}
+---
+{{- end }}

@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: rabbitmq-cluster-operator
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+        # Names of clusters to deploy the app to
+        - name: dev-v3
+        - name: dev-proxmox
+        # Uncomment if you want to deploy to dev-microk8s-alternative
+        #- name: dev-microk8s-alternative
+  template:
+    metadata:
+      name: '{{.name}}-rabbitmq-cluster-operator'      
+    spec:
+      project: infrastructure-project
+      source:
+        path: components/infra/rabbitmq-operators/operators/cluster-operator
+        repoURL: 'https://github.com/isisbusapps/gitops'
+        targetRevision: main
+      destination:
+        namespace: rabbitmq-system
+        name: '{{.name}}'
+      syncPolicy:
+        automated: 
+          selfHeal: true
+        syncOptions:
+          - ServerSideApply=true  

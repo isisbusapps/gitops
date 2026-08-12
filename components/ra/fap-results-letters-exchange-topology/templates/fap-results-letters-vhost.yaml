@@ -1,0 +1,14 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: Vhost
+metadata:
+  name: {{ $.Values.frl_exchange_vhost }}
+  namespace: {{ $.Values.namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+spec:
+  name: {{ $.Values.frl_exchange_vhost }}
+  defaultQueueType: quorum   # quorum | classic | stream
+  rabbitmqClusterReference:
+    name: {{ $.Values.rmq_cluster_name }}
+  deletionPolicy: retain   
+  

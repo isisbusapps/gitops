@@ -22,6 +22,9 @@ spec:
           env:
             - name: FILTERS_PATH
               value: /app/filters.json
+          envFrom:
+            - secretRef:
+                name: approved-experiments
           volumeMounts:
             - name: common-views
               mountPath: "/app/build/common-views"

@@ -12,3 +12,4 @@ data:
   LOG_LEVEL: "info"
   ICRD_EMAIL: "ICRD@stfc.ac.uk"
   APP_ENV: "dev"
+  PROPOSALS_API_URL: "https://devproposal.facilities.rl.ac.uk/graphql"

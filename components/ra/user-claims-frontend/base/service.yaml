@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-claims-frontend
+spec:
+  ports:
+    - name: https
+      protocol: TCP
+      port: 6011
+      targetPort: 6011

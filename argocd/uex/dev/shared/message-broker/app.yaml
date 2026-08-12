@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: rmq-message-broker
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+        # Cluster names and storage classes to use for rabbitmq deployment
+        - name: dev-v3
+          storageClassName: csi-cinder
+
+        - name: dev-proxmox
+          storageClassName: longhorn
+
+        # Uncomment if you want to deploy to dev-microk8s-alternative
+        #- name: dev-microk8s-alternative
+  template:
+    metadata:
+      name: '{{.name}}-rmq-message-broker'
+      annotations:
+        argocd.argoproj.io/sync-wave: "0"        
+    spec:
+      project: infrastructure-project
+      source:
+        path: components/shared/message-broker/rmq-message-broker-chart
+        repoURL: 'https://github.com/isisbusapps/gitops'
+        targetRevision: main
+        helm:
+          valueFiles:
+            - values.yaml
+            - values-httpRoute.yaml
+          parameters:
+            - name: storageClassName
+              value: '{{.storageClassName}}'
+      destination:
+        namespace: apps
+        name: '{{.name}}'
+      syncPolicy:
+        automated: 
+          selfHeal: true
+          enabled: true

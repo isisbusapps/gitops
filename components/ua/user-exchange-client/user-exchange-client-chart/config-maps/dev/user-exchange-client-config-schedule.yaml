@@ -1,0 +1,36 @@
+apiVersion: v1
+data:
+  user-exchange-client-config-schedule.yaml: |
+    exchangeConfig:
+      clientName: schedule-client
+      pendingQueue: schedule_pending
+      holdingQueue: schedule_holding
+      failedQueue: schedule_failed
+      successQueue: schedule_successful
+      republishExchange: schedule_direct
+      failReasonsHeader: fail-reasons
+      retryCountHeader: retry-count
+      maxRetries: 5
+    databaseActions:
+      merge:
+      - sqlStatement: UPDATE CALENDAR_ENTRY SET CREATED_BY = TO_NUMBER(:newUser) WHERE CREATED_BY = TO_NUMBER(:oldUser)
+      - sqlStatement: UPDATE CALENDAR_ENTRY SET MODIFIED_BY = TO_NUMBER(:newUser) WHERE MODIFIED_BY = TO_NUMBER(:oldUser)
+      - sqlStatement: UPDATE EXPERIMENT SET PI_USER_NUMBER = TO_NUMBER(:newUser) WHERE PI_USER_NUMBER = TO_NUMBER(:oldUser)
+      - sqlStatement: UPDATE EXPERIMENT_PART SET LC_USER_NUMBER = TO_NUMBER(:newUser) WHERE LC_USER_NUMBER = TO_NUMBER(:oldUser)
+      - sqlStatement: UPDATE EXPERIMENT_PART SET STATISTICS_MANAGER_USER_NUMBER = TO_NUMBER(:newUser) WHERE STATISTICS_MANAGER_USER_NUMBER = TO_NUMBER(:oldUser)
+      - sqlStatement: UPDATE EXPERIMENT_PART SET LAB_MANAGER_USER_NUMBER = TO_NUMBER(:newUser) WHERE LAB_MANAGER_USER_NUMBER = TO_NUMBER(:oldUser)
+      - sqlStatement: UPDATE EXPERIMENT_PART SET MODIFIED_BY = TO_NUMBER(:newUser) WHERE MODIFIED_BY = TO_NUMBER(:oldUser)
+      - sqlStatement: UPDATE EXPERIMENT_PART SET CREATED_BY = TO_NUMBER(:newUser) WHERE CREATED_BY = TO_NUMBER(:oldUser)
+      - sqlStatement: UPDATE EXPERIMENT_PART SET DEPUTY_LC_USER_NUMBER = TO_NUMBER(:newUser) WHERE DEPUTY_LC_USER_NUMBER = TO_NUMBER(:oldUser)
+      - sqlStatement: UPDATE INSTRUMENT_DETAILS SET PRIMARY_CONTACT_USER_NUMBER = TO_NUMBER(:newUser) WHERE PRIMARY_CONTACT_USER_NUMBER = TO_NUMBER(:oldUser)
+      - sqlStatement: UPDATE INSTRUMENT_DETAILS SET STATISTICS_MANAGER_USER_NUMBER = TO_NUMBER(:newUser) WHERE STATISTICS_MANAGER_USER_NUMBER = TO_NUMBER(:oldUser)
+      - sqlStatement: UPDATE INSTRUMENT_DETAILS SET DEPUTY_CONTACT_USER_NUMBER = TO_NUMBER(:newUser) WHERE DEPUTY_CONTACT_USER_NUMBER = TO_NUMBER(:oldUser)
+      - sqlStatement: UPDATE LTR SET CREATED_BY = TO_NUMBER(:newUser) WHERE CREATED_BY = TO_NUMBER(:oldUser)
+      - sqlStatement: UPDATE LTR SET MODIFIED_BY = TO_NUMBER(:newUser) WHERE MODIFIED_BY = TO_NUMBER(:oldUser)
+      - sqlStatement: UPDATE LTR_COMMENTS SET CREATED_BY = TO_NUMBER(:newUser) WHERE CREATED_BY = TO_NUMBER(:oldUser)
+      - sqlStatement: UPDATE LTR_COMMENTS SET MODIFIED_BY = TO_NUMBER(:newUser) WHERE MODIFIED_BY = TO_NUMBER(:oldUser)
+      - sqlStatement: UPDATE NOTE SET AUTHOR_USER_NUMBER = TO_NUMBER(:newUser) WHERE AUTHOR_USER_NUMBER = TO_NUMBER(:oldUser)
+      - sqlStatement: CALL update_user_number(:oldUser, :newUser)
+kind: ConfigMap
+metadata:
+  name: user-exchange-client-config-schedule

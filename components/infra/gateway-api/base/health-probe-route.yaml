@@ -1,0 +1,30 @@
+# Apache's mod_proxy_hcheck does not send the SNI (Server Name Indication)
+# extension during its background TLS health checks. Without SNI, Envoy
+# Gateway routes the connection to the hostname-less "https-default" listener.
+# However, HTTPRoutes that specify hostnames (e.g. *.developers.facilities.rl.ac.uk)
+# are not matched on the default listener, resulting in a 404.
+#
+# This dedicated HTTPRoute has NO hostnames and is pinned to the "https-default"
+# listener via sectionName, so it matches any Host header on non-SNI connections
+# and routes health check requests to the correct backend.
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: health-probe
+  namespace: apps
+  labels:
+    app: health-probe
+spec:
+  # No hostnames — matches any Host header on the attached listener
+  parentRefs:
+    - name: envoy-gateway
+      namespace: envoy-gateway-system
+      sectionName: https-default  # Only attach to the no-SNI fallback listener
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /auth/Ready
+      backendRefs:
+        - name: authenticate-frontend
+          port: 3000

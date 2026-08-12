@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: establishment-service
-          image: ghcr.io/isisbusapps/establishment-service@sha256:313a8265ae8fff0144f9afc8b96c3a8209fe2013ac48ba4986f462007faed03a
+          image: ghcr.io/isisbusapps/establishment-service@sha256:ae6e2f3eb85dab87800d3d960f983154e84ea767c139c2ce82f5644066eb4b8e
           ports:
             - containerPort: 4019
           env:

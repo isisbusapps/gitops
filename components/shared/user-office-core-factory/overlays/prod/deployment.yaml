@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proposal-factory
+  namespace: apps
+spec:
+  template:
+    metadata:
+      labels:
+        app: proposal-factory
+    spec:
+      containers:
+        - name: proposal-factory
+          image: ghcr.io/userofficeproject/user-office-factory:v1.5.2
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: LOG_LEVEL
+              value: info
+            - name: BROWSER_WS_ENDPOINT
+              value: ws://browserless.apps.svc.cluster.local:3000
+            - name: FACTORY_BASE_URL
+              value: http://proposal-factory.apps.svc.cluster.local:4500
+            - name: MAX_CONCURRENT_PDF_GENERATIONS
+              value: "20"

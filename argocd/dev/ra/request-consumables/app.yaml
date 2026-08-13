@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: request-consumables
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - clusters:
+      selector:
+        matchLabels:
+          appEnvironment: dev
+  ignoreApplicationDifferences:
+    - jsonPointers:
+        - /spec/syncPolicy
+  template:
+    metadata:
+      name: '{{.name}}-request-consumables'
+    spec:
+      project: r-a-project
+      source:
+        path: components/ra/request-consumables/overlays/dev
+        repoURL: 'https://github.com/isisbusapps/gitops'
+        targetRevision: main
+      destination:
+        namespace: apps
+        name: '{{.name}}'
+      syncPolicy:
+        automated: 
+          selfHeal: true #https://argo-cd.readthedocs.io/en/stable/user-guide/auto_sync/#automatic-self-healing

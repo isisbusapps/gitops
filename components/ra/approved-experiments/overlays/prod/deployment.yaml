@@ -8,13 +8,7 @@ spec:
       containers:
         - name: approved-experiments
           image: ghcr.io/isisbusapps/approved-experiments:1.8.1
-          env:
-            - name: CONFIG_PATH
-              value: /FBS/.env
           volumeMounts:
-            - name: env-config
-              mountPath: "/FBS"
-              readOnly: true
             - name: common-js
               mountPath: "/app/build/common-public/js"
               readOnly: true
@@ -25,6 +19,3 @@ spec:
         - name: common-js
           configMap:
             name: common-pug-content-js
-        - name: env-config
-          secret:
-            secretName: approved-experiments-environment

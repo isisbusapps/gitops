@@ -8,7 +8,7 @@ spec:
       containers:
         - name: merge-user-tool
           # version: 1.3.0
-          image: ghcr.io/isisbusapps/merge-user-tool@sha256:998eb8ed5afe786c82426716bc1603dd5ee97e029c3ad2c1e4cbda95783fa4c4
+          image: ghcr.io/isisbusapps/merge-user-tool@sha256:084b9d44ae63936a81adb2f9c7b3540952ef772d1b44cbbdfde5071bb640b0e4
           ports:
             - containerPort: 7005
           env:

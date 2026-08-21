@@ -20,7 +20,7 @@ spec:
     spec:
       project: infrastructure-project
       source:
-        path: components/infra/vault-operator-config/{{.path}}
+        path: components/infra/vault-operator-config-infra/{{.path}}
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:

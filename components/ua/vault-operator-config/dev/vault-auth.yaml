@@ -7,7 +7,7 @@ metadata:
 spec:
   vaultConnectionRef: secrets-isis-connection
   method: kubernetes
-  mount: u-and-a-dev
+  mount: fase-infra
   allowedNamespaces:
     - "*"
   kubernetes:

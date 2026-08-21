@@ -1,6 +1,6 @@
 apiVersion: v1
 data:
-  user-exchange-client-config-iops-v4.yaml: |
+  user-exchange-client-config-iops-v4.yaml: |+
     exchangeConfig:
       clientName: iops-v4-client
       pendingQueue: iops-v4_pending
@@ -16,6 +16,13 @@ data:
       - sqlStatement: UPDATE EXPERIMENTER SET USER_ID = TO_NUMBER(:newUser) WHERE USER_ID = TO_NUMBER(:oldUser)
       - sqlStatement: UPDATE NEW_CONSUMABLES_USER SET USER_NUMBER = TO_CHAR(:newUser) WHERE USER_NUMBER = TO_CHAR(:oldUser)
       - sqlStatement: UPDATE PHD_FUNDING SET USER_ID = TO_NUMBER(:newUser) WHERE USER_ID = TO_NUMBER(:oldUser)
+      - sqlStatement: UPDATE NEW_CONSUMABLES_REQUEST SET SUBMITTED_BY = TO_CHAR(:newUser) WHERE SUBMITTED_BY = TO_CHAR(:oldUser)
+      - sqlStatement: UPDATE CONSUMABLES_REVIEWERS SET REVIEWER_USER_NUMBER = TO_NUMBER(:newUser) WHERE REVIEWER_USER_NUMBER = TO_NUMBER(:oldUser)
+      - sqlStatement: UPDATE CONSUMABLES_ILL_REQUEST SET AWARD_RECEIVER_USERNUMBER = TO_CHAR(:newUser) WHERE AWARD_RECEIVER_USERNUMBER = TO_CHAR(:oldUser)
+      - sqlStatement: UPDATE CONSUMABLES_ILL_REQUEST SET PI_USERNUMBER = TO_CHAR(:newUser) WHERE PI_USERNUMBER = TO_CHAR(:oldUser)
+      - sqlStatement: UPDATE CONSUMABLES_EMAIL_LOG SET RECIPIENT_USER_NUMBER = TO_CHAR(:newUser) WHERE RECIPIENT_USER_NUMBER = TO_CHAR(:oldUser)
+
+
 kind: ConfigMap
 metadata:
   name: user-exchange-client-config-iops-v4

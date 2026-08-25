@@ -1,0 +1,48 @@
+name: Test kubernetes config validity
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'components/**/base/**/*'
+      - 'components/**/overlays/**/*'
+
+jobs:
+  test_configs:
+    name: Test kubernetes configs
+    runs-on: ubuntu-latest
+    steps:
+    - name: Load dev kubeconfig
+      uses: tale/kubectl-action@v1
+      with:
+        base64-kube-config: ${{ secrets.DEV_ISIS_KUBECONFIG }}
+    - name: Test dev kubernetes configs
+      # Excludes argocd, as that is an incomplete base requiring external config
+      run: |
+        for devOverlay in $(ls -d components/*/*/overlays/dev | grep -v argocd); do
+          kubectl apply -k "$devOverlay" --dry-run=client
+          if [ "$?" -ne "0" ]; then
+            echo "Verification error in $devOverlay"
+            ! break
+          fi
+        done
+
+    - name: Load prod kubeconfig
+      uses: tale/kubectl-action@v1
+      with:
+        base64-kube-config: ${{ secrets.PROD_ISIS_KUBECONFIG }}
+    - name: Test prod kubernetes configs
+      # Excludes argocd, as that is an incomplete base requiring external config
+      run: |
+        for prodOverlay in $(ls -d components/*/*/overlays/prod | grep -v argocd); do
+          kubectl apply -k "$prodOverlay" --dry-run=client
+          if [ "$?" -ne "0" ]; then
+            echo "Verification error in $prodOverlay"
+            ! break
+          fi
+        done

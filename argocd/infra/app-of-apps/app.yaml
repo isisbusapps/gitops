@@ -8,7 +8,7 @@ spec:
   source:
     path: argocd/infra
     repoURL: https://github.com/isisbusapps/gitops
-    targetRevision: AddInfraVaultOperator
+    targetRevision: main
     directory:
       recurse: true
   destination:

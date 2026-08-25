@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: prod-vault-operator
+  name: infra-vault-operator
   namespace: argocd
 spec:
   goTemplate: true
@@ -10,16 +10,14 @@ spec:
   - list:
       elements:
         # Names of clusters to deploy the app to
-        - name: prod-v4
-        # Uncomment if you want to deploy to prod-microk8s-alternative
-        - name: prod-fallback
+        - name: infra
   template:
     metadata:
       name: '{{.name}}-vault-operator'
       annotations:
         argocd.argoproj.io/sync-wave: "-10"
     spec:
-      project: u-a-project
+      project: infrastructure-project
       source:
         repoURL: https://helm.releases.hashicorp.com
         targetRevision: 0.10.0
@@ -32,3 +30,6 @@ spec:
       syncPolicy:
         automated: 
           selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true

@@ -1,0 +1,49 @@
+
+uop_exchange_vhost: proposals
+
+users:
+  proposal-submission-user:
+    credentialsSecret: uop-exchange-secret
+    tags:
+     - management
+    permissions:
+      configure: .*
+      write: .*
+      read: .*
+  proposal-allocations-user:
+    credentialsSecret: allocations-exchange-secret
+    tags:
+     - management
+    permissions:
+      configure: .*
+      write: .*
+      read: .*
+     
+
+exchange:
+ - name: user_office_backend.fanout
+   type: fanout
+ - name: allocations-dead-letter-exchange
+   type: direct
+
+queue:
+ - name: Proposal-Allocations
+ - name: allocations-dead-letter-queue
+
+binding:
+- name: Proposal-Allocations
+  source: user_office_backend.fanout
+  destination: Proposal-Allocations
+  destination_type: queue
+- name: allocations-dead-letter-queue
+  source: allocations-dead-letter-exchange
+  destination: allocations-dead-letter-queue
+  destination_type: queue
+  routing_key: dead
+
+policy:
+ - name: Proposal-Allocations
+   pattern: ^Proposal-Allocations$
+   definition:
+     dead-letter-exchange: allocations-dead-letter-exchange
+     dead-letter-routing-key: dead

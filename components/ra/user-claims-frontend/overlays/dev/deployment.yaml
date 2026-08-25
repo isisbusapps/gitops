@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-claims-frontend
+spec:
+  template:
+    spec:
+      containers:
+        - name: user-claims-frontend
+          image: ghcr.io/isisbusapps/user-claims-frontend@sha256:333ad7fea34d8e0f1e477820298e66f53ac9e9a0a59e4337e7a8d43f9704aabb

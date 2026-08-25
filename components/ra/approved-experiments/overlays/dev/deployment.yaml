@@ -7,7 +7,18 @@ spec:
     spec:
       containers:
         - name: approved-experiments
-          image: ghcr.io/isisbusapps/approved-experiments@sha256:5f3c2afff7221c63774854ad7197e7e887a5549e24275db3ed631b1f02f0edd3
+          image: ghcr.io/isisbusapps/approved-experiments@sha256:b329e67717ac565d0c5131300e6f107f4e8bfc572d3591a9efff7eb80de86aef
           envFrom:
             - secretRef:
                 name: approved-experiments
+          volumeMounts:
+            - name: common-public
+              mountPath: "/app/build/common-public"
+              readOnly: true
+      volumes:
+        - name: common-views
+          configMap:
+            name: common-pug-views-2026
+        - name: common-public
+          configMap:
+            name: common-pug-public-2026

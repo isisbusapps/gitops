@@ -16,7 +16,11 @@ spec:
     spec:      
       containers:
         - name: user-exchange-client-{{ .name }}
+          {{- if eq .name "duo"}}
+          image: {{ $.Values.image_duo_ref }}
+          {{- else}}
           image: {{ $.Values.image_ref }}
+          {{- end}}
           ports:
             - containerPort: 8080            
           volumeMounts:           

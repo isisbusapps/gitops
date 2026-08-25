@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: request-consumables
+spec:
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        co.elastic.logs/processors.add_fields.target: ""
+        co.elastic.logs/processors.add_fields.fields.application.name: "request-consumables"
+        co.elastic.logs/processors.add_fields.fields.application.domain: "request-consumables"
+        co.elastic.logs/processors.add_fields.fields.application.tier: "service"
+        co.elastic.logs/processors.add_fields.fields.application.language: "javascript"
+        co.elastic.logs/processors.dissect.tokenizer: "[%{?timestamp}] %{log_level} - %{log_message}"
+        co.elastic.logs/processors.dissect.target_prefix: ""
+        co.elastic.logs/multiline.pattern: "^\\[[0-9]{4}-[0-9]{2}-[0-9]{2}"
+        co.elastic.logs/multiline.negate: "true"
+        co.elastic.logs/multiline.match: "after"
+
+    spec:
+      containers:
+        - name: request-consumables
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: CONFIG_PATH
+              value: /FBS/.env
+          volumeMounts:
+            - name: env-config
+              mountPath: "/FBS"
+              readOnly: true
+            - name: common-views
+              mountPath: "/app/build/common-views"
+              readOnly: true
+            - name: common-public
+              mountPath: "/app/build/common-public"
+              readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /consumables/health/ready
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+      imagePullSecrets:
+        - name: registry-creds
+      volumes:
+        - name: env-config
+          secret:
+            secretName: request-consumables-environment
+        - name: common-views
+          configMap:
+            name: common-pug-views-2026
+        - name: common-public
+          configMap:
+            name: common-pug-public-2026

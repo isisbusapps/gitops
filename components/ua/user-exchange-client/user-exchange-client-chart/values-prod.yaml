@@ -1,8 +1,26 @@
-image_ref: ghcr.io/isisbusapps/merge-user-tool/user-exchange-client@sha256:9c8befca98216570786cd8301995f1fdabae746e5481bbfa4a76599eeefa87e0
+# version: 0.0.0
+image_ref: ghcr.io/isisbusapps/merge-user-tool/user-exchange-client-ora@sha256:6b5aaf587f32b0f953cb466bead99e6270c2cafdad0ff70aa83d4645814c87c8
+# version: 0.0.0
+image_duo_ref: ghcr.io/isisbusapps/merge-user-tool/user-exchange-client-psql@sha256:e30a6580f0e3f2cfc38575fad71b9320864fc8d55b8721be3638b58147200947
+
 clients:
   - name: users
     cm_name: user-exchange-client-config-users
-  # - name: era
-  #   cm_name: user-exchange-client-config-era
-  # - name: schedule
-  #   cm_name: user-exchange-client-config-schedule
+  - name: era
+    cm_name: user-exchange-client-config-era
+  - name: schedule
+    cm_name: user-exchange-client-config-schedule
+  - name: allocations
+    cm_name: user-exchange-client-config-allocations
+  - name: safety-test
+    cm_name: user-exchange-client-config-safety-test
+  - name: visits
+    cm_name: user-exchange-client-config-visits
+  - name: duo
+    cm_name: user-exchange-client-config-duo
+  - name: prop-clf-all
+    cm_name: user-exchange-client-config-prop-clf-all
+  - name: iops-v4
+    cm_name: user-exchange-client-config-iops-v4
+  - name: xpress
+    cm_name: user-exchange-client-config-xpress

@@ -8,20 +8,13 @@ spec:
     metadata:
       labels:
         app: proposal-factory
-        bypass-alloy-scraper: bypass
     spec:
       containers:
         - name: proposal-factory
-          image: ghcr.io/userofficeproject/user-office-factory@sha256:13e66eaea977296964a3334ad6aed6c5a40b4720972ee25b595ce4530478fbc6
+          image: ghcr.io/userofficeproject/user-office-factory@sha256:dedc4dfc94b01c9936bb0eaa2c7881eed4046e4f3b2bfc1924eae029e9150d13
           env:
             - name: NODE_ENV
               value: development
-            - name: OTEL_EXPORTER_OTLP_ENDPOINT
-              value: http://alloy.alloy.svc.cluster.local:4318/v1/traces
-            - name: OTEL_EXPORTER_OTLP_METRICS_ENDPOINT
-              value: http://alloy.alloy.svc.cluster.local:4318/v1/metrics
-            - name: OTEL_EXPORTER_OTLP_LOGS_ENDPOINT
-              value: http://alloy.alloy.svc.cluster.local:4318/v1/logs
             - name: LOG_LEVEL
               value: info
             - name: BROWSER_WS_ENDPOINT

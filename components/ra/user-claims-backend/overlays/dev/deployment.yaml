@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-claims-backend
+spec:
+  template:
+    spec:
+      containers:
+        - name: user-claims-backend
+          image: ghcr.io/isisbusapps/user-claims-backend@sha256:43d30ee16d0db11080464a409839276c028b9ddcb808cd134f4e18f9db460803
+          envFrom:
+            - secretRef:
+                name: approved-experiments

@@ -9,8 +9,13 @@ spec:
   generators:
   - list:
       elements:
-        # Names of clusters to deploy the app to
+        # Cluster names and storage classes to use for rabbitmq deployment
         - name: dev-v3
+          storageClassName: csi-cinder
+
+        - name: dev-proxmox
+          storageClassName: longhorn
+
         # Uncomment if you want to deploy to dev-microk8s-alternative
         #- name: dev-microk8s-alternative
   template:
@@ -27,6 +32,10 @@ spec:
         helm:
           valueFiles:
             - values.yaml
+            - values-httpRoute.yaml
+          parameters:
+            - name: storageClassName
+              value: '{{.storageClassName}}'
       destination:
         namespace: apps
         name: '{{.name}}'

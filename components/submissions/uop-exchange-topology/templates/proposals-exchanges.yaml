@@ -1,0 +1,17 @@
+{{- range .Values.exchange}}
+apiVersion: rabbitmq.com/v1beta1
+kind: Exchange
+metadata:
+  name: {{ .name | lower | replace "_" "-"}}-exchange
+  namespace: {{ $.Values.namespace }}  
+spec:
+  name: {{ .name }} 
+  autoDelete: {{ index . "auto-delete" | default "false" }}
+  durable: {{ .durable | default "true" }}
+  type: {{ .type | default "direct"}} 
+  vhost: {{ $.Values.uop_exchange_vhost}}
+  rabbitmqClusterReference:
+    name: {{ $.Values.rmq_cluster_name }}
+  deletionPolicy: retain     
+---
+{{ end }}    

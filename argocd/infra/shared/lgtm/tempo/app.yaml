@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tempo
+  namespace: argocd
+spec:
+  project: infrastructure-project
+  sources:
+    - repoURL: 'https://grafana-community.github.io/helm-charts'
+      chart: tempo-distributed
+      targetRevision: 2.23.* #Chart version
+      helm:
+        releaseName: tempo
+        valueFiles:
+        - $values/lgtm/tempo/helm-values/values.yaml
+    - repoURL: https://github.com/isisbusapps/observability
+      targetRevision: develop
+      ref: values
+  destination:
+    namespace: lgtm
+    name: infra
+  syncPolicy:
+    automated: 
+      selfHeal: true

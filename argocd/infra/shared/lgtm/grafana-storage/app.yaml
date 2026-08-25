@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana-storage
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-10"
+spec:
+  project: infrastructure-project
+  source:
+    repoURL: 'https://github.com/isisbusapps/observability'
+    path: lgtm/grafana/storage
+    targetRevision: develop
+  destination:
+    namespace: lgtm
+    name: infra
+  syncPolicy:
+    automated: {}

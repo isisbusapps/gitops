@@ -24,7 +24,7 @@ spec:
         - name: mimir
           chart: mimir-distributed
           chartRepo: https://grafana.github.io/helm-charts
-          version: '6.3.*'
+          version: '6.2.*'
           valuesPath: lgtm/mimir/helm-values/values.yaml
  
         - name: tempo

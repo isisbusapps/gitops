@@ -18,6 +18,9 @@ jobs:
     name: Test kubernetes configs
     runs-on: fase-self-hosted-dind
     steps:
+    - name: Checkout repo
+      uses: actions/checkout@v7
+
     - name: Load dev kubeconfig
       uses: tale/kubectl-action@v1
       with:

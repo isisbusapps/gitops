@@ -1,0 +1,64 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: lgtm
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+        - name: grafana
+          chart: grafana
+          chartRepo: https://grafana-community.github.io/helm-charts
+          version: '12.11.*'
+          valuesPath: lgtm/grafana/helm-values/values.yaml
+ 
+        - name: loki
+          chart: loki
+          chartRepo: https://grafana-community.github.io/helm-charts
+          version: '18.11.*'
+          valuesPath: lgtm/loki/helm-values/values.yaml
+ 
+        - name: mimir
+          chart: mimir-distributed
+          chartRepo: https://grafana.github.io/helm-charts
+          version: '6.2.*'
+          valuesPath: lgtm/mimir/helm-values/values.yaml
+ 
+        - name: tempo
+          chart: tempo-distributed
+          chartRepo: https://grafana-community.github.io/helm-charts
+          version: '2.3.*'
+          valuesPath: lgtm/tempo/helm-values/values.yaml
+ 
+  template:
+    metadata:
+      name: '{{.name}}'
+    spec:
+      project: infrastructure-project
+ 
+      sources:
+        - repoURL: '{{.chartRepo}}'
+          chart: '{{.chart}}'
+          targetRevision: '{{.version}}'
+          helm:
+            releaseName: '{{.name}}'
+            valueFiles:
+              - $values/{{.valuesPath}}
+ 
+        - repoURL: https://github.com/isisbusapps/observability
+          targetRevision: develop
+          ref: values
+ 
+      destination:
+        namespace: lgtm
+        name: infra
+ 
+      syncOptions:
+        - CreateNamespace=true
+        - ServerSideApply=true
+      syncPolicy:
+        automated:
+          selfHeal: true

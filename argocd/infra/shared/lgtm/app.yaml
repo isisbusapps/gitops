@@ -56,9 +56,11 @@ spec:
         namespace: lgtm
         name: infra
  
-      syncOptions:
-        - CreateNamespace=true
-        - ServerSideApply=true
       syncPolicy:
         automated:
           selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true
+
+

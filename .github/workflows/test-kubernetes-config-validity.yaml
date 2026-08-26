@@ -16,7 +16,7 @@ on:
 jobs:
   test_configs:
     name: Test kubernetes configs
-    runs-on: fase-self-hosted
+    runs-on: fase-self-hosted-dind
     steps:
     - name: Load dev kubeconfig
       uses: tale/kubectl-action@v1

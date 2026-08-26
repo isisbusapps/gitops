@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: prod-vault-operator-config
+  name: infra-vault-operator-config
   namespace: argocd
 spec:
   goTemplate: true
@@ -10,25 +10,25 @@ spec:
   - list:
       elements:
         # Names of clusters to deploy the app to
-        - name: prod-v4
-          path: prod
-        # Uncomment if you want to deploy to prod-microk8s-alternative
-        - name: prod-fallback
-          path: prod-fallback
+        - name: infra
+          path: infra
   template:
     metadata:
       name: '{{.name}}-vault-operator-config'
       annotations:
         argocd.argoproj.io/sync-wave: "-1"
     spec:
-      project: u-a-project
+      project: infrastructure-project
       source:
-        path: components/ua/vault-operator-config/{{.path}}
+        path: components/infra/vault-operator-config-infra/{{.path}}
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:
-        namespace: apps
+        namespace: lgtm
         name: '{{.name}}'
       syncPolicy:
         automated: 
           selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true

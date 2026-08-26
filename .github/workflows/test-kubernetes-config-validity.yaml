@@ -29,7 +29,8 @@ jobs:
       # Excludes argocd, as that is an incomplete base requiring external config
       run: |
         for devOverlay in $(ls -d components/*/*/overlays/dev | grep -v argocd); do
-          echo -e "\n Testing config in $devOverlay"
+          echo "-----------------"
+          echo "Testing config in $devOverlay"
           kubectl apply -k "$devOverlay" --dry-run=client
           if [ "$?" -ne "0" ]; then
             echo "Verification error in $devOverlay"
@@ -45,7 +46,8 @@ jobs:
       # Excludes argocd, as that is an incomplete base requiring external config
       run: |
         for prodOverlay in $(ls -d components/*/*/overlays/prod | grep -v argocd); do
-          echo -e "\n Testing config in $prodOverlay"
+          echo "-----------------"
+          echo "Testing config in $prodOverlay"
           kubectl apply -k "$prodOverlay" --dry-run=client
           if [ "$?" -ne "0" ]; then
             echo "Verification error in $prodOverlay"

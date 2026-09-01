@@ -34,9 +34,6 @@ spec:
             - name: common-views
               mountPath: "/app/build/common-views"
               readOnly: true
-            - name: common-public
-              mountPath: "/app/build/common-public"
-              readOnly: true
           readinessProbe:
             httpGet:
               path: /consumables/health/ready
@@ -49,9 +46,3 @@ spec:
         - name: env-config
           secret:
             secretName: request-consumables-environment
-        - name: common-views
-          configMap:
-            name: common-pug-views-2026
-        - name: common-public
-          configMap:
-            name: common-pug-public-2026

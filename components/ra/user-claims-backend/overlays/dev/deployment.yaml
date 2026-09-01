@@ -10,4 +10,4 @@ spec:
           image: ghcr.io/isisbusapps/user-claims-backend@sha256:43d30ee16d0db11080464a409839276c028b9ddcb808cd134f4e18f9db460803
           envFrom:
             - secretRef:
-                name: approved-experiments
+                name: user-claims-backend

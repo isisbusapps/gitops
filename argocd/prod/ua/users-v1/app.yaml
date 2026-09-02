@@ -13,6 +13,7 @@ spec:
         - name: prod-v4
         # Uncomment if you want to deploy to prod-fallback
         - name: prod-fallback
+        - name: prod-proxmox
   template:
     metadata:
       name: '{{.name}}-users-v1'

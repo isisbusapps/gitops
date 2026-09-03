@@ -14,7 +14,7 @@ spec:
         - name: prod-fallback
   template:
     metadata:
-      name: rabbitmq-topology-operator
+      name: '{{.name}}-rabbitmq-topology-operator'
       annotations:
         argocd.argoproj.io/sync-wave: "1"     
     spec:

@@ -14,7 +14,7 @@ spec:
         - name: prod-fallback
   template:
     metadata:
-      name: cert-manager
+      name: '{{.name}}-cert-manager'
       annotations:
         argocd.argoproj.io/sync-wave: "0"      
     spec:

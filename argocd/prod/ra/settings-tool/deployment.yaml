@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: settings-tool
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - clusters:
+      selector:
+        matchLabels:
+          appEnvironment: prod
+  template:
+    metadata:
+      name: '{{.name}}-settings-tool'
+    spec:
+      project: r-a-project
+      source:
+        path: components/ra/settings-tool/overlays/prod
+        repoURL: 'https://github.com/isisbusapps/gitops'
+        targetRevision: master
+      destination:
+        namespace: apps
+        name: '{{.name}}'
+      ignoreDifferences:
+        - group: apps
+          kind: Deployment
+          jqPathExpressions:
+            - .spec.template.spec.containers[0].image
+      syncPolicy:
+        automated: {}

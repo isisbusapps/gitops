@@ -7,18 +7,7 @@ spec:
     spec:
       containers:
         - name: request-consumables
-          image: ghcr.io/isisbusapps/request-consumables:1.2.0
+          image: ghcr.io/isisbusapps/request-consumables:1.3.0
           env:
             - name: NODE_ENV
               value: production
-          volumeMounts:
-            - name: common-js
-              mountPath: "/app/build/common-public/js"
-              readOnly: true
-      volumes:
-        - name: common-views
-          configMap:
-            name: common-pug-views
-        - name: common-js
-          configMap:
-            name: common-pug-content-js

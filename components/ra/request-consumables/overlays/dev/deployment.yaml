@@ -11,17 +11,3 @@ spec:
           env:
             - name: NODE_ENV
               value: development
-          envFrom:
-            - secretRef:
-                name: request-consumables
-          volumeMounts:
-            - name: common-public
-              mountPath: "/app/build/common-public"
-              readOnly: true
-      volumes:
-        - name: common-views
-          configMap:
-            name: common-pug-views-2026
-        - name: common-public
-          configMap:
-            name: common-pug-public-2026

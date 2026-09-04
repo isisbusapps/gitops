@@ -11,8 +11,10 @@ spec:
       elements:
         # Names of clusters to deploy the app to
         - name: prod-v4
-        # Uncomment if you want to deploy to prod-fallback
-        #- name: prod-fallback
+          storageClassName: csi-cinder
+        
+        - name: prod-fallback
+          storageClassName: microk8s-hostpath
   template:
     metadata:
       name: '{{.name}}-rmq-message-broker'
@@ -28,6 +30,9 @@ spec:
           valueFiles:
             - values.yaml
             - values-httpRoute.yaml
+          parameters:
+            - name: storageClassName
+              value: '{{.storageClassName}}' 
       destination:
         namespace: apps
         name: '{{.name}}'

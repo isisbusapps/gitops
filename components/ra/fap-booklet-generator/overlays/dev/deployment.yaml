@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fap-booklet-generator
+spec:
+  template:
+    spec:
+      containers:
+        - name: fap-booklet-generator
+          image: ghcr.io/isisbusapps/fap-booklet-generator@sha256:e52cd3e14e157522d0748117b63863e3b9bf7513c7585589c29ad287f797f0cc

@@ -22,7 +22,7 @@ spec:
       source:
         path: components/ra/settings-tool/overlays/dev
         repoURL: 'https://github.com/isisbusapps/gitops'
-        targetRevision: develop
+        targetRevision: main
       destination:
         namespace: apps
         name: '{{.name}}'

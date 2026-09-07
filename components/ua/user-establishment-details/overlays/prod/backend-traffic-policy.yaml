@@ -1,0 +1,15 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: BackendTrafficPolicy
+metadata:
+  name: user-establishment-details-http1
+  namespace: apps
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: user-establishment-details
+  timeout:
+    http:
+      connectionIdleTimeout: 60s
+      maxConnectionDuration: 300s
+      requestTimeout: 120s

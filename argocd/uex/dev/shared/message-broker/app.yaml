@@ -16,8 +16,8 @@ spec:
         - name: dev-proxmox
           storageClassName: longhorn
 
-        # Uncomment if you want to deploy to dev-microk8s-alternative
-        #- name: dev-microk8s-alternative
+        - name: dev-microk8s-alternative
+          storageClassName: microk8s-hostpath
   template:
     metadata:
       name: '{{.name}}-rmq-message-broker'

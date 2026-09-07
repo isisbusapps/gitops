@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: settings-tool-service
+spec:
+  template:
+    spec:
+      containers:
+        - name: settings-tool-service
+          image: ghcr.io/isisbusapps/settings-tool-service@sha256:03f2f107a4aa9cfd570021cd11b015705fd6be9bfd71515f9b06cf21f935582f
+          ports:
+            - containerPort: 7005
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:7005 -Denvironment=dev

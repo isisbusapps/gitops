@@ -22,12 +22,12 @@ spec:
           env:
             - name: FILTERS_PATH
               value: /app/filters.json
+          envFrom:
+            - secretRef:
+                name: approved-experiments
           volumeMounts:
             - name: common-views
               mountPath: "/app/build/common-views"
-              readOnly: true
-            - name: common-js
-              mountPath: "/app/build/common-public/js"
               readOnly: true
             - name: approved-experiments-filters
               mountPath: /app/filters.json
@@ -41,12 +41,6 @@ spec:
       imagePullSecrets:
         - name: registry-creds
       volumes:
-        - name: common-views
-          configMap:
-            name: common-pug-views
-        - name: common-js
-          configMap:
-            name: common-pug-content-js
         - name: approved-experiments-filters
           configMap:
             name: approved-experiments-filters

@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: request-consumables
+spec:
+  template:
+    spec:
+      containers:
+        - name: request-consumables
+          image: ghcr.io/isisbusapps/request-consumables@sha256:656a30716d18c9206d9ccd20314c0d4282fbada9e1db2264423b67a4bbef83a9
+          env:
+            - name: NODE_ENV
+              value: development

@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: settings-tool-service
+spec:
+  template:
+    spec:
+      containers:
+        - name: settings-tool-service
+          image: ghcr.io/isisbusapps/settings-tool-service:2.5.1
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: -Denvironment=prod

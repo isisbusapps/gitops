@@ -18,8 +18,8 @@ spec:
       project: r-a-project
       source:
         path: components/ra/fap-booklet-generator/overlays/prod
-        repoURL: 'https://github.com/isisbusapps/fap-booklet-generator'
-        targetRevision: master
+        repoURL: 'https://github.com/isisbusapps/gitops'
+        targetRevision: main
       destination:
         namespace: apps
         name: '{{.name}}'

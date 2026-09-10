@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - main
-      - fix-kube-test-workflow
   pull_request:
     branches:
       - main
@@ -29,8 +28,7 @@ jobs:
       with:
         method: kubeconfig
         kubeconfig: ${{ secrets.DEV_ISIS_KUBECONFIG }}
-        # Required: the secret stores base64. Without this the raw base64 string
-        # is written to disk and kubectl fails with "couldn't get version/kind".
+        # Required: the secret stores base64.
         kubeconfig-encoding: base64
 
     - name: Test dev kubernetes configs

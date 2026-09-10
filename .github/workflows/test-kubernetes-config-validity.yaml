@@ -29,6 +29,9 @@ jobs:
       with:
         method: kubeconfig
         kubeconfig: ${{ secrets.DEV_ISIS_KUBECONFIG }}
+        # Required: the secret stores base64. Without this the raw base64 string
+        # is written to disk and kubectl fails with "couldn't get version/kind".
+        kubeconfig-encoding: base64
 
     - name: Test dev kubernetes configs
       # Excludes argocd, as that is an incomplete base requiring external config
@@ -47,7 +50,9 @@ jobs:
       uses: azure/k8s-set-context@v5
       with:
         method: kubeconfig
-        kubeconfig: ${{ secrets.DEV_ISIS_KUBECONFIG }}
+        kubeconfig: ${{ secrets.PROD_ISIS_KUBECONFIG }}
+        kubeconfig-encoding: base64
+
     - name: Test prod kubernetes configs
       # Excludes argocd, as that is an incomplete base requiring external config
       run: |

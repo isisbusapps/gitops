@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - fix-kube-test-workflow
   pull_request:
     branches:
       - main
@@ -24,6 +25,7 @@ jobs:
       uses: tale/kubectl-action@v1
       with:
         base64-kube-config: ${{ secrets.DEV_ISIS_KUBECONFIG }}
+        kubectl-version: v1.33.1
     - name: Test dev kubernetes configs
       # Excludes argocd, as that is an incomplete base requiring external config
       run: |
@@ -41,6 +43,7 @@ jobs:
       uses: tale/kubectl-action@v1
       with:
         base64-kube-config: ${{ secrets.PROD_ISIS_KUBECONFIG }}
+        kubectl-version: v1.33.1
     - name: Test prod kubernetes configs
       # Excludes argocd, as that is an incomplete base requiring external config
       run: |

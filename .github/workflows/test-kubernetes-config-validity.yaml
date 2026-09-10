@@ -28,7 +28,7 @@ jobs:
       with:
         method: kubeconfig
         kubeconfig: ${{ secrets.DEV_ISIS_KUBECONFIG }}
-        # Required: the secret stores base64.
+        # The secrets are stored in base64.
         kubeconfig-encoding: base64
 
     - name: Test dev kubernetes configs

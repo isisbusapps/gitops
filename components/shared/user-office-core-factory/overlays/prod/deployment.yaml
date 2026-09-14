@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: proposal-factory
-          image: ghcr.io/userofficeproject/user-office-factory:v1.5.2
+          image: ghcr.io/userofficeproject/user-office-factory:v1.5.3
           env:
             - name: NODE_ENV
               value: production

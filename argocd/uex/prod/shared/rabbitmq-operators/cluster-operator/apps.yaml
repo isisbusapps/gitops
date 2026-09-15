@@ -11,11 +11,10 @@ spec:
       elements:
         # Names of clusters to deploy the app to
         - name: prod-v4
-        # Uncomment if you want to deploy to prod-fallback
-        #- name: prod-fallback
+        - name: prod-fallback
   template:
     metadata:
-      name: rabbitmq-cluster-operator
+      name: '{{.name}}-rabbitmq-cluster-operator'
       annotations:
         argocd.argoproj.io/sync-wave: "0"      
     spec:

@@ -27,6 +27,9 @@ spec:
           env:
             - name: CONFIG_PATH
               value: /FBS/.env
+          envFrom:
+            - secretRef:
+                name: request-consumables
           volumeMounts:
             - name: env-config
               mountPath: "/FBS"

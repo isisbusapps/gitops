@@ -7,10 +7,7 @@ spec:
     spec:
       containers:
         - name: request-consumables
-          image: ghcr.io/isisbusapps/request-consumables@sha256:62882f6841937702d1955b1561166ea571e004c681b965a28dc2746a372d3131
+          image: ghcr.io/isisbusapps/request-consumables@sha256:656a30716d18c9206d9ccd20314c0d4282fbada9e1db2264423b67a4bbef83a9
           env:
             - name: NODE_ENV
               value: development
-          envFrom:
-            - secretRef:
-                name: request-consumables

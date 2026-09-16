@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-claims-backend
+spec:
+  template:
+    spec:
+      containers:
+        - name: user-claims-backend
+          image: ghcr.io/isisbusapps/user-claims-backend:2.1.0

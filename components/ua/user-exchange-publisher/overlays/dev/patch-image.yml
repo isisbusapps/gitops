@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: user-exchange-publisher
-          image: ghcr.io/isisbusapps/merge-user-tool/user-exchange-publisher@sha256:4303564b09a2957d9dbfec0d096394e10025bad4788c595762bb43b46cd2ffb5
+          image: ghcr.io/isisbusapps/merge-user-tool/user-exchange-publisher@sha256:2f121fa38eb60110805e22b1e38d6569d6487dfdf3f057b2e8690ee33abe4e46
       initContainers:
         - name: setup-h2-permissions
           image: ghcr.io/isisbusapps/merge-user-tool/user-exchange-publisher@sha256:d22d6b341d14459be889bdb87873bd6930d7fa375b7a19409bfc3e7250e03b8d

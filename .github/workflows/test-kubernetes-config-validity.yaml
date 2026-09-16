@@ -20,10 +20,17 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v7
 
+    - name: Setup Kubectl
+      uses: azure/setup-kubectl@v5
+
     - name: Load dev kubeconfig
-      uses: tale/kubectl-action@v1
+      uses: azure/k8s-set-context@v5
       with:
-        base64-kube-config: ${{ secrets.DEV_ISIS_KUBECONFIG }}
+        method: kubeconfig
+        kubeconfig: ${{ secrets.DEV_ISIS_KUBECONFIG }}
+        # The secrets are stored in base64.
+        kubeconfig-encoding: base64
+
     - name: Test dev kubernetes configs
       # Excludes argocd, as that is an incomplete base requiring external config
       run: |
@@ -38,9 +45,12 @@ jobs:
         done
 
     - name: Load prod kubeconfig
-      uses: tale/kubectl-action@v1
+      uses: azure/k8s-set-context@v5
       with:
-        base64-kube-config: ${{ secrets.PROD_ISIS_KUBECONFIG }}
+        method: kubeconfig
+        kubeconfig: ${{ secrets.PROD_ISIS_KUBECONFIG }}
+        kubeconfig-encoding: base64
+
     - name: Test prod kubernetes configs
       # Excludes argocd, as that is an incomplete base requiring external config
       run: |

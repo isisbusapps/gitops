@@ -11,7 +11,7 @@ users:
       write: .*
       read: .*
   proposal-allocations-user:
-  credentialsSecret: allocations-exchange-secret
+    credentialsSecret: allocations-exchange-secret
     tags:
      - management
     permissions:

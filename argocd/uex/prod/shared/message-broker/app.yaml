@@ -15,6 +15,9 @@ spec:
         
         - name: prod-fallback
           storageClassName: microk8s-hostpath
+
+        - name: prod-proxmox
+          storageClassName: longhorn
   template:
     metadata:
       name: '{{.name}}-rmq-message-broker'

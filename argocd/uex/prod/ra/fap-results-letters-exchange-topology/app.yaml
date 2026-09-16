@@ -12,6 +12,7 @@ spec:
         # Names of clusters to deploy the app to
         - name: prod-v4
         - name: prod-fallback
+        - name: prod-proxmox
   template:
     metadata:
       name: '{{.name}}-frl-exchange-topology'

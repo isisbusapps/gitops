@@ -9,11 +9,14 @@ spec:
   generators:
   - list:
       elements:
-        # Names of clusters to deploy the app to. Should be same as overlays.
+        # Names of clusters to deploy the app to.
         - name: prod-v4
+        - path: prod-v4
         # Uncomment if you want to deploy to prod-fallback
         - name: prod-fallback
+        - path: prod-v4
         - name: prod-proxmox
+        - path: prod-proxmox
   template:
     metadata:
       name: '{{.name}}-user-establishment-details'
@@ -22,7 +25,7 @@ spec:
     spec:
       project: u-a-project
       source:
-        path:  components/ua/user-establishment-details/overlays/{{name}}
+        path:  components/ua/user-establishment-details/overlays/{{path}}
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:

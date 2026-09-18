@@ -13,6 +13,8 @@ spec:
         - name: prod-v4
         # Uncomment if you want to deploy to prod-fallback
         - name: prod-fallback
+        # Uncomment if you want to deploy to prod-proxmox
+        - name: prod-proxmox
   template:
     metadata:
       name: '{{.name}}-health-check-service'

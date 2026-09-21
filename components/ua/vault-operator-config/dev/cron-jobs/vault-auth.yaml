@@ -8,8 +8,6 @@ spec:
   vaultConnectionRef: secrets-isis-connection
   method: kubernetes
   mount: submissions
-  allowedNamespaces:
-    - "*"
   kubernetes:
     role: cluster
     serviceAccount: vault-op

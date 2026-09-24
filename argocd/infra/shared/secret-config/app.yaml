@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: infra-secret-configs
+  namespace: argocd
+spec:
+  project: infrastructure-project
+  source:
+    path: secret-config/infra
+    repoURL: 'https://git.developers.facilities.rl.ac.uk/isisbusapps/BisAppSettings'
+    targetRevision: develop
+  destination:
+    namespace: lgtm
+    name: infra
+  syncPolicy:
+    automated: {}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: infra-developers-cert
+  namespace: argocd
+spec:
+  project: infrastructure-project
+  source:
+    path: secret-config/base/developers-tls-certificate-base
+    repoURL: 'https://git.developers.facilities.rl.ac.uk/isisbusapps/BisAppSettings'
+    targetRevision: develop
+  destination:
+    namespace: lgtm
+    name: infra
+  syncPolicy:
+    automated: {}

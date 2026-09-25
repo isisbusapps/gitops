@@ -3,13 +3,11 @@ apiVersion: secrets.hashicorp.com/v1beta1
 kind: VaultAuth
 metadata:
   name: static-auth
-  namespace: apps
+  namespace: cron-jobs
 spec:
   vaultConnectionRef: secrets-isis-connection
   method: kubernetes
-  mount: u-and-a-dev
-  allowedNamespaces:
-    - "*"
+  mount: submissions
   kubernetes:
     role: cluster
     serviceAccount: vault-op

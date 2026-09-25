@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proposal-allocations-v2
+spec:
+  template:
+    spec:
+      containers:
+        - name: proposal-allocations
+          image: ghcr.io/isisbusapps/proposal-allocations@sha256:5e4011da9add76769045657479425e90aded9007907fa7608dea24c566d8cad7
+          ports:
+            - containerPort: 7005
+          env:
+            - name: APP_ENV
+              value: dev
+            - name: JAVA_TOOL_OPTIONS
+              value: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=7005 -Dlog4j2.formatMsgNoLookups=true
+      volumes:
+        - name: spring-config
+          secret:
+            secretName: proposal-allocations-profiles

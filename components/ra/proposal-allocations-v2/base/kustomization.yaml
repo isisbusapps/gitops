@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonLabels:
+  app: proposal-allocations-v2
+
+labels:
+  - pairs:
+      bypass-alloy-scraper:
+    includeSelectors: false
+    includeTemplates: true
+
+labels:
+  - pairs:
+      bypass-alloy-scraper:
+    includeSelectors: false
+    includeTemplates: true
+
+namespace: apps
+
+resources:
+  - deployment.yaml
+  - service.yaml
+  - http-route.yaml

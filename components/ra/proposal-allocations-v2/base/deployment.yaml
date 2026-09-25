@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proposal-allocations-v2
+spec:
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        co.elastic.logs/processors.1.add_fields.target: ""
+        co.elastic.logs/processors.1.add_fields.fields.application.name: "proposal-allocations"
+        co.elastic.logs/processors.1.add_fields.fields.application.domain: "proposal-allocations"
+        co.elastic.logs/processors.1.add_fields.fields.application.tier: "service"
+        co.elastic.logs/processors.1.add_fields.fields.application.language: "java"
+        # Extract log_level, class, and log_message as separate fields for elastic
+        co.elastic.logs/processors.2.dissect.tokenizer: "%{?date} %{?time} %{log_level} [%{?Session_and_user_data}] [%{class}] %{log_message}"
+        co.elastic.logs/processors.2.dissect.target_prefix: ""
+        # Extract web method call time stats to separate fields
+        co.elastic.logs/processors.3.dissect.tokenizer: "Web method %{web_method.name} completed in %{web_method.seconds_taken|double} seconds"
+        co.elastic.logs/processors.3.dissect.target_prefix: ""
+        co.elastic.logs/processors.3.dissect.field: "log_message"
+        co.elastic.logs/processors.3.dissect.when.regexp.log_message: "Web method .* completed in .* seconds"
+
+        co.elastic.logs/multiline.pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}"
+        co.elastic.logs/multiline.negate: "true"
+        co.elastic.logs/multiline.match: "after"
+    spec:
+      containers:
+        - name: proposal-allocations
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5050
+          volumeMounts:
+            - name: spring-config
+              mountPath: "/FBS/Apps/spring/proposal-allocations"
+              readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /proposal-allocations/v2/actuator/health/readiness
+              port: 5050
+            initialDelaySeconds: 10
+            periodSeconds: 5
+      imagePullSecrets:
+        - name: registry-creds

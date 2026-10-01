@@ -11,9 +11,15 @@ spec:
       elements:
         # Names of clusters to deploy the app to
         - name: dev-v3
+          storageClassName: csi-cinder
+
         - name: dev-proxmox
+          storageClassName: longhorn
+
         # Uncomment if you want to deploy to dev-microk8s-alternative
         - name: dev-microk8s-alternative
+          storageClassName: microk8s-hostpath
+          
   template:
     metadata:
       name: '{{.name}}-user-exchange-publisher'

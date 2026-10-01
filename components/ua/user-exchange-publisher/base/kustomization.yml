@@ -12,5 +12,4 @@ namespace: apps
 resources:
   - deployment.yml
   - service.yml
-  - storage.yml
   - setup-h2-permissions.yml

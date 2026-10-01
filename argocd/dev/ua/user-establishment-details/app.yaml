@@ -11,10 +11,13 @@ spec:
       elements:
         # Names of clusters to deploy the app to
         - name: dev-v3
+          path: dev-v3
         # Uncomment if you want to deploy to dev-proxmox
         - name: dev-proxmox
+          path: dev-proxmox
         # Uncomment if you want to deploy to dev-microk8s-alternative
         - name: dev-microk8s-alternative
+          path: dev-v3
   template:
     metadata:
       name: '{{.name}}-user-establishment-details'
@@ -27,7 +30,7 @@ spec:
     spec:
       project: u-a-project
       source:
-        path:  components/ua/user-establishment-details/overlays/dev
+        path:  components/ua/user-establishment-details/overlays/{{path}}
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:

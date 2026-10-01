@@ -10,7 +10,7 @@ spec:
   mount: submissions
   kubernetes:
     role: cluster
-    serviceAccount: vault-op
+    serviceAccount: cron-jobs-vault-op
     audiences:
       - vault
       - https://kubernetes.default.svc.cluster.local

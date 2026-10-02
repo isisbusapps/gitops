@@ -45,7 +45,10 @@ GitOps repository for managing Kubernetes deployments via ArgoCD. All changes to
 │       ├── user-exchange-topology/  # Helm chart
 │       ├── users-v1/               # UOWS REST API v1 (legacy, master-v1 branch)
 │       ├── users-v2/               # UOWS REST API v2 (current, main branch)
-│       └── vault-operator-config/  # Per-cluster Vault connection config
+│       └── vault-operator-config/  # Per-cluster, per-namespace Vault connection config
+│           └── dev/
+│               ├── apps/           # VaultConnection, VaultAuth, ServiceAccount + RBAC for `apps`
+│               └── cron-jobs/      # Same, for `cron-jobs` (ServiceAccount: cron-jobs-vault-op)
 │
 └── .github/workflows/
     └── create-release-pr.yaml      # Called by source repos to create deploy PRs
@@ -95,6 +98,25 @@ generators:
       #- name: prod-fallback
 ```
 
+The `vault-operator-config` ApplicationSet is the exception: it uses a matrix generator (cluster × namespace), because a `VaultConnection` and `VaultAuth` must exist in every namespace that consumes Vault secrets:
+
+```yaml
+generators:
+- matrix:
+    generators:
+    - list:
+        elements:
+          - name: dev-v3
+            path: dev
+
+    - list:
+        elements:
+          - namespace: apps
+          - namespace: cron-jobs
+```
+
+This produces one Application per cluster/namespace pair, <br>named `{{.name}}-{{.namespace}}-vault-operator-config`, <br>sourced from `components/ua/vault-operator-config/{{.path}}/{{.namespace}}` <br>and deployed into `{{.namespace}}`. If you enable the fallback cluster, <br>the matching `{{.path}}/apps` and `{{.path}}/cron-jobs` directories must exist first, otherwise the Application will fail to sync.
+
 See [moving UA apps to the fallback cluster](https://github.com/isisbusapps/ISISBusApps/wiki/Moving-UA-apps-to-the-fallback-cluster) for details.
 
 ### Clusters
@@ -118,7 +140,25 @@ spec:
     name: user-office-web-service-v2    # K8s Secret name
 ```
 
-The Vault operator and its per-cluster config (`vault-operator-config/`) are deployed at sync-wave `-10` and `-1` respectively, before any application workloads.
+Each namespace that uses Vault needs its own `VaultConnection` and `VaultAuth` (`static-auth`), defined in `components/ua/vault-operator-config/{env}/{namespace}/`. 
+<br>A `VaultStaticSecret` must live in the same namespace as the `VaultAuth` it references. Each `VaultAuth` authenticates with a ServiceAccount in its own namespace, created alongside it in `vault-auth-service-account.yaml` together with the RBAC it needs (including a `system:auth-delegator` ClusterRoleBinding):
+
+| Namespace | ServiceAccount | Config directory (dev) |
+|-----------|----------------|------------------------|
+| `apps` | `vault-op` | `vault-operator-config/dev/apps/` |
+| `cron-jobs` | `cron-jobs-vault-op` | `vault-operator-config/dev/cron-jobs/` |
+
+> **Note:** the per-namespace layout (`apps/`, `cron-jobs/`) currently applies to `dev` only. `prod` still uses a single flat `vault-operator-config/prod/` directory deployed into `apps`.
+
+The `VaultAuth` uses the `cluster` Kubernetes auth role on the `submissions` mount. That role is configured in Vault, not in this repo, and its `bound_service_account_names` and `bound_service_account_namespaces` must include each ServiceAccount and namespace above.
+
+The Vault operator and its per-cluster, per-namespace config (`vault-operator-config/`) are deployed at sync-wave `-10` and `-1` respectively, before any application workloads.
+
+### Adding Vault access for a new namespace
+
+1. Copy `components/ua/vault-operator-config/dev/cron-jobs/` to `.../dev/{namespace}/` and update the namespace and ServiceAccount name in all three files. Keep the ServiceAccount name identical across the `ServiceAccount`, the `RoleBinding` and `ClusterRoleBinding` subjects, and the `VaultAuth`.
+2. Add `- namespace: {namespace}` to the second list in `argocd/dev/ua/vault-operator-configs/app.yaml`.
+3. Add the new ServiceAccount name and namespace to the bound lists of the Vault auth role.
 
 ## How Deployments Happen
 
@@ -146,6 +186,6 @@ See [docs/uows-release-guide.md](docs/uows-release-guide.md) for the UOWS-specif
 | Wave | Resources |
 |------|-----------|
 | -10 | Vault Operator (Helm) |
-| -1 | Vault Operator Config, UA Shared Config |
+| -1 | Vault Operator Config (per namespace. e.g. `apps`, `cron-jobs`), UA Shared Config |
 | 0 | All application workloads |
 | 1 | Health Check Service (dev only) |

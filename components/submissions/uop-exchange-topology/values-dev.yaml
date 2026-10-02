@@ -27,13 +27,13 @@ exchange:
    type: direct
 
 queue:
- - name: Proposal-Allocations
+ - name: proposal-allocations
  - name: allocations-dead-letter-queue
 
 binding:
-- name: Proposal-Allocations
+- name: proposal-allocations
   source: user_office_backend.fanout
-  destination: Proposal-Allocations
+  destination: proposal-allocations
   destination_type: queue
 - name: allocations-dead-letter-queue
   source: allocations-dead-letter-exchange
@@ -42,8 +42,8 @@ binding:
   routing_key: dead
 
 policy:
- - name: Proposal-Allocations
-   pattern: ^Proposal-Allocations$
+ - name: proposal-allocations
+   pattern: ^proposal-allocations$
    definition:
      dead-letter-exchange: allocations-dead-letter-exchange
      dead-letter-routing-key: dead

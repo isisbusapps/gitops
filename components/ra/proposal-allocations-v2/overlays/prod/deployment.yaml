@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proposal-allocations-v2
+spec:
+  template:
+    spec:
+      containers:
+        - name: proposal-allocations
+          image: ghcr.io/isisbusapps/proposal-allocations:2.1.1
+          env:
+            - name: APP_ENV
+              value: prod
+            - name: JAVA_TOOL_OPTIONS
+              value: -Dlog4j2.formatMsgNoLookups=true
+      volumes:
+        - name: spring-config
+          secret:
+            secretName: proposal-allocations-profiles

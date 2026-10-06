@@ -10,6 +10,6 @@ labels:
 namespace: apps
 
 resources:
-  - deployment.yml
-  - service.yml
-  - setup-h2-permissions.yml
+  - deployment.yaml
+  - service.yaml
+  - setup-h2-permissions.yaml

@@ -94,7 +94,7 @@ ApplicationSets use a list generator to target clusters by name. Each app has th
 generators:
 - list:
     elements:
-      - name: prod-v4
+      - name: prod-v5
       #- name: prod-fallback
 ```
 
@@ -123,7 +123,7 @@ See [moving UA apps to the fallback cluster](https://github.com/isisbusapps/ISIS
 
 | Environment | Primary | Fallback |
 |-------------|---------|----------|
-| Prod | `prod-v4` | `prod-fallback` |
+| Prod | `prod-v5` | `prod-fallback` |
 | Dev | `dev-v3` | `dev-microk8s-alternative` |
 | Management Prod | `https://kubernetes.default.svc` (local) | - |
 | Management Dev | `https://kubernetes.default.svc` (local) | - |

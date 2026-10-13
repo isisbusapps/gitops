@@ -3,6 +3,7 @@ uop_exchange_vhost: proposals
 
 users:
   proposal-submission-user:
+    credentialsSecret: uop-exchange-secret
     tags:
      - management
     permissions:
@@ -10,6 +11,7 @@ users:
       write: .*
       read: .*
   proposal-allocations-user:
+    credentialsSecret: allocations-exchange-secret
     tags:
      - management
     permissions:

@@ -10,9 +10,11 @@ spec:
   - list:
       elements:
         # Names of clusters to deploy the app to
-        - name: prod-v4
-        # Uncomment if you want to deploy to dev-microk8s-alternative
-        #- name: dev-microk8s-alternative
+        - name: prod-v5
+        # Uncomment if you want to deploy to prod-fallback
+        - name: prod-fallback
+        # Uncomment if you want to deploy to prod-proxmox
+        - name: prod-proxmox
   template:
     metadata:
       name: '{{.name}}-health-check-service'

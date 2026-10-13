@@ -1,0 +1,16 @@
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  name: static-auth
+  namespace: cron-jobs
+spec:
+  vaultConnectionRef: secrets-isis-connection
+  method: kubernetes
+  mount: submissions
+  kubernetes:
+    role: cluster
+    serviceAccount: cron-jobs-vault-op
+    audiences:
+      - vault
+      - https://kubernetes.default.svc.cluster.local

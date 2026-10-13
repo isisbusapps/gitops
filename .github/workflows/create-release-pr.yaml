@@ -64,6 +64,7 @@ jobs:
           ### Review Checklist
           - [ ] Image built and pushed successfully
           - [ ] Source changes reviewed and approved
+          - [ ] Any prod kubernetes config updates applied to this PR
 
           ---
           **Merging this PR will trigger ArgoCD to sync the new image.**"

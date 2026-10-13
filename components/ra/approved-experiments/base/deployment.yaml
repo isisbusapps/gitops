@@ -29,6 +29,9 @@ spec:
             - name: common-views
               mountPath: "/app/build/common-views"
               readOnly: true
+            - name: common-public
+              mountPath: "/app/build/common-public"
+              readOnly: true
             - name: approved-experiments-filters
               mountPath: /app/filters.json
               subPath: filters.json
@@ -41,6 +44,12 @@ spec:
       imagePullSecrets:
         - name: registry-creds
       volumes:
+        - name: common-views
+          configMap:
+            name: common-pug-views-2026
+        - name: common-public
+          configMap:
+            name: common-pug-public-2026
         - name: approved-experiments-filters
           configMap:
             name: approved-experiments-filters

@@ -1,7 +1,7 @@
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: BackendTrafficPolicy
 metadata:
-  name: user-establishment-details-http1
+  name: user-establishment-details-backendtrafficpolicy
   namespace: apps
 spec:
   targetRefs:

@@ -10,7 +10,6 @@ resources:
   - static-secret.yaml
   - config.yaml
   - HTTPRoute.yaml
-  - backend-traffic-policy.yaml
 
 patches:
 - path: patch-image.yaml

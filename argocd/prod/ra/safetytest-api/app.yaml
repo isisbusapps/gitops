@@ -10,7 +10,7 @@ spec:
   - clusters:
       selector:
         matchLabels:
-          appEnvironment: dev
+          appEnvironment: prod
   ignoreApplicationDifferences:
     - jsonPointers:
         - /spec/syncPolicy

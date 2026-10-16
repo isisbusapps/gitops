@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: safetytest-api
+spec:
+  template:
+    spec:
+      containers:
+        - name: user-claims-backend
+          image: ghcr.io/isisbusapps/safetytest-api:1.0

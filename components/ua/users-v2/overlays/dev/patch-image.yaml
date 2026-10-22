@@ -40,7 +40,7 @@ spec:
             name: users-db-updater-config
       containers:
         - name: user-office-web-service
-          image: ghcr.io/isisbusapps/user-office-web-service@sha256:024927707b968e13c67c97558d4f004bf634e5d8783081fae9a13318f361188a
+          image: ghcr.io/isisbusapps/user-office-web-service@sha256:c8c2bed956cfc75ce9201acd4e20c707a3db03e743dabe95969304af3e595935
           ports:
             - containerPort: 7005
           env:

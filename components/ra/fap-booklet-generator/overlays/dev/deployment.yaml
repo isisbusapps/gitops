@@ -7,4 +7,4 @@ spec:
     spec:
       containers:
         - name: fap-booklet-generator
-          image: ghcr.io/isisbusapps/fap-booklet-generator@sha256:b9621c5ca6c369734daa26a9d2cd19d0904dd8df573f07a3ff76e39d97201d75
+          image: ghcr.io/isisbusapps/fap-booklet-generator@sha256:bad356452f78edc273022afa32d3ffcee82e66f9951c748d15c9bb08f4e7318d

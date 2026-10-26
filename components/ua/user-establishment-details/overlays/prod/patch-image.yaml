@@ -7,8 +7,8 @@ spec:
     spec:
       containers:
         - name: user-establishment-details
-          # version: 1.8.0
-          image: ghcr.io/isisbusapps/user-establishment-details@sha256:b9e623cb6ce471b87d563859a77f211e16dfcbc62749f93bf3d13d7a66e67a09
+          # version: 1.8.1
+          image: ghcr.io/isisbusapps/user-establishment-details@sha256:4053143b5e4fa200077f78fd5594ca5a74d278a439c1cf1f2f258b57da276fc1
           envFrom:
             - configMapRef:
                 name: user-establishment-details

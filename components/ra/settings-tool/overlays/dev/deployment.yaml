@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: settings-tool-service
-          image: ghcr.io/isisbusapps/settings-tool-service@sha256:1d08f3235eab91bcb363411a42102cdaf9df530d9a683e71e7db43259107f906
+          image: ghcr.io/isisbusapps/settings-tool-service@sha256:cd2e5ae6767e8b099b8832f8de80486432809717de790342c328bf07bbb6d99d
           ports:
             - containerPort: 7005
           env:

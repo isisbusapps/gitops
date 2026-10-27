@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: proposal-allocations
-          image: ghcr.io/isisbusapps/proposal-allocations@sha256:49df76edc0799dd1f07c0375da6374e925b6c089378ca27e12c6e5d3dff9afc3
+          image: ghcr.io/isisbusapps/proposal-allocations@sha256:f4c06312e297c6ba0ab01f7948eeaa7eee2fba51f39129b62cd6ed9cdc813364
           ports:
             - containerPort: 7005
           env:

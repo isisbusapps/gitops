@@ -11,7 +11,8 @@ spec:
       elements:
         # Names of clusters to deploy the app to
         - name: dev-v3
-        - name: dev-proxmox        
+        - name: dev-proxmox 
+        - name: dev-microk8s-alternative       
   template:
     metadata:
       name: '{{.name}}-user-exchange-client-secret'

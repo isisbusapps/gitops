@@ -1,0 +1,42 @@
+# ApplicationSet Helm
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: argo-workflows-install
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  syncPolicy:
+    preserveResourcesOnDeletion: true
+  generators:
+    - list:
+        elements:
+          - name: dev-proxmox
+          - name: dev-v3
+  ignoreApplicationDifferences:
+    - jsonPointers:
+        - /spec/syncPolicy
+  template:
+    metadata:
+      name: '{{.name}}-argo-workflows-install'
+    spec:
+      project: argo-workflows
+      sources:
+        - repoURL: https://github.com/isisbusapps/gitops
+          targetRevision: main
+          ref: values
+        - repoURL: https://argoproj.github.io/argo-helm
+          chart: argo-workflows
+          targetRevision: "0.45.4"
+          helm:
+            valueFiles:
+              - $values/components/infra/argo-workflows/base/values.yaml
+      destination:
+        namespace: argo
+        name: '{{.name}}'
+      syncPolicy:
+        automated:
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

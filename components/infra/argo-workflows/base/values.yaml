@@ -1,0 +1,19 @@
+controller:
+  workflowNamespaces:
+    - cron-jobs
+  # Applied to every Workflow on this controller unless a Workflow overrides it.
+  # Without this, completed pods and Workflow objects are kept forever.
+  workflowDefaults:
+    spec:
+      podGC:
+        strategy: OnPodCompletion
+      ttlStrategy:
+        secondsAfterSuccess: 3600      # 1h
+        secondsAfterFailure: 604800    # 7d, keep failures around longer for debugging
+        secondsAfterCompletion: 86400  # 1d fallback
+
+server:
+  extraArgs:
+  # these are dev only args, removes need for SSO requirement 
+  # remove for prod, configure SSo or similar
+  - --auth-mode=server

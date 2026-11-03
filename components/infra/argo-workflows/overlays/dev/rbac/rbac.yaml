@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: argo-workflow
+  namespace: cron-jobs
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: argo-workflow-role
+  namespace: cron-jobs
+rules:
+  - apiGroups: ["argoproj.io"]
+    resources:
+      - workflowtaskresults
+    verbs: ["create", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: argo-workflow-rolebinding
+  namespace: cron-jobs
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: argo-workflow-role
+subjects:
+  - kind: ServiceAccount
+    name: argo-workflow
+    namespace: cron-jobs

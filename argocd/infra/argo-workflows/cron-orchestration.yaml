@@ -1,1 +1,45 @@
 # ApplicationSet manifest
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cron-orchestration-dev          # same ApplicationSet name as today
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  syncPolicy:
+    preserveResourcesOnDeletion: true
+  generators:
+    - matrix:
+        generators:
+          - list:
+              elements:
+                - name: dev-proxmox
+                - name: dev-v3
+          - git:
+              repoURL: https://github.com/isisbusapps/gitops
+              revision: main
+              directories:
+                - path: components/infra/argo-workflows/overlays/dev/*
+  ignoreApplicationDifferences:
+    - jsonPointers:
+        - /spec/syncPolicy
+  template:
+    metadata:
+      name: '{{.name}}-cron-orchestration-{{.path.basename}}'
+    spec:
+      project: argo-workflows
+      source:
+        repoURL: https://github.com/isisbusapps/gitops
+        path: '{{.path.path}}'
+        targetRevision: main
+        directory:
+          recurse: true
+      destination:
+        namespace: cron-jobs
+        name: '{{.name}}'
+      syncPolicy:
+        automated:
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

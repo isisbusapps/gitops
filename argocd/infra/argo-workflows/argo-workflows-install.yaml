@@ -13,6 +13,7 @@ spec:
     - list:
         elements:
           - name: dev-v3
+          - name: dev-proxmox
           - name: dev-fallback
   ignoreApplicationDifferences:
     - jsonPointers:

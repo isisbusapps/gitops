@@ -10,6 +10,7 @@ on:
 jobs:
   scan:
     runs-on: fase-self-hosted
+    container: ghcr.io/isisbusapps/fase-gh-runner-container:latest
     steps:
       - uses: actions/checkout@v6
 

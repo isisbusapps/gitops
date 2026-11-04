@@ -12,8 +12,8 @@ spec:
   generators:
     - list:
         elements:
-          - name: dev-proxmox
           - name: dev-v3
+          - name: dev-fallback
   ignoreApplicationDifferences:
     - jsonPointers:
         - /spec/syncPolicy

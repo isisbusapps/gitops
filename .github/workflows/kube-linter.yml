@@ -15,14 +15,17 @@ jobs:
     runs-on: fase-self-hosted-dind
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+        with:
+          repository: isisbusapps/gitops
+          token: ${{ secrets.workflow-token }}
 
       - name: Scan with KubeLinter Action
         uses: stackrox/kube-linter-action@v1
         id: kube_linter_scan
         continue-on-error: true # Allows us to scrub and log findings before failing the workflow
         with:
-          directory: /components/ra/user-claims-backend
+          directory: components/ra/user-claims-backend
           format: plain
           output-file: kube-linter.log
 

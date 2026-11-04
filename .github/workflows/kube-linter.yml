@@ -26,10 +26,6 @@ jobs:
           format: plain
           output-file: kube-linter.log
 
-      - name: Redact and Stream to Console Log
-        run: |
-            cat kube-linter.log
-
       - name: Enforce Linter Status
         run: |
           if [ "${{ steps.kube_linter_scan.outcome }}" != "success" ]; then

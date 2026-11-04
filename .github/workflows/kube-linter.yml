@@ -5,7 +5,10 @@ on:
   # SARIF reports.
   push:
     branches: [ test-branch-kube-lint ]
-  pull_request:
+
+permissions:
+  contents: read
+  packages: read
 
 jobs:
   scan:

@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: authenticate-frontend
-          image: ghcr.io/isisbusapps/authenticate-frontend@sha256:8b9d80c5fe256f27a84ddc0790ec68aa52d32f8d132d0c4a2473ff1f16caf512
+          image: ghcr.io/isisbusapps/authenticate-frontend@sha256:b0b45858865281c0d32d8e75ef5f9932f03b12b04719ac69b3dae8fa5875b05f
           volumeMounts:
             - mountPath: /front_end/config/allowed-redirects.json
               name: allowed-redirects

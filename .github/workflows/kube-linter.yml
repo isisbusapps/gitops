@@ -23,7 +23,7 @@ jobs:
         id: kube_linter_scan
         continue-on-error: true # Allows us to scrub and log findings before failing the workflow
         with:
-          directory: .
+          directory: /components/ra/user-claims-backend
           format: plain
           output-file: kube-linter.log
 

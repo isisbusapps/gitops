@@ -16,9 +16,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
-        with:
-          repository: isisbusapps/gitops
-          token: ${{ secrets.workflow-token }}
 
       - name: Scan with KubeLinter Action
         uses: stackrox/kube-linter-action@v1

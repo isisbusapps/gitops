@@ -26,4 +26,5 @@ jobs:
         uses: stackrox/kube-linter-action@v1
         with:
           directory: ${{ matrix.directory }}
+          config: .kube-linter.yaml
           format: plain

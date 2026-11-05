@@ -5,8 +5,7 @@ on:
     branches: [ test-branch-kube-lint ]
     # Keep this list in sync with the matrix below
     paths:
-      - 'components/ra/user-claims-backend/**'
-      - 'components/ra/user-claims-frontend/**'
+      - 'components/ra/**'
 
 permissions:
   contents: read

@@ -34,7 +34,7 @@ spec:
                 name: user-claims-backend
           volumeMounts:
             - name: uploads
-              mountPath: "/app/uploads"
+              mountPath: "/app/backend/uploads"
               readOnly: false
           readinessProbe:
             httpGet:
@@ -47,4 +47,3 @@ spec:
       volumes:
         - name: uploads
           emptyDir: {}
-

@@ -1,33 +1,29 @@
 name: Check Kubernetes YAMLs with kube-linter
 
 on:
-  # Note that both `push` and `pull_request` triggers should be present for GitHub to consistently present kube-linter
-  # SARIF reports.
   push:
     branches: [ test-branch-kube-lint ]
+    # Keep this list in sync with the matrix below
+    paths:
+      - 'components/ra/user-claims-backend/**'
 
 permissions:
   contents: read
-  packages: read
 
 jobs:
   scan:
     runs-on: fase-self-hosted-dind
+    strategy:
+      fail-fast: true
+      matrix:
+        directory:
+          - components/ra/user-claims-backend
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
 
-      - name: Scan with KubeLinter Action
+      - name: Scan ${{ matrix.directory }} with KubeLinter
         uses: stackrox/kube-linter-action@v1
-        id: kube_linter_scan
-        continue-on-error: true # Allows us to scrub and log findings before failing the workflow
         with:
-          directory: components/ra/user-claims-backend
+          directory: ${{ matrix.directory }}
           format: plain
-          output-file: kube-linter.log
-
-      - name: Enforce Linter Status
-        run: |
-          if [ "${{ steps.kube_linter_scan.outcome }}" != "success" ]; then
-            exit 1
-          fi

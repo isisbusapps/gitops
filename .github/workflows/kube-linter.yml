@@ -6,6 +6,7 @@ on:
     # Keep this list in sync with the matrix below
     paths:
       - 'components/ra/user-claims-backend/**'
+      - 'components/ra/user-claims-frontend/**'
 
 permissions:
   contents: read
@@ -18,6 +19,7 @@ jobs:
       matrix:
         directory:
           - components/ra/user-claims-backend/overlays
+          - components/ra/user-claims-frontend/overlays
     steps:
       - name: Checkout code
         uses: actions/checkout@v6

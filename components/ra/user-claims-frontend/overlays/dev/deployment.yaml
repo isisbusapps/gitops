@@ -7,4 +7,4 @@ spec:
     spec:
       containers:
         - name: user-claims-frontend
-          image: ghcr.io/isisbusapps/user-claims-frontend@sha256:4f08a79e8f1aa6e8196bff04ce01ae03fdfc93dbec2a55d508263d933bfa7762
+          image: ghcr.io/isisbusapps/user-claims-frontend@sha256:3b9db490afbafa188c9ba0277ae6a498389459ab29200fbc9dffce34c8d17eca

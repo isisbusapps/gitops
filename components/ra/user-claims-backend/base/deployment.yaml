@@ -47,3 +47,4 @@ spec:
       volumes:
         - name: uploads
           emptyDir: {}
+

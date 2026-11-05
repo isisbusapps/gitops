@@ -17,7 +17,7 @@ jobs:
       fail-fast: true
       matrix:
         directory:
-          - components/ra/user-claims-backend
+          - components/ra/user-claims-backend/overlays
     steps:
       - name: Checkout code
         uses: actions/checkout@v6

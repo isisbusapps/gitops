@@ -1,0 +1,31 @@
+name: Check Kubernetes YAMLs with kube-linter
+
+on:
+  push:
+    branches: [ test-branch-kube-lint ]
+    # Keep this list in sync with the matrix below
+    paths:
+      - 'components/ra/**'
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: fase-self-hosted-dind
+    strategy:
+      fail-fast: true
+      matrix:
+        directory:
+          - components/ra/user-claims-backend/overlays
+          - components/ra/user-claims-frontend/overlays
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Scan ${{ matrix.directory }} with KubeLinter
+        uses: stackrox/kube-linter-action@v1
+        with:
+          directory: ${{ matrix.directory }}
+          config: .kube-linter.yaml
+          format: plain

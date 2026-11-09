@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: app-of-apps-dev-ua
-  namespace: argocd
+  namespace: argocd-dev
 spec:
   project: infrastructure-project
   source:
@@ -12,7 +12,7 @@ spec:
     directory:
       recurse: true
   destination:
-    namespace: argocd
+    namespace: argocd-dev
     server: https://kubernetes.default.svc
   syncPolicy:
     automated: {}

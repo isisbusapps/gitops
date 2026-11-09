@@ -3,7 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: argo-workflows-install
-  namespace: argocd
+  namespace: argocd-dev
 spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]

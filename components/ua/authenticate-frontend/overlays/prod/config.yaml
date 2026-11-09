@@ -13,3 +13,4 @@ data:
   ICRD_EMAIL: "ICRD@stfc.ac.uk"
   APP_ENV: prod
   PROPOSALS_API_URL: "https://proposal.facilities.rl.ac.uk/graphql"
+  VISITS_API_URL: "https://api.facilities.rl.ac.uk/visits-service"

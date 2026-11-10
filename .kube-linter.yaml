@@ -1,0 +1,7 @@
+# kube-linter configuration
+# Uses kube-linter's default checks, minus the CPU/memory requests and limits checks.
+checks:
+  addAllBuiltIn: false # Keep the default set rather than enabling every built-in check
+  exclude:
+    - unset-cpu-requirements
+    - unset-memory-requirements

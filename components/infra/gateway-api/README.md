@@ -73,7 +73,7 @@ gateway-api/
 Envoy Gateway was installed via Helm:
 
 ```bash
-helm install eg oci://docker.io/envoyproxy/gateway-helm --version v1.7.1 -n envoy-gateway-system --create-namespace
+helm install eg oci://docker.io/envoyproxy/gateway-helm --version v1.10.0 -n envoy-gateway-system --create-namespace
 ```
 
 Then, apply the Gateway resources using the appropriate Kustomize overlay for your cluster:

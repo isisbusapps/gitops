@@ -10,7 +10,8 @@ GitOps repository for managing Kubernetes deployments via ArgoCD. All changes to
 │   ├── dev/                         # Dev environment apps
 │   │   ├── app-of-apps/             # Root Application that discovers all dev apps
 │   │   ├── ra/                      # Reviews & Allocations apps
-│   │   ├── shared/                  # Shared services (health-check-service)
+│   │   ├── shared/                  # Shared services (health-check-service, user-office-core-factory, argo-workflows)
+│   │   │   └── argo-workflows/      # Argo Workflows install ApplicationSet                  <!-- NEW -->
 │   │   └── ua/                      # Users & Auth apps
 │   ├── prod/                        # Production environment apps
 │   │   ├── app-of-apps/             # Root Application that discovers all prod apps
@@ -22,6 +23,7 @@ GitOps repository for managing Kubernetes deployments via ArgoCD. All changes to
 ├── components/                      # Kubernetes manifests (Kustomize + Helm)
 │   ├── infra/                       # Infrastructure components
 │   │   ├── alloy-config-management-{dev, infra, prod}/
+│   │   ├── argo-workflows/          # Argo Workflows install (upstream Helm chart; values only)
 │   │   ├── cert-manager/
 │   │   ├── rabbitmq-operators/
 │   │   └── vault-config-management-{dev, prod}/
@@ -60,6 +62,8 @@ GitOps repository for managing Kubernetes deployments via ArgoCD. All changes to
 
 Each environment has a root `Application` (app-of-apps) that recursively discovers all `ApplicationSet` definitions under its `argocd/{env}/` directory. When you add, modify, or remove an ApplicationSet file, ArgoCD automatically picks it up.
 
+> **Note:** files outside `argocd/{env}/` are not discovered. For dev, the root app (`app-of-apps-dev-ua`) watches `argocd/dev` on `main`, so a new ApplicationSet must live somewhere under `argocd/dev/` (e.g. `argocd/dev/shared/`), not in a new top-level folder such as `argocd/infra/`.
+
 ### Component Layout
 
 Most components follow the Kustomize base/overlays pattern:
@@ -85,6 +89,17 @@ components/ua/{service}/
 ```
 
 Some components (message-broker, user-exchange-client, user-exchange-topology) use Helm charts instead of Kustomize.
+
+Components installed from an **upstream** Helm chart keep only their values (our custom configuration, values.yaml) here in this repo while the chart repository and version are pinned in the ApplicationSet.
+<br>`argo-workflows` is the current example:
+
+```
+components/infra/argo-workflows/
+└── base/
+    └── values.yaml        # Helm values for the upstream argo-workflows chart
+```
+
+> The CI check runs `kustomize build` on every `components/*/*/overlays/dev`, so a folder named `overlays/dev` must contain a `kustomization.yaml`. Don't put Helm values files in `overlays/` unless the component is built with Kustomize.
 
 ### Multi-Cluster Deployment
 
@@ -119,6 +134,22 @@ This produces one Application per cluster/namespace pair, <br>named `{{.name}}-{
 
 See [moving UA apps to the fallback cluster](https://github.com/isisbusapps/ISISBusApps/wiki/Moving-UA-apps-to-the-fallback-cluster) for details.
 
+### Argo Workflows
+
+The Argo Workflows **platform** (controller and server) is installed from this repo. The **jobs** that run on it are not.
+
+| Lives in | What | Deployed by |
+|----------|------|-------------|
+| This repo | `argocd/dev/shared/argo-workflows/argo-workflows-install.yaml` (ApplicationSet) <br> `components/infra/argo-workflows/base/values.yaml` | `<cluster>-argo-workflows-install` (Helm chart `argo-workflows` from argo-helm, into namespace `argo`) |
+| `docker-orchestration` | CronWorkflows <br> workflow templates <br> workflow RBAC <br> VaultStaticSecrets for jobs | `cron-orchestration-dev` ApplicationSet (into namespace `cron-jobs`) |
+
+Points to keep in mind:
+
+- **Don't rename the ApplicationSet or its generated Applications.** ArgoCD uses the Application name (`dev-v3-argo-workflows-install`) as the Helm release name, and every chart resource name is derived from it. Renaming it would deploy a second copy of Argo Workflows instead of updating the running one.
+- **`preserveResourcesOnDeletion: true`** is set on the ApplicationSet, so deleting it never removes the running install.
+- The controller runs in `argo` and only manages workflows in `cron-jobs` (`controller.workflowNamespaces`).
+- Job secrets in `cron-jobs` should reference the `cron-jobs` `VaultAuth` (see [Secrets](#secrets)), not the one in `apps`.
+
 ### Clusters
 
 | Environment | Primary | Fallback |
@@ -140,7 +171,8 @@ spec:
     name: user-office-web-service-v2    # K8s Secret name
 ```
 
-Each namespace that uses Vault needs its own `VaultConnection` and `VaultAuth` (`static-auth`), defined in `components/ua/vault-operator-config/{env}/{namespace}/`. 
+Each namespace that uses Vault needs its own `VaultConnection` and `VaultAuth` (`static-auth`), 
+<br>defined in `components/ua/vault-operator-config/{env}/{namespace}/`. 
 <br>A `VaultStaticSecret` must live in the same namespace as the `VaultAuth` it references. Each `VaultAuth` authenticates with a ServiceAccount in its own namespace, created alongside it in `vault-auth-service-account.yaml` together with the RBAC it needs (including a `system:auth-delegator` ClusterRoleBinding):
 
 | Namespace | ServiceAccount | Config directory (dev) |
@@ -169,6 +201,8 @@ Automatic. Source repos push to `main` (or the version branch), which triggers a
 2. Pushes to GHCR
 3. Updates the `patch-image.yml` in the dev overlay directly on `main` of this repo
 4. ArgoCD syncs the change
+
+Infrastructure components without an image (e.g. `argo-workflows`) are changed by a normal PR to `main`.
 
 ### Prod
 

@@ -7,5 +7,4 @@ bases:
 namespace: apps
 
 patches:
-    - path: deployment.yml
-    - path: service.yml
+    - path: deployment.yaml

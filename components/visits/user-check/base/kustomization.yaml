@@ -7,6 +7,6 @@ commonLabels:
 namespace: apps
 
 resources:
-  - deployment.yml
-  - httproute.yml
-  - service.yml
+  - deployment.yaml
+  - httproute.yaml
+  - service.yaml

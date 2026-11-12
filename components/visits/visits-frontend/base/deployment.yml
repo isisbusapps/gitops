@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: visits-frontend
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  template:
+    metadata:
+      annotations:
+        co.elastic.logs/processors.add_fields.target: ""
+        co.elastic.logs/processors.add_fields.fields.application.name: "visits-frontend"
+        co.elastic.logs/processors.add_fields.fields.application.domain: "visits"
+        co.elastic.logs/processors.add_fields.fields.application.tier: web
+        co.elastic.logs/processors.add_fields.fields.application.language: "typescript"
+
+        # Extract log_level, class, and log_message as separate fields for elastic
+        co.elastic.logs/processors.dissect.tokenizer: "%{?date} %{?time} [%{log_level->}] %{log_message}"
+        co.elastic.logs/processors.dissect.trim_values: "all"
+        co.elastic.logs/processors.dissect.ignore_failure: "true"
+        co.elastic.logs/processors.dissect.target_prefix: ""
+
+        co.elastic.logs/multiline.pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}"
+        co.elastic.logs/multiline.negate: "true"
+        co.elastic.logs/multiline.match: "after"
+    spec:
+      containers:
+        - name: visits-frontend
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 6003
+          volumeMounts:
+            - name: visits-frontend-config
+              mountPath: "/FBS/config"
+              readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /visits-alpha/ready
+              port: 6003
+            initialDelaySeconds: 2
+            periodSeconds: 3
+          livenessProbe:
+            httpGet:
+              path: /visits-alpha/ready
+              port: 6003
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            failureThreshold: 6
+
+      imagePullSecrets:
+        - name: registry-creds
+      volumes:
+        - name: visits-frontend-config
+          secret:
+            secretName: visits-frontend-config
+

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: visits-frontend
+spec:
+  template:
+    spec:
+      containers:
+        - name: visits-frontend
+          image: ghcr.io/isisbusapps/visits-frontend@sha256:6c270f1f8bfccf5e6ed032bcd6e32b4f2df56e05d97218a526880ce3b0c4099a
+          env:
+            - name: TARGET_CLUSTER
+              value: "DEV"
+            - name: OTEL_SERVICE_NAME
+              value: "visits-nextjs-frontend"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://alloy.alloy.svc.cluster.local:4318"
+            - name: OTEL_SDK_DISABLED
+              value: "FALSE"
+            - name: OTEL_LOG_LEVEL
+              value: "ERROR"
+            - name: NEXT_OTEL_VERBOSE
+              value: "1"

@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: user-establishment-details
-          image: ghcr.io/isisbusapps/user-establishment-details@sha256:2f0554114e9612b7a5c7ca690b0117b5e743b087e815c37fd6c0d10d0a72bf42
+          image: ghcr.io/isisbusapps/user-establishment-details@sha256:758e23f8efb46c77983a4fb76b26378ac082649556989bf925362c2c36a8414e
           envFrom:
             - configMapRef:
                 name: user-establishment-details

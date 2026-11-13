@@ -17,5 +17,9 @@ spec:
               value: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=7005 -Dlog4j2.formatMsgNoLookups=true
       volumes:
         - name: spring-config
-          secret:
-            secretName: proposal-allocations-profiles
+          projected:
+            sources:
+              - secret:
+                  secretName: proposal-allocations-profiles
+              - configMap:
+                  name: proposal-allocations-config

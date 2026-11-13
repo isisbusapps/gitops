@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - ../../base
+  - static-secret.yaml
 
 namespace: apps
 

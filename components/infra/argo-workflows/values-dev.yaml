@@ -1,0 +1,88 @@
+# Dev-only settings for the Argo Workflows install on dev-v3.
+# Layered on top of base/values.yaml (listed after it in the ApplicationSet's valueFiles).
+# Hostnames, the SSO client and the SSO user mapping below are specific to dev.
+
+server:
+  # base/values.yaml sets --auth-mode=server. Helm merges values files, so clear it here,
+  # otherwise the server would accept requests without a login alongside SSO.
+  extraArgs: []
+
+  # SSO only. Never add "server" here: server mode serves requests without a login.
+  authModes:
+    - sso
+
+  sso:
+    enabled: true
+    # Dev ArgoCD URL + /api/dex
+    issuer: https://devargocd.developers.facilities.rl.ac.uk/api/dex
+    # Secret argo-server-sso (namespace argo) must exist before this syncs:
+    #   client-id     = argo-workflows-sso
+    #   client-secret = same value as dex.argo-workflows.clientSecret in argocd-secret
+    clientId:
+      name: argo-server-sso
+      key: client-id
+    clientSecret:
+      name: argo-server-sso
+      key: client-secret
+    # Must match redirectURIs in the Dex staticClients entry exactly
+    redirectUrl: https://devargoworkflows.developers.facilities.rl.ac.uk/oauth2/callback
+
+# Names starting with dev-v3-argo-workflows-install come from the Helm release name,
+# which is the ArgoCD Application name. Change them together if the Application is renamed.
+extraObjects:
+  # Expose the UI through the shared dev-v3 Envoy Gateway (TLS terminated at the Gateway).
+  - apiVersion: gateway.networking.k8s.io/v1
+    kind: HTTPRoute
+    metadata:
+      name: argo-workflows-server
+      namespace: argo
+    spec:
+      parentRefs:
+        - name: envoy-gateway
+          namespace: envoy-gateway-system
+          sectionName: https-developers
+      hostnames:
+        - devargoworkflows.developers.facilities.rl.ac.uk
+      rules:
+        - matches:
+            - path:
+                type: PathPrefix
+                value: /
+          backendRefs:
+            - name: dev-v3-argo-workflows-install-server
+              port: 2746
+
+  # SSO RBAC: every user Dex lets in (the developers LDAP group) acts as this ServiceAccount.
+  - apiVersion: v1
+    kind: ServiceAccount
+    metadata:
+      name: argo-sso-developer
+      namespace: argo
+      annotations:
+        workflows.argoproj.io/rbac-rule: "true"
+        workflows.argoproj.io/rbac-rule-precedence: "0"
+
+  # Token for the ServiceAccount above (Kubernetes 1.24+ no longer creates these).
+  - apiVersion: v1
+    kind: Secret
+    metadata:
+      name: argo-sso-developer.service-account-token
+      namespace: argo
+      annotations:
+        kubernetes.io/service-account.name: argo-sso-developer
+    type: kubernetes.io/service-account-token
+
+  # What SSO users may do: edit workflows in cron-jobs only. No cluster-wide access.
+  - apiVersion: rbac.authorization.k8s.io/v1
+    kind: RoleBinding
+    metadata:
+      name: argo-sso-developer-edit
+      namespace: cron-jobs
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: dev-v3-argo-workflows-install-edit
+    subjects:
+      - kind: ServiceAccount
+        name: argo-sso-developer
+        namespace: argo

@@ -33,6 +33,7 @@ spec:
           helm:
             valueFiles:
               - $values/components/infra/argo-workflows/base/values.yaml
+              - $values/components/infra/argo-workflows/values-dev.yaml
       destination:
         namespace: argo
         name: '{{.name}}'

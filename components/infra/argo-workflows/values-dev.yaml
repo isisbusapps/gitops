@@ -1,15 +1,14 @@
-# Dev-only settings for the Argo Workflows install on dev-v3.
-# Layered on top of base/values.yaml (listed after it in the ApplicationSet's valueFiles).
-# Hostnames, the SSO client and the SSO user mapping below are specific to dev.
+# Dev-only settings for the Argo Workflows install on a dev cluster.
 
 server:
   # base/values.yaml sets --auth-mode=server. Helm merges values files, so clear it here,
   # otherwise the server would accept requests without a login alongside SSO.
   extraArgs: []
 
-  # SSO only. Never add "server" here: server mode serves requests without a login.
+  # SSO and client. Never add "server"
   authModes:
     - sso
+    - client      # break-glass: log in with a Kubernetes token if Dex/AD is unavailable
 
   sso:
     enabled: true
@@ -18,6 +17,7 @@ server:
     # Secret argo-server-sso (namespace argo) must exist before this syncs:
     #   client-id     = argo-workflows-sso
     #   client-secret = same value as dex.argo-workflows.clientSecret in argocd-secret
+    # this will be given by vault as future fix
     clientId:
       name: argo-server-sso
       key: client-id
@@ -72,7 +72,7 @@ extraObjects:
         kubernetes.io/service-account.name: argo-sso-developer
     type: kubernetes.io/service-account-token
 
-  # What SSO users may do: edit workflows in cron-jobs only. No cluster-wide access.
+  # What SSO users may do: edit workflows in cron-jobs only from argo-workflows helm installation. No cluster-wide access.
   - apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
     metadata:

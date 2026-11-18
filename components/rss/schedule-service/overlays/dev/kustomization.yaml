@@ -3,10 +3,10 @@ kind: Kustomization
 
 resources:
   - ./../../base
-  - static-secrets.yml
+  - static-secrets.yaml
 
 namespace: apps
 
 patches:
-  - path: deployment.yml
-  - path: service.yml
+  - path: deployment.yaml
+  - path: service.yaml

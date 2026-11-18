@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: schedule-service
+spec:
+  template:
+    spec:
+      containers:
+        - name: schedule-service
+          image: ghcr.io/isisbusapps/schedule-service:8.12.1
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: -javaagent:/opt/payara/deployments/otel/opentelemetry-javaagent.jar -Denvironment=prod
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: http://alloy.alloy.svc.cluster.local:4318
+            - name: LOG4J_CONFIGURATION_FILE
+              value: logging-config/log4j2-prod.xml
+          envFrom:
+            - secretRef:
+                name: schedule-service

@@ -7,8 +7,8 @@ spec:
     spec:
       containers:
         - name: mailchimp-webhooks
-          # version: 4.0.0
-          image: ghcr.io/isisbusapps/mailchimp-webhooks:4.0.0
+          # version: 4.0.1
+          image: ghcr.io/isisbusapps/mailchimp-webhooks@sha256:b72afdd6d5841314c60c44e99082c1e4f8cadc0db3c80fa562f48680fbff4438
           env:
             - name: APP_ENV
               value: prod

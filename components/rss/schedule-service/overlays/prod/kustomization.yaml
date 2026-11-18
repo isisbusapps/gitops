@@ -3,9 +3,9 @@ kind: Kustomization
 
 resources:
   - ./../../base
-  - static-secrets.yml
+  - static-secrets.yaml
 
 namespace: apps
 
 patches:
-  - path: deployment.yml
+  - path: deployment.yaml

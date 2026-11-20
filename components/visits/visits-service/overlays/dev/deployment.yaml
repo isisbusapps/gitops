@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: visits-service
+spec:
+  template:
+    spec:
+      containers:
+        - name: visits-service
+          image: ghcr.io/isisbusapps/visits@sha256:caba37ad1b57eb8bfcadda44407c86e2a99a48d5bafac0deca07bd2f754ebe0a
+          ports:
+            - containerPort: 7012
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=7012 -Denvironment=dev

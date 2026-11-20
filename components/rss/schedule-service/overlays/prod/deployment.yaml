@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: schedule-service
-          image: ghcr.io/isisbusapps/schedule-service:8.12.2
+          image: ghcr.io/isisbusapps/schedule-service:8.12.3
           env:
             - name: JAVA_TOOL_OPTIONS
               value: -javaagent:/opt/payara/deployments/otel/opentelemetry-javaagent.jar -Denvironment=prod

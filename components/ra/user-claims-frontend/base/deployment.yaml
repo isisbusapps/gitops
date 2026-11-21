@@ -21,6 +21,11 @@ spec:
     spec:
       containers:
         - name: user-claims-frontend
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
           imagePullPolicy: Always
           ports:
             - containerPort: 6011
@@ -30,3 +35,4 @@ spec:
         - name: env-config
           secret:
             secretName: user-claims-frontend
+

@@ -20,6 +20,6 @@ spec:
           projected:
             sources:
               - secret:
-                  secretName: proposal-allocations-profiles
+                  name: proposal-allocations-profiles
               - configMap:
                   name: proposal-allocations-config

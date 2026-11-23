@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: manage-consumables-backend
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            appEnvironment: prod
+  ignoreApplicationDifferences:
+    - jsonPointers:
+        - /spec/syncPolicy
+  template:
+    metadata:
+      name: '{{.name}}-manage-consumables-backend'
+    spec:
+      project: r-s-s-project
+      source:
+        path: components/rss/manage-consumables-backend/overlays/prod
+        repoURL: "https://github.com/isisbusapps/gitops"
+        targetRevision: main
+      destination:
+        namespace: apps
+        name: '{{.name}}'
+      syncPolicy:
+        automated:
+          selfHeal: true #https://argo-cd.readthedocs.io/en/stable/user-guide/auto_sync/#automatic-self-healing

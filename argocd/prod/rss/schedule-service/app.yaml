@@ -30,4 +30,4 @@ spec:
             - .spec.template.spec.containers[0].image
       syncPolicy:
         automated:
-          enabled: false
+          selfHeal: true #https://argo-cd.readthedocs.io/en/stable/user-guide/auto_sync/#automatic-self-healing

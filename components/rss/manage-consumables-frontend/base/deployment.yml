@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: manage-consumables-frontend
+spec:
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        co.elastic.logs/processors.add_fields.target: ""
+        co.elastic.logs/processors.add_fields.fields.application.name: "manage-consumables-frontend"
+        co.elastic.logs/processors.add_fields.fields.application.domain: "manage-consumables"
+        co.elastic.logs/processors.add_fields.fields.application.tier: web
+        co.elastic.logs/processors.add_fields.fields.application.language: "typescript"
+        # Extract log_level, class, and log_message as separate fields for elastic
+        co.elastic.logs/processors.dissect.tokenizer: "%{?date} %{?time} %{log_level->} %{log_message}"
+        co.elastic.logs/processors.dissect.target_prefix: ""
+        co.elastic.logs/multiline.pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}"
+        co.elastic.logs/multiline.negate: "true"
+        co.elastic.logs/multiline.match: "after"
+    spec:
+      containers:
+        - name: manage-consumables-frontend
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 6010
+          livenessProbe:
+            httpGet:
+              path: /manage-consumables/
+              port: 6010
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /manage-consumables/
+              port: 6010
+            initialDelaySeconds: 10
+            periodSeconds: 15
+      imagePullSecrets:
+        - name: registry-creds
+      volumes:
+        - name: uploads
+          emptyDir: {}

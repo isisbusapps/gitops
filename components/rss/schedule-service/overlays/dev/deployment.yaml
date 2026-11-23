@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: schedule-service
-          image: ghcr.io/isisbusapps/schedule-service@sha256:4a714a7c32547dadd63a8d01b2873d301b2d36b6e7f034f040555f404af8bed1
+          image: ghcr.io/isisbusapps/schedule-service@sha256:a88b11f1c800da8728fa62e18d288319bca2b6d0cfe3f4ef3925d6d06831504c
           ports:
             - containerPort: 7007
           env:

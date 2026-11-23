@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: mailchimp-webhooks
-          image: ghcr.io/isisbusapps/mailchimp-webhooks@sha256:f97509286ab892e4cd40c91af61c93f4101c73680d1a77e3f3bedf1ebc3165a3
+          image: ghcr.io/isisbusapps/mailchimp-webhooks@sha256:bb2b51ac934107e426ad9ba7488240da90b50e59e7c9aafdc6161247b676330a
           ports:
             - containerPort: 7005
           env:

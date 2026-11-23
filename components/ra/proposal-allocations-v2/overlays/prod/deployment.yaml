@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: proposal-allocations
-          image: ghcr.io/isisbusapps/proposal-allocations:2.1.2
+          image: ghcr.io/isisbusapps/proposal-allocations:2.1.3
           env:
             - name: APP_ENV
               value: prod

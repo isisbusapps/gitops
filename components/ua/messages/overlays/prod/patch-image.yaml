@@ -7,5 +7,5 @@ spec:
     spec:
       containers:
         - name: messages-service
-          # version: 1.4.0
-          image: ghcr.io/isisbusapps/messages-service@sha256:d8de1a156399d9a4b9e08461135e9c048856b4237ef7e5bd28f5e5224d7d6138
+          # version: 1.4.1
+          image: ghcr.io/isisbusapps/messages-service@sha256:88b6dfdb7cfff155ee41e28f26b429f0dbf4af7b0e4001f3656afba3fa89393e

@@ -5,14 +5,6 @@ metadata:
 spec:
   replicas: 1
   template:
-    metadata:
-      annotations:
-        co.elastic.logs/processors.add_fields.target: ""
-        co.elastic.logs/processors.add_fields.fields.application.name: "fap-booklet-generator"
-        co.elastic.logs/processors.add_fields.fields.application.domain: "fap-booklet-generator"
-        co.elastic.logs/processors.add_fields.fields.application.tier: "service"
-        co.elastic.logs/processors.add_fields.fields.application.language: "javascript"
-
     spec:
       containers:
         - name: fap-booklet-generator

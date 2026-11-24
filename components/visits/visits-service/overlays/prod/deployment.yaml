@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: visits-service
-          image: ghcr.io/isisbusapps/visits:8.8.2
+          image: ghcr.io/isisbusapps/visits:8.8.4
           env:
             - name: JAVA_TOOL_OPTIONS
               value: -Denvironment=prod

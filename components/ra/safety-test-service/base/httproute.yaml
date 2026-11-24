@@ -1,7 +1,7 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: safetytest-api
+  name: safety-test-service
 spec:
   parentRefs:
     - name: envoy-gateway
@@ -13,7 +13,7 @@ spec:
     - matches:
         - path:
             type: PathPrefix
-            value: /safetytest-api
+            value: /safety-test-service
       backendRefs:
-        - name: safetytest-api
+        - name: safety-test-service
           port: 8080

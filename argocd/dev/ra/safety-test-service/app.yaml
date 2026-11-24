@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: safetytest-api
+  name: safety-test-service
   namespace: argocd
 spec:
   goTemplate: true
@@ -10,17 +10,17 @@ spec:
   - clusters:
       selector:
         matchLabels:
-          appEnvironment: prod
+          appEnvironment: dev
   ignoreApplicationDifferences:
     - jsonPointers:
         - /spec/syncPolicy
   template:
     metadata:
-      name: '{{.name}}-safetytest-api'
+      name: '{{.name}}-safety-test-service'
     spec:
       project: r-a-project
       source:
-        path: components/ra/safetytest-api/overlays/prod
+        path: components/ra/safety-test-service/overlays/dev
         repoURL: 'https://github.com/isisbusapps/gitops'
         targetRevision: main
       destination:

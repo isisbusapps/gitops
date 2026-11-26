@@ -12,12 +12,6 @@ spec:
       labels:
         app: proposal-factory
         bypass-alloy-scraper: bypass
-      annotations:
-        co.elastic.logs/processors.add_fields.target: ""
-        co.elastic.logs/processors.add_fields.fields.application.name: "proposal-factory"
-        co.elastic.logs/processors.add_fields.fields.application.domain: "proposal"
-        co.elastic.logs/processors.add_fields.fields.application.tier: "service"
-        co.elastic.logs/processors.add_fields.fields.application.language: "javascript"
     spec:
       containers:
         - name: proposal-factory

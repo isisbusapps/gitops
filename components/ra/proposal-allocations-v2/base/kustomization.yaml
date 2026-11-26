@@ -22,3 +22,10 @@ resources:
   - deployment.yaml
   - service.yaml
   - http-route.yaml
+
+configMapGenerator:
+  - name: proposal-allocations-config
+    files:
+      - application.properties
+    options:
+      disableNameSuffixHash: true

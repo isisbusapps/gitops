@@ -9,6 +9,11 @@ spec:
       containers:
         - name: user-claims-backend
           imagePullPolicy: Always
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
           ports:
             - containerPort: 3001
           envFrom:
@@ -16,7 +21,7 @@ spec:
                 name: user-claims-backend
           volumeMounts:
             - name: uploads
-              mountPath: "/app/uploads"
+              mountPath: "/app/backend/uploads"
               readOnly: false
           readinessProbe:
             httpGet:

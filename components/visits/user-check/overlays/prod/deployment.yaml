@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-check
+spec:
+  template:
+    spec:
+      containers:
+        - name: user-check
+          image: ghcr.io/isisbusapps/user-check:1.4.0
+          env:
+            - name: TARGET_CLUSTER
+              value: "PROD"

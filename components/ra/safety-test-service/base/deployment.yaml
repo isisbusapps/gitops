@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: safety-test-service
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: safety-test-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: safety-test-service
+          readinessProbe:
+            httpGet:
+              path: /safety-test-service/health/ready
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+      imagePullSecrets:
+        - name: registry-creds

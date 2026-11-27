@@ -1,0 +1,19 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: safety-test-service
+spec:
+  parentRefs:
+    - name: envoy-gateway
+      namespace: envoy-gateway-system
+  hostnames:
+    - "*.developers.facilities.rl.ac.uk"
+    - "*.facilities.rl.ac.uk"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /safety-test-service
+      backendRefs:
+        - name: safety-test-service
+          port: 8080

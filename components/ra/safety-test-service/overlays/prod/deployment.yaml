@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: safety-test-service
+spec:
+  template:
+    spec:
+      containers:
+        - name: safety-test-service
+          image: ghcr.io/isisbusapps/safety-test-service

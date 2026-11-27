@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: manage-consumables-backend
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: manage-consumables-backend
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4023
+          env:
+            - name: ANTIVIRUS_HOST
+              value: clam-antivirus
+            - name: ANTIVIRUS_PORT
+              value: "3310"
+            - name: OTEL_SERVICE_NAME
+              value: "manage-consumables-backend"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://alloy.alloy.svc.cluster.local:4318"
+            - name: OTEL_SDK_DISABLED
+              value: "FALSE"
+            - name: OTEL_LOG_LEVEL
+              value: "ERROR"
+            - name: NEXT_OTEL_VERBOSE
+              value: "1"
+          livenessProbe:
+            httpGet:
+              path: /manage-consumables-service/api/health
+              port: 4023
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /manage-consumables-service/api/health
+              port: 4023
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          volumeMounts:
+            - name: manage-consumables-volume
+              mountPath: "/FBS/apps"
+              readOnly: true
+      imagePullSecrets:
+        - name: registry-creds
+      volumes:
+        - name: manage-consumables-volume
+          secret:
+            secretName: manage-consumables-config
+        - name: uploads
+          emptyDir: {}

@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: manage-consumables-backend
+spec:
+  template:
+    spec:
+      containers:
+        - name: manage-consumables-backend
+          image: "ghcr.io/isisbusapps/manage-consumables-backend@sha256:03c9767ec8ed7edfdf58affc9065273cbc0de93727b3d542c3231be5996b5d18"
+          env:
+            - name: TARGET_CLUSTER
+              value: "DEV"
+          envFrom:
+            - secretRef:
+                name: manage-consumables-backend

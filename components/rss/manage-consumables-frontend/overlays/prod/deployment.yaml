@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: manage-consumables-frontend
+spec:
+  template:
+    spec:
+      containers:
+        - name: manage-consumables-frontend
+          image: ghcr.io/isisbusapps/manage-consumables-frontend:2.3.1

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: manage-consumables-frontend
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: manage-consumables-frontend
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 6010
+          livenessProbe:
+            httpGet:
+              path: /manage-consumables/
+              port: 6010
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /manage-consumables/
+              port: 6010
+            initialDelaySeconds: 10
+            periodSeconds: 15
+      imagePullSecrets:
+        - name: registry-creds
+      volumes:
+        - name: uploads
+          emptyDir: {}
